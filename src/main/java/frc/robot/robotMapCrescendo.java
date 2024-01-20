@@ -1,6 +1,5 @@
 package frc.robot;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import edu.wpi.first.math.geometry.Pose3d;
@@ -9,7 +8,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj2.command.Command;
 
 /**
  * The SwerveMap class provides a convenient place for teams to hold robot-wide
@@ -33,7 +31,6 @@ public class robotMapCrescendo {
       public static final boolean shoulderDebug = false;
       public static final boolean drivetrainDebug = false;
       public static final boolean limelightDebug = true;
-      public static final boolean flipperDebug = false;
   } 
 
     public static class Color{
@@ -180,10 +177,6 @@ public class robotMapCrescendo {
     public static final double kShoulderToWrist = 0;
     public static final double kWristToConeEnd = 0;
     public static final double kWristToCubeEnd = 0;
-
-    // Flipper constants
-    public static final int kFlipperMotorCanId = 14;
-    public static final double kFlipperMaxSpeed = 0.025;
 
     // wrist constants
     public static final int kWristCanId = 12;
