@@ -1,0 +1,3 @@
+[submodule "src/main/java/frc/robot/rev-max-swerve"]
+	path = src/main/java/frc/robot/rev-max-swerve
+	url = git@github.com:FRC3184/rev-max-swerve.git
