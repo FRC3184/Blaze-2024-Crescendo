@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.RevMaxSwerve.DriveSSSwerve;
-import frc.robot.robotMapCrescendo.OIConstants;
+import frc.robot.constantsCrescendo.constsJoysticks;
 import frc.robot.robotMapCrescendo.DriveConstants;
 
 public class RobotContainer {
@@ -15,8 +15,8 @@ public class RobotContainer {
   private final DriveSSSwerve m_robotDrive = new DriveSSSwerve();
 
   // Joystick Controller (I/O)
-  XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
-  XboxController m_gunnerController = new XboxController(OIConstants.kGunnerControllerPort);
+  XboxController m_driverController = new XboxController(constsJoysticks.kDriverControllerPort);
+  XboxController m_gunnerController = new XboxController(constsJoysticks.kGunnerControllerPort);
 
   public RobotContainer() {
     configureBindings();
@@ -27,9 +27,9 @@ public class RobotContainer {
         // Turning is controlled by the X axis of the right stick.
         new RunCommand(
             () -> m_robotDrive.drive(
-                -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband),
-                -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband),
-                -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getLeftY(), constsJoysticks.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getLeftX(), constsJoysticks.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getRightX(), constsJoysticks.kDriveDeadband),
                 DriveConstants.kFieldCentric, true),
             m_robotDrive));
   }
