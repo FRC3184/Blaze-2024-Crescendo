@@ -13,8 +13,8 @@ package frc.robot.constantsCrescendo;
 public final class constShooter {
 
     // Constants for the shooter
-    public static final int kMotorPortWheel1 = 11;
-    public static final int kMotorPortWheel2 = 10;
+    public static final int kMotorPortWheel1 = 5;
+    public static final int kMotorPortWheel2 = 6;
 
     // Does the motor need to be inverted? 
     public static final boolean invertedWheel1 = true;
