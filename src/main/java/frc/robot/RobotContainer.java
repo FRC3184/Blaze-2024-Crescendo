@@ -8,17 +8,13 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.math.MathUtil;
-// Shooter Imports
-import frc.robot.TwoWheelShooterRevNeo.ShootCommand;
-import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
-// Drive Imports
-import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
-import frc.robot.RevMaxSwerve.constantsMaxSwerve.DriveConstants;
-// Intake Imports
-import frc.robot.TwoMotorIntakeRevNeo.Intake;
-import frc.robot.TwoMotorIntakeRevNeo.IntakeSubsystem;
-
-import frc.robot.constantsCrescendo.constsJoysticks;
+import frc.robot.GitRepoImports.RevMaxSwerve.DriveSubsystemSwerve;
+import frc.robot.GitRepoImports.RevMaxSwerve.constantsMaxSwerve.DriveConstants;
+import frc.robot.GitRepoImports.TwoMotorIntakeRevNeo.Intake;
+import frc.robot.GitRepoImports.TwoMotorIntakeRevNeo.IntakeSubsystem;
+import frc.robot.GitRepoImports.TwoWheelShooterRevNeo.ShootCommand;
+import frc.robot.GitRepoImports.TwoWheelShooterRevNeo.ShooterSubsystem;
+import frc.robot.RobotMap.constsJoysticks;
 
 public class RobotContainer {
 
