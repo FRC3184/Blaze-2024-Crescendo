@@ -14,7 +14,7 @@ import frc.robot.GitRepoImports.TwoMotorIntakeRevNeo.Intake;
 import frc.robot.GitRepoImports.TwoMotorIntakeRevNeo.IntakeSubsystem;
 import frc.robot.GitRepoImports.TwoWheelShooterRevNeo.ShootCommand;
 import frc.robot.GitRepoImports.TwoWheelShooterRevNeo.ShooterSubsystem;
-import frc.robot.RobotMap.constsJoysticks;
+import frc.robot.RobotMap.OIConstants;
 
 public class RobotContainer {
 
@@ -24,8 +24,8 @@ public class RobotContainer {
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
 
   // Joystick Controller (I/O)
-  XboxController m_driverController = new XboxController(constsJoysticks.kDriverControllerPort);
-  XboxController m_gunnerController = new XboxController(constsJoysticks.kGunnerControllerPort);
+  XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+  XboxController m_gunnerController = new XboxController(OIConstants.kGunnerControllerPort);
 
   public RobotContainer() {
     configureBindings();
@@ -36,9 +36,9 @@ public class RobotContainer {
         // Turning is controlled by the X axis of the right stick.
         new RunCommand(
             () -> m_robotDrive.drive(
-                -MathUtil.applyDeadband(m_driverController.getLeftY(), constsJoysticks.kDriveDeadband),
-                -MathUtil.applyDeadband(m_driverController.getLeftX(), constsJoysticks.kDriveDeadband),
-                -MathUtil.applyDeadband(m_driverController.getRightX(), constsJoysticks.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
                 DriveConstants.kFieldCentric, true),
             m_robotDrive));
   
@@ -47,7 +47,7 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    new JoystickButton(m_driverController, Button.kLeftBumper.value).onTrue(new Intake(m_intake));
+    new JoystickButton(m_driverController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
   }
 
   public Command getAutonomousCommand() {

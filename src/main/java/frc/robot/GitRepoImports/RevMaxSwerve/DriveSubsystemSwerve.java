@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.kauailabs.navx.frc.AHRS;
 
 import frc.robot.GitRepoImports.RevMaxSwerve.constantsMaxSwerve.DriveConstants;
-import frc.robot.RobotMap.constMode;
+import frc.robot.RobotMap.ModeConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -96,7 +96,7 @@ public class DriveSubsystemSwerve extends SubsystemBase {
     absGyro360();
     absGyro180();
 
-    if (constMode.drivetrainDebug) {
+    if (ModeConstants.drivetrainDebug) {
       dashboardDebug();
     }
   }
@@ -372,7 +372,7 @@ public void setModuleStates(SwerveModuleState[] desiredStates) {
   }
 
   public void dashboardDebug(){
-    if (constMode.drivetrainDebug) {
+    if (ModeConstants.drivetrainDebug) {
       SmartDashboard.putNumber("Speed Mode", speedMode);
       SmartDashboard.putNumber("Heading", getHeading());
       SmartDashboard.putNumber("Heading360", heading360);

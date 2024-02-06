@@ -1,7 +1,7 @@
 package frc.robot.GitRepoImports.TwoWheelShooterRevNeo;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap.constShooter;
+import frc.robot.RobotMap.ShooterConstants;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShooterSubsystem extends SubsystemBase {
     
     // Define Motors and Encoders
-    private final CANSparkMax m_Shooter1 = new CANSparkMax(constShooter.kMotorPortWheel1, MotorType.kBrushless);
-    private final CANSparkMax m_Shooter2 = new CANSparkMax(constShooter.kMotorPortWheel2, MotorType.kBrushless);
+    private final CANSparkMax m_Shooter1 = new CANSparkMax(ShooterConstants.kMotorPortWheel1, MotorType.kBrushless);
+    private final CANSparkMax m_Shooter2 = new CANSparkMax(ShooterConstants.kMotorPortWheel2, MotorType.kBrushless);
 
     private final RelativeEncoder m_ShooterEncoder1 = m_Shooter1.getEncoder();
     private final RelativeEncoder m_shooterEncoder2 = m_Shooter2.getEncoder();
@@ -25,11 +25,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
     public ShooterSubsystem() {
-        m_Shooter1.setInverted(constShooter.invertedWheel1);
-        m_Shooter2.setInverted(constShooter.invertedWheel2);
+        m_Shooter1.setInverted(ShooterConstants.invertedWheel1);
+        m_Shooter2.setInverted(ShooterConstants.invertedWheel2);
 
-        m_ShooterEncoder1.setVelocityConversionFactor(constShooter.velFactorWheel1);
-        m_shooterEncoder2.setVelocityConversionFactor(constShooter.velFactorWheel2);
+        m_ShooterEncoder1.setVelocityConversionFactor(ShooterConstants.velFactorWheel1);
+        m_shooterEncoder2.setVelocityConversionFactor(ShooterConstants.velFactorWheel2);
 
         resetEncoders();
 
@@ -42,19 +42,19 @@ public class ShooterSubsystem extends SubsystemBase {
         m_shootPID2 = m_Shooter2.getPIDController();
 
         // set PID coefficients
-        m_shootPID1.setP(constShooter.kP);
-        m_shootPID1.setI(constShooter.kI);
-        m_shootPID1.setD(constShooter.kD);
-        m_shootPID1.setIZone(constShooter.kIz);
-        m_shootPID1.setFF(constShooter.kFF);
-        m_shootPID1.setOutputRange(constShooter.kMinOut, constShooter.kMaxOut);
+        m_shootPID1.setP(ShooterConstants.kP);
+        m_shootPID1.setI(ShooterConstants.kI);
+        m_shootPID1.setD(ShooterConstants.kD);
+        m_shootPID1.setIZone(ShooterConstants.kIz);
+        m_shootPID1.setFF(ShooterConstants.kFF);
+        m_shootPID1.setOutputRange(ShooterConstants.kMinOut, ShooterConstants.kMaxOut);
 
-        m_shootPID2.setP(constShooter.kP);
-        m_shootPID2.setI(constShooter.kI);
-        m_shootPID2.setD(constShooter.kD);
-        m_shootPID2.setIZone(constShooter.kIz);
-        m_shootPID2.setFF(constShooter.kFF);
-        m_shootPID2.setOutputRange(constShooter.kMinOut, constShooter.kMaxOut);
+        m_shootPID2.setP(ShooterConstants.kP);
+        m_shootPID2.setI(ShooterConstants.kI);
+        m_shootPID2.setD(ShooterConstants.kD);
+        m_shootPID2.setIZone(ShooterConstants.kIz);
+        m_shootPID2.setFF(ShooterConstants.kFF);
+        m_shootPID2.setOutputRange(ShooterConstants.kMinOut, ShooterConstants.kMaxOut);
     }
     
     @Override
@@ -78,10 +78,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void setShooterRPM1(double speed){
         // make sure speed doesn't surpass accepted values
-        if (speed > constShooter.maxRPM) {
-            shootSpeed1 = constShooter.maxRPM;
-        } else if (speed < -constShooter.maxRPM) {
-            shootSpeed1 = -constShooter.maxRPM;
+        if (speed > ShooterConstants.maxRPM) {
+            shootSpeed1 = ShooterConstants.maxRPM;
+        } else if (speed < -ShooterConstants.maxRPM) {
+            shootSpeed1 = -ShooterConstants.maxRPM;
         } else {
             shootSpeed1 = speed;
         }
@@ -89,10 +89,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void setShooterRPM2(double speed){
         // make sure speed doesn't surpass accepted values
-        if (speed > constShooter.maxRPM) {
-            shootSpeed2 = constShooter.maxRPM;
-        } else if (speed < -constShooter.maxRPM) {
-            shootSpeed2 = -constShooter.maxRPM;
+        if (speed > ShooterConstants.maxRPM) {
+            shootSpeed2 = ShooterConstants.maxRPM;
+        } else if (speed < -ShooterConstants.maxRPM) {
+            shootSpeed2 = -ShooterConstants.maxRPM;
         } else {
             shootSpeed2 = speed;
         }
@@ -111,15 +111,15 @@ public class ShooterSubsystem extends SubsystemBase {
         shootSpeed2 = speed2;
         
         // make sure speed doesn't surpass accepted values
-        if (shootSpeed1 > constShooter.maxRPM) {
-            shootSpeed1 = constShooter.maxRPM;
-        } else if (shootSpeed1 < -constShooter.maxRPM) {
-            shootSpeed1 = -constShooter.maxRPM;
+        if (shootSpeed1 > ShooterConstants.maxRPM) {
+            shootSpeed1 = ShooterConstants.maxRPM;
+        } else if (shootSpeed1 < -ShooterConstants.maxRPM) {
+            shootSpeed1 = -ShooterConstants.maxRPM;
         }
-        if (shootSpeed2 > constShooter.maxRPM){
-            shootSpeed2 = constShooter.maxRPM;
-        }else if (shootSpeed2 < -constShooter.maxRPM) {
-            shootSpeed2 = -constShooter.maxRPM;
+        if (shootSpeed2 > ShooterConstants.maxRPM){
+            shootSpeed2 = ShooterConstants.maxRPM;
+        }else if (shootSpeed2 < -ShooterConstants.maxRPM) {
+            shootSpeed2 = -ShooterConstants.maxRPM;
         }
 
         m_shootPID1.setReference(shootSpeed1, CANSparkMax.ControlType.kVelocity);

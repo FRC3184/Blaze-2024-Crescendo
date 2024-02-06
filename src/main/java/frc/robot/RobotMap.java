@@ -7,7 +7,7 @@ public class RobotMap {
         public static edu.wpi.first.wpilibj.DriverStation.Alliance AllianceColor = edu.wpi.first.wpilibj.DriverStation.Alliance.Red;  
     }
 
-    public class constsJoysticks {
+    public class OIConstants {
 
         public static final int kDriverControllerPort = 0;
         public static final int kGunnerControllerPort = 1;
@@ -26,7 +26,7 @@ public class RobotMap {
         public static final int LEDLen = 150; // length of current full LED strip
       }
 
-      public final class constShooter {
+      public final class ShooterConstants {
 
         // Constants for the shooter
         public static final int kMotorPortWheel1 = 5;
@@ -43,7 +43,7 @@ public class RobotMap {
         // PID Controller Constants
         public static final double kP = 6e-5;
         public static final double kI = 0;
-        public static final double kD = 0; 
+        public static final double kD = 0;
         public static final double kIz = 0;
         public static final double kFF = 1.0/5700.0;
         public static final double kMaxOut = 1;
@@ -51,7 +51,7 @@ public class RobotMap {
         public static final double maxRPM = 5700;
     }
 
-    public final class constIntake {
+    public final class IntakeConstants {
 
         // Constants for the shooter
         public static final int kIntakePort1 = 19;
@@ -70,7 +70,7 @@ public class RobotMap {
         public static final double kMinPower = -1.0;
     }
 
-    public class constAuto {
+    public class AutoConstants {
     public static final double kMaxSpeedMetersPerSecond = 3;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
@@ -85,7 +85,7 @@ public class RobotMap {
         kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 }
 
-public class constMode {
+public class ModeConstants {
     public static final boolean intakeDebug = false;
     public static final boolean wristDebug = false;
     public static final boolean extensionDebug = false;

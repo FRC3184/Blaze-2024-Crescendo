@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class IntakeSubsystem extends SubsystemBase {
     
     // Define Motors and Encoders
-    private final CANSparkMax m_Intake1 = new CANSparkMax(RobotMap.constIntake.kIntakePort1, MotorType.kBrushless);
-    private final CANSparkMax m_Intake2 = new CANSparkMax(RobotMap.constIntake.kIntakePort2, MotorType.kBrushless);
+    private final CANSparkMax m_Intake1 = new CANSparkMax(RobotMap.IntakeConstants.kIntakePort1, MotorType.kBrushless);
+    private final CANSparkMax m_Intake2 = new CANSparkMax(RobotMap.IntakeConstants.kIntakePort2, MotorType.kBrushless);
 
     private final RelativeEncoder m_IntakeEncoder1 = m_Intake1.getEncoder();
     private final RelativeEncoder m_IntakeEncoder2 = m_Intake2.getEncoder();
@@ -21,11 +21,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
 
     public IntakeSubsystem() {
-        m_Intake1.setInverted(RobotMap.constIntake.kIntakeInverted1);
-        m_Intake2.setInverted(RobotMap.constIntake.kIntakeInverted2);
+        m_Intake1.setInverted(RobotMap.IntakeConstants.kIntakeInverted1);
+        m_Intake2.setInverted(RobotMap.IntakeConstants.kIntakeInverted2);
 
-        m_IntakeEncoder1.setVelocityConversionFactor(RobotMap.constIntake.kIntakeVelFactor1);
-        m_IntakeEncoder2.setVelocityConversionFactor(RobotMap.constIntake.kIntakeVelFactor2);
+        m_IntakeEncoder1.setVelocityConversionFactor(RobotMap.IntakeConstants.kIntakeVelFactor1);
+        m_IntakeEncoder2.setVelocityConversionFactor(RobotMap.IntakeConstants.kIntakeVelFactor2);
 
         resetEncoders();
 
@@ -54,10 +54,10 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void setShooterPower1(double power){
         // make sure power doesn't surpass accepted values
-        if (power > RobotMap.constIntake.kMaxPower) {
-            intakePower1 = RobotMap.constIntake.kMaxPower;
-        } else if (power < RobotMap.constIntake.kMinPower) {
-            intakePower1 = RobotMap.constIntake.kMinPower;
+        if (power > RobotMap.IntakeConstants.kMaxPower) {
+            intakePower1 = RobotMap.IntakeConstants.kMaxPower;
+        } else if (power < RobotMap.IntakeConstants.kMinPower) {
+            intakePower1 = RobotMap.IntakeConstants.kMinPower;
         } else {
             intakePower1 = power;
         }
@@ -65,10 +65,10 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void setShooterPower2(double power){
         // make sure power doesn't surpass accepted values
-        if (power > RobotMap.constIntake.kMaxPower) {
-            intakePower2 = RobotMap.constIntake.kMaxPower;
-        } else if (power < RobotMap.constIntake.kMinPower) {
-            intakePower2 = RobotMap.constIntake.kMinPower;
+        if (power > RobotMap.IntakeConstants.kMaxPower) {
+            intakePower2 = RobotMap.IntakeConstants.kMaxPower;
+        } else if (power < RobotMap.IntakeConstants.kMinPower) {
+            intakePower2 = RobotMap.IntakeConstants.kMinPower;
         } else {
             intakePower2 = power;
         }
@@ -87,15 +87,15 @@ public class IntakeSubsystem extends SubsystemBase {
         intakePower2 = power2;
         
         // make sure power doesn't surpass accepted values
-        if (intakePower1 > RobotMap.constIntake.kMaxPower) {
-            intakePower1 = RobotMap.constIntake.kMaxPower;
-        } else if (intakePower1 < RobotMap.constIntake.kMinPower) {
-            intakePower1 = RobotMap.constIntake.kMinPower;
+        if (intakePower1 > RobotMap.IntakeConstants.kMaxPower) {
+            intakePower1 = RobotMap.IntakeConstants.kMaxPower;
+        } else if (intakePower1 < RobotMap.IntakeConstants.kMinPower) {
+            intakePower1 = RobotMap.IntakeConstants.kMinPower;
         }
-        if (intakePower2 > RobotMap.constIntake.kMaxPower){
-            intakePower2 = RobotMap.constIntake.kMaxPower;
-        }else if (intakePower2 < RobotMap.constIntake.kMinPower) {
-            intakePower2 = RobotMap.constIntake.kMinPower;
+        if (intakePower2 > RobotMap.IntakeConstants.kMaxPower){
+            intakePower2 = RobotMap.IntakeConstants.kMaxPower;
+        }else if (intakePower2 < RobotMap.IntakeConstants.kMinPower) {
+            intakePower2 = RobotMap.IntakeConstants.kMinPower;
         }
 
         m_Intake1.set(intakePower1);
