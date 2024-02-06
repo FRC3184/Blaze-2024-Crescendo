@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class DriveSubsystemSwerve extends SubsystemBase {
-  public static SwerveControllerCommand YEs;
   // Create MAXSwerveModules
   // IMPORTANT - Redefine each module based on which motor controller you are using
   private final MAXSwerveModuleWithSparkMax m_frontLeft = new MAXSwerveModuleWithSparkMax(

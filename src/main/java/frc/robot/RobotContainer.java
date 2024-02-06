@@ -48,6 +48,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     new JoystickButton(m_driverController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
+    new JoystickButton(m_driverController, Button.kRightBumper.value).whileTrue(new SetSlowMode(m_robotDrive));
   }
 
   public Command getAutonomousCommand() {
