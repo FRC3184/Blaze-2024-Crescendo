@@ -2,11 +2,11 @@ package frc.robot.GitRepoImports.RevMaxSwerve;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class SetSlowMode extends Command {
+public class SetNormalMode extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final DriveSubsystemSwerve m_robotDrive;
 
-    public SetSlowMode(DriveSubsystemSwerve subsystem){
+    public SetNormalMode(DriveSubsystemSwerve subsystem){
         m_robotDrive = subsystem;
 
         addRequirements(subsystem);
@@ -17,12 +17,11 @@ public class SetSlowMode extends Command {
 
     @Override
     public void execute(){
-        m_robotDrive.setSpeedMode(0);
+        m_robotDrive.setSpeedMode(1);
     }
 
     @Override
     public boolean isFinished(){
         return true;
     }
-    
 }

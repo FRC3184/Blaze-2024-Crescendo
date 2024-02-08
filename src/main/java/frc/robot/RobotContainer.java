@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.math.MathUtil;
 import frc.robot.GitRepoImports.RevMaxSwerve.DriveSubsystemSwerve;
+import frc.robot.GitRepoImports.RevMaxSwerve.SetFastMode;
+import frc.robot.GitRepoImports.RevMaxSwerve.SetNormalMode;
+import frc.robot.GitRepoImports.RevMaxSwerve.SetSlowMode;
 import frc.robot.GitRepoImports.RevMaxSwerve.constantsMaxSwerve.DriveConstants;
 import frc.robot.GitRepoImports.TwoMotorIntakeRevNeo.Intake;
 import frc.robot.GitRepoImports.TwoMotorIntakeRevNeo.IntakeSubsystem;
@@ -47,8 +50,14 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    new JoystickButton(m_driverController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
-    new JoystickButton(m_driverController, Button.kRightBumper.value).whileTrue(new SetSlowMode(m_robotDrive));
+    new JoystickButton(m_gunnerController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
+
+    //Set speed modes
+    new JoystickButton(m_driverController, Button.kRightBumper.value).onTrue(new SetSlowMode(m_robotDrive));
+    new JoystickButton(m_driverController, Button.kRightBumper.value).onFalse(new SetNormalMode(m_robotDrive));
+    new JoystickButton(m_driverController, Button.kLeftBumper.value).onTrue(new SetFastMode(m_robotDrive));
+    new JoystickButton(m_driverController, Button.kLeftBumper.value).onFalse(new SetNormalMode(m_robotDrive));
+
   }
 
   public Command getAutonomousCommand() {
