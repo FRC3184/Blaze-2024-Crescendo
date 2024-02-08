@@ -8,4 +8,7 @@ public class constMode {
     public static final boolean drivetrainDebug = false;
     public static final boolean limelightDebug = true;
     public static final boolean armDebug = false;
+
+    public static final boolean drivetrainRun = false;
+    public static final boolean intakeRun = false;
 }
