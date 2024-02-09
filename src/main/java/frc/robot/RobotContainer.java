@@ -9,10 +9,13 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.math.MathUtil;
 // Shooter Imports
-import frc.robot.TwoWheelShooterRevNeo.ShootCommand;
-import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
+// import frc.robot.TwoWheelShooterRevNeo.ShootCommand;
+// import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 // Drive Imports
 import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
+import frc.robot.RevMaxSwerve.SetFastMode;
+import frc.robot.RevMaxSwerve.SetNormalMode;
+import frc.robot.RevMaxSwerve.SetSlowMode;
 import frc.robot.RevMaxSwerve.constantsMaxSwerve.DriveConstants;
 // Intake Imports
 import frc.robot.TwoMotorIntakeRevNeo.Intake;
@@ -51,8 +54,19 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    new JoystickButton(m_driverController, Button.kLeftBumper.value).onTrue(new Intake(m_intake));
+
+    //DRIVER CONTROLS
     new JoystickButton(m_driverController, Button.kBack.value).whileTrue(new RunCommand(() -> m_robotDrive.zeroHeading()));
+ 
+    //Set speed modes
+    new JoystickButton(m_driverController, Button.kRightBumper.value).onTrue(new SetSlowMode(m_robotDrive));
+    new JoystickButton(m_driverController, Button.kRightBumper.value).onFalse(new SetNormalMode(m_robotDrive));
+    new JoystickButton(m_driverController, Button.kLeftBumper.value).onTrue(new SetFastMode(m_robotDrive));
+    new JoystickButton(m_driverController, Button.kLeftBumper.value).onFalse(new SetNormalMode(m_robotDrive));
+
+    //GUNNER CONTROLS
+    new JoystickButton(m_gunnerController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
+
   }
 
   public Command getAutonomousCommand() {

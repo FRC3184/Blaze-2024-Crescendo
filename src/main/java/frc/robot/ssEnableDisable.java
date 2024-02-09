@@ -3,7 +3,6 @@ package frc.robot;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.constantsCrescendo.constMode;
 
 public class ssEnableDisable {
@@ -17,9 +16,9 @@ public class ssEnableDisable {
     public ssEnableDisable(){
         inCompMode();
         ssEnableTab = Shuffleboard.getTab("Subsystem Status");
-        competitionStatus = Shuffleboard.getTab("Subsystem Status").add("Competition Mode", constMode.competitionMode).getEntry();
-        drivetrainStatus = Shuffleboard.getTab("Subsystem Status").add("Drivetrain Enabled", constMode.drivetrainRun).getEntry();
-        intakeStatus = Shuffleboard.getTab("Subsystem Status").add("Intake Enabled", constMode.intakeRun).getEntry();
+        competitionStatus = ssEnableTab.add("Competition Mode", constMode.competitionMode).getEntry();
+        drivetrainStatus = ssEnableTab.add("Drivetrain Enabled", constMode.drivetrainRun).getEntry();
+        intakeStatus = ssEnableTab.add("Intake Enabled", constMode.intakeRun).getEntry();
     
     }
 
