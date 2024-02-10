@@ -1,4 +1,4 @@
-package frc.robot.constCrescendoBot;
+package frc.robot.SubmoduleSubsystemConstants;
 
 import com.revrobotics.CANSparkBase.IdleMode;
 

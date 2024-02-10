@@ -16,11 +16,11 @@ import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
 import frc.robot.RevMaxSwerve.SetFastMode;
 import frc.robot.RevMaxSwerve.SetNormalMode;
 import frc.robot.RevMaxSwerve.SetSlowMode;
+import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
+import frc.robot.SubmoduleSubsystemConstants.constMaxSwerveDrive.DriveConstants;
 // Intake Imports
 import frc.robot.TwoMotorIntakeRevNeo.Intake;
 import frc.robot.TwoMotorIntakeRevNeo.IntakeSubsystem;
-import frc.robot.constCrescendoBot.constsJoysticks;
-import frc.robot.constCrescendoBot.constMaxSwerveDrive.DriveConstants;
 
 public class RobotContainer {
 

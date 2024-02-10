@@ -1,4 +1,4 @@
-package frc.robot.constCrescendoBot;
+package frc.robot.SubmoduleSubsystemConstants;
 
 public class constMode {
     public static boolean competitionMode = false;
