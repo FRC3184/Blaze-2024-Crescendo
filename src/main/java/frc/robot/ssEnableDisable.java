@@ -3,7 +3,7 @@ package frc.robot;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import frc.robot.constantsCrescendo.constMode;
+import frc.robot.constCrescendoBot.constMode;
 
 public class ssEnableDisable {
 
