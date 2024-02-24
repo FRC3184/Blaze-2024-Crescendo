@@ -3,28 +3,28 @@ package frc.robot;
 // General Imports
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.math.MathUtil;
+// Autonomous Imports
+import frc.robot.Autos.*;
+// Constants Imports
+import frc.robot.SubmoduleSubsystemConstants.*;
 // Shooter Imports
-// import frc.robot.TwoWheelShooterRevNeo.ShootCommand;
-// import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
+// import frc.robot.TwoWheelShooterRevNeo.*;
 // Drive Imports
-import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
-import frc.robot.RevMaxSwerve.SetFastMode;
-import frc.robot.RevMaxSwerve.SetNormalMode;
-import frc.robot.RevMaxSwerve.SetSlowMode;
-import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
+import frc.robot.RevMaxSwerve.*;
+// import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.constMaxSwerveDrive.DriveConstants;
 // Intake Imports
-import frc.robot.TwoMotorIntakeRevNeo.Intake;
-import frc.robot.TwoMotorIntakeRevNeo.IntakeSubsystem;
+import frc.robot.TwoMotorIntakeRevNeo.*;
 
 public class RobotContainer {
 
-  // define subsystems5
+  // define subsystems
   private final DriveSubsystemSwerve m_robotDrive = new DriveSubsystemSwerve();
   // private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
@@ -33,7 +33,30 @@ public class RobotContainer {
   XboxController m_driverController = new XboxController(constsJoysticks.kDriverControllerPort);
   XboxController m_gunnerController = new XboxController(constsJoysticks.kGunnerControllerPort);
 
+  // Autonomous Chooser
+  private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
+  SendableChooser<Command> m_autoChooser = new SendableChooser<>();
+
+  // AUTONOMOUS ROUTINES - FINAL WORKING
+  private final Command m_FINALdoNothing = new FINALdoNothing(m_robotDrive);
+
+  // IN PROGRESS AUTOS
+  private final Command m_TESTdoNothing = new doNothing(m_robotDrive);
+
+
   public RobotContainer() {
+    // AUTONOMOUS Setup
+    // Competition Ready Autonomous Programs
+    m_autoChooser.setDefaultOption("Do Nothing", m_FINALdoNothing);
+    // Test Autonomous Programs
+    m_autoChooser.addOption("TEST Do Nothing", m_TESTdoNothing);
+    // Add data to the dashboard
+    sbCompTab.add("Select Autonomous", m_autoChooser);
+
+
+
+
+    // TELEOP Setup
     configureBindings();
 
     // Configure default commands
@@ -69,6 +92,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+    // return Commands.print("No autonomous command configured");
+    return m_autoChooser.getSelected();
   }
 }
