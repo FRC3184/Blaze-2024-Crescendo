@@ -7,6 +7,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 
+// import java.util.HashMap;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -37,12 +39,28 @@ public final class constMaxSwerveDrive {
     public static final double kTrackWidth = Units.inchesToMeters(26.5);
     // Distance between centers of right and left wheels on robot
     public static final double kWheelBase = Units.inchesToMeters(26.5);
-    // Distance between front and back wheels on robot
+
+    // Variables for location of the swerve drive in relation to the center of the robot
+    // TODO need to update for Crescendo Robot
+    public static double kFrontLeftX = kWheelBase / 2;
+    public static double kFrontLeftY = kTrackWidth / 2;
+    public static double kFrontRightX = kWheelBase / 2;
+    public static double kFrontRightY = -kTrackWidth / 2;
+    public static double kBackLeftX = -kWheelBase / 2;
+    public static double kBackLeftY = kTrackWidth / 2;
+    public static double kBackRightX = -kWheelBase / 2;
+    public static double kBackRightY = -kTrackWidth / 2;
+
+    // Locations for the swerve drive modules relative to the robot center.
+    private static final Translation2d m_frontLeftLocation = new Translation2d(kFrontLeftX, kFrontLeftY);
+    private static final Translation2d m_frontRightLocation = new Translation2d(kFrontRightX, kFrontRightY);
+    private static final Translation2d m_backLeftLocation = new Translation2d(kBackLeftX, kBackLeftY);
+    private static final Translation2d m_backRightLocation = new Translation2d(kBackRightX, kBackRightY);
+
+  // Creating my kinematics object using the module locations
     public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
-        new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-        new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-        new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
-        new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
+      m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation
+      );
 
     // Angular offsets of the modules relative to the chassis in radians
     public static final double kFrontLeftChassisAngularOffset = -Math.PI / 2;

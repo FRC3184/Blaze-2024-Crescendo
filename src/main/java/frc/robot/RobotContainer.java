@@ -6,8 +6,13 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+// import com.pathplanner.lib.commands.PathPlannerAuto;
+
 import edu.wpi.first.math.MathUtil;
 // Autonomous Imports
 import frc.robot.Autos.*;
@@ -36,6 +41,7 @@ public class RobotContainer {
   // Autonomous Chooser
   private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
   SendableChooser<Command> m_autoChooser = new SendableChooser<>();
+  SendableChooser<Command> autoChooserPathPlan = new SendableChooser<>();
 
   // AUTONOMOUS ROUTINES - FINAL WORKING
   private final Command m_FINALdoNothing = new FINALdoNothing(m_robotDrive);
@@ -58,6 +64,15 @@ public class RobotContainer {
 
     // TELEOP Setup
     configureBindings();
+
+     // Build an auto chooser. This will use Commands.none() as the default option.
+    autoChooserPathPlan = AutoBuilder.buildAutoChooser();
+
+    // Another option that allows you to specify the default auto by its name
+    // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
+
+    SmartDashboard.putData("Auto Chooser", autoChooserPathPlan);
+  
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -85,6 +100,7 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kRightBumper.value).onFalse(new SetNormalMode(m_robotDrive));
     new JoystickButton(m_driverController, Button.kLeftBumper.value).onTrue(new SetFastMode(m_robotDrive));
     new JoystickButton(m_driverController, Button.kLeftBumper.value).onFalse(new SetNormalMode(m_robotDrive));
+
 
     //GUNNER CONTROLS
     new JoystickButton(m_gunnerController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
