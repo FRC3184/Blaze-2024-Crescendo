@@ -3,10 +3,9 @@ package frc.robot;
 // General Imports
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-// import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-// import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -14,8 +13,6 @@ import com.pathplanner.lib.auto.AutoBuilder;
 // import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.MathUtil;
-// Autonomous Imports
-// import frc.robot.Autos.*;
 // Constants Imports
 import frc.robot.SubmoduleSubsystemConstants.*;
 // Shooter Imports
@@ -39,30 +36,10 @@ public class RobotContainer {
   XboxController m_gunnerController = new XboxController(constsJoysticks.kGunnerControllerPort);
 
   // Autonomous Chooser
-  // private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
-  // SendableChooser<Command> m_autoChooser = new SendableChooser<>();
+  private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
   SendableChooser<Command> autoChooserPathPlan = new SendableChooser<>();
 
-
-  // AUTONOMOUS ROUTINES - FINAL WORKING
-  // private final Command m_FINALdoNothing = new FINALdoNothing(m_robotDrive);
-
-  // // IN PROGRESS AUTOS
-  // private final Command m_TESTdoNothing = new doNothing(m_robotDrive);
-
-
   public RobotContainer() {
-    // AUTONOMOUS Setup
-    // Competition Ready Autonomous Programs
-    // m_autoChooser.setDefaultOption("Do Nothing", m_FINALdoNothing);
-    // // Test Autonomous Programs
-    // m_autoChooser.addOption("TEST Do Nothing", m_TESTdoNothing);
-    // // Add data to the dashboard
-    // sbCompTab.add("Select Autonomous", m_autoChooser);
-
-
-
-
     // TELEOP Setup
     configureBindings();
 
@@ -72,11 +49,8 @@ public class RobotContainer {
 
     // Another option that allows you to specify the default auto by its name
     // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
+    sbCompTab.add("Choose Path Planner Auto", autoChooserPathPlan);
 
-    SmartDashboard.updateValues();
-
-    SmartDashboard.putData("Auto Chooser", autoChooserPathPlan);
-  
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
