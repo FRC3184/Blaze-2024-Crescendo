@@ -29,8 +29,6 @@ import frc.robot.TwoMotorIntakeRevNeo.*;
 
 public class RobotContainer {
 
-  private final SendableChooser<Command> autoChooserPathPlan;
-
   // define subsystems
   private final DriveSubsystemSwerve m_robotDrive = new DriveSubsystemSwerve();
   // private final ShooterSubsystem m_shooter = new ShooterSubsystem();
@@ -43,6 +41,7 @@ public class RobotContainer {
   // Autonomous Chooser
   private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
   SendableChooser<Command> m_autoChooser = new SendableChooser<>();
+  SendableChooser<Command> autoChooserPathPlan = new SendableChooser<>();
 
   // AUTONOMOUS ROUTINES - FINAL WORKING
   private final Command m_FINALdoNothing = new FINALdoNothing(m_robotDrive);
