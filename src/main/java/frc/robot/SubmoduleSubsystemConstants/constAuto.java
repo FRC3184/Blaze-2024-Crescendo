@@ -1,4 +1,4 @@
-package frc.robot.constCrescendoBot;
+package frc.robot.SubmoduleSubsystemConstants;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 

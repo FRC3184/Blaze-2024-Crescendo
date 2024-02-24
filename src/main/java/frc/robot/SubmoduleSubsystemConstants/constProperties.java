@@ -1,4 +1,4 @@
-package frc.robot.constCrescendoBot;
+package frc.robot.SubmoduleSubsystemConstants;
 
 public class constProperties {
     public static class Color{
