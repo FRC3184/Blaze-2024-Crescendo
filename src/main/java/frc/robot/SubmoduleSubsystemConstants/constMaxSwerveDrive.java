@@ -36,20 +36,21 @@ public final class constMaxSwerveDrive {
     public static final double kRotationalSlewRate = 2.0; // percent per second (1 = 100%)
 
     // Chassis configuration
-    public static final double kTrackWidth = Units.inchesToMeters(26.5);
+    public static final double kRevMaxSwerveOffset = Units.inchesToMeters(1.75);
+    public static final double kTrackWidth = Units.inchesToMeters(28);
     // Distance between centers of right and left wheels on robot
-    public static final double kWheelBase = Units.inchesToMeters(26.5);
+    public static final double kWheelBase = Units.inchesToMeters(30);
 
     // Variables for location of the swerve drive in relation to the center of the robot
     // TODO need to update for Crescendo Robot
-    public static double kFrontLeftX = kWheelBase / 2;
-    public static double kFrontLeftY = kTrackWidth / 2;
-    public static double kFrontRightX = kWheelBase / 2;
-    public static double kFrontRightY = -kTrackWidth / 2;
-    public static double kBackLeftX = -kWheelBase / 2;
-    public static double kBackLeftY = kTrackWidth / 2;
-    public static double kBackRightX = -kWheelBase / 2;
-    public static double kBackRightY = -kTrackWidth / 2;
+    public static double kFrontLeftX = (kWheelBase / 2) - kRevMaxSwerveOffset;
+    public static double kFrontLeftY = (kTrackWidth / 2) - kRevMaxSwerveOffset;
+    public static double kFrontRightX = (kWheelBase / 2) - kRevMaxSwerveOffset;
+    public static double kFrontRightY = -((kTrackWidth / 2) - kRevMaxSwerveOffset);
+    public static double kBackLeftX = -((kWheelBase / 2) - kRevMaxSwerveOffset);
+    public static double kBackLeftY = (kTrackWidth / 2) - kRevMaxSwerveOffset;
+    public static double kBackRightX = -((kWheelBase / 2) - kRevMaxSwerveOffset);
+    public static double kBackRightY = -((kTrackWidth / 2) - kRevMaxSwerveOffset);
 
     // Locations for the swerve drive modules relative to the robot center.
     private static final Translation2d m_frontLeftLocation = new Translation2d(kFrontLeftX, kFrontLeftY);
