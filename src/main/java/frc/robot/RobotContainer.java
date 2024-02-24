@@ -3,8 +3,8 @@ package frc.robot;
 // General Imports
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+// import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+// import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
@@ -15,7 +15,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 
 import edu.wpi.first.math.MathUtil;
 // Autonomous Imports
-import frc.robot.Autos.*;
+// import frc.robot.Autos.*;
 // Constants Imports
 import frc.robot.SubmoduleSubsystemConstants.*;
 // Shooter Imports
@@ -39,25 +39,26 @@ public class RobotContainer {
   XboxController m_gunnerController = new XboxController(constsJoysticks.kGunnerControllerPort);
 
   // Autonomous Chooser
-  private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
-  SendableChooser<Command> m_autoChooser = new SendableChooser<>();
+  // private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
+  // SendableChooser<Command> m_autoChooser = new SendableChooser<>();
   SendableChooser<Command> autoChooserPathPlan = new SendableChooser<>();
 
-  // AUTONOMOUS ROUTINES - FINAL WORKING
-  private final Command m_FINALdoNothing = new FINALdoNothing(m_robotDrive);
 
-  // IN PROGRESS AUTOS
-  private final Command m_TESTdoNothing = new doNothing(m_robotDrive);
+  // AUTONOMOUS ROUTINES - FINAL WORKING
+  // private final Command m_FINALdoNothing = new FINALdoNothing(m_robotDrive);
+
+  // // IN PROGRESS AUTOS
+  // private final Command m_TESTdoNothing = new doNothing(m_robotDrive);
 
 
   public RobotContainer() {
     // AUTONOMOUS Setup
     // Competition Ready Autonomous Programs
-    m_autoChooser.setDefaultOption("Do Nothing", m_FINALdoNothing);
-    // Test Autonomous Programs
-    m_autoChooser.addOption("TEST Do Nothing", m_TESTdoNothing);
-    // Add data to the dashboard
-    sbCompTab.add("Select Autonomous", m_autoChooser);
+    // m_autoChooser.setDefaultOption("Do Nothing", m_FINALdoNothing);
+    // // Test Autonomous Programs
+    // m_autoChooser.addOption("TEST Do Nothing", m_TESTdoNothing);
+    // // Add data to the dashboard
+    // sbCompTab.add("Select Autonomous", m_autoChooser);
 
 
 
@@ -66,10 +67,13 @@ public class RobotContainer {
     configureBindings();
 
      // Build an auto chooser. This will use Commands.none() as the default option.
+
     autoChooserPathPlan = AutoBuilder.buildAutoChooser();
 
     // Another option that allows you to specify the default auto by its name
     // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
+
+    SmartDashboard.updateValues();
 
     SmartDashboard.putData("Auto Chooser", autoChooserPathPlan);
   
@@ -109,6 +113,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // return Commands.print("No autonomous command configured");
-    return m_autoChooser.getSelected();
+    return autoChooserPathPlan.getSelected();
   }
 }
