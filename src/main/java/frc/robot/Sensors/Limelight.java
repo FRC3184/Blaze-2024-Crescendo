@@ -53,17 +53,21 @@ public class Limelight extends SubsystemBase {
         return skew;
     }
 
-    private void dashboardDebug() {  
-        SmartDashboard.putNumberArray("botPoseBlue", botposeblue);
-        SmartDashboard.putNumber("x", botposeblue[0]);
-        SmartDashboard.putNumber("y", botposeblue[1]);
-        SmartDashboard.putNumber("z", botposeblue[2]);
-        SmartDashboard.putNumber("roll", botposeblue[3]);
-        SmartDashboard.putNumber("pitch", botposeblue[4]);
-        SmartDashboard.putNumber("yaw", botposeblue[5]);
+    private void dashboardDebug() { 
+        updateLimelight();
 
-        SmartDashboard.putNumber("GETY", getY());
-        SmartDashboard.putNumber("GETX", getX());
+        // SmartDashboard.putNumberArray("botPoseBlue", botposeblue);
+        // SmartDashboard.putNumber("x", botposeblue[0]);
+        // SmartDashboard.putNumber("y", botposeblue[1]);
+        // SmartDashboard.putNumber("z", botposeblue[2]);
+        // SmartDashboard.putNumber("roll", botposeblue[3]);
+        // SmartDashboard.putNumber("pitch", botposeblue[4]);
+        // SmartDashboard.putNumber("yaw", botposeblue[5]);
+
+        SmartDashboard.putNumber("Note X", x);
+        SmartDashboard.putNumber("Note Y", y);
+        SmartDashboard.putNumber("Note Area", area);
+        SmartDashboard.putNumber("Note Skew", skew);
     }
 
     public static final class alignmentConstants{
