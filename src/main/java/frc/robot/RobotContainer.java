@@ -30,7 +30,7 @@ public class RobotContainer {
   // define subsystems
   private final DriveSubsystemSwerve m_robotDrive = new DriveSubsystemSwerve();
   // private final ShooterSubsystem m_shooter = new ShooterSubsystem();
-  private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  // private final IntakeSubsystem m_intake = new IntakeSubsystem();
   private final Limelight m_limelight = new Limelight();
 
   
@@ -88,7 +88,7 @@ public class RobotContainer {
 
 
     //GUNNER CONTROLS
-    new JoystickButton(m_gunnerController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
+    // new JoystickButton(m_gunnerController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
 
   }
 
