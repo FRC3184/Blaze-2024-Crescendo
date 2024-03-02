@@ -19,9 +19,14 @@ import frc.robot.SubmoduleSubsystemConstants.*;
 // import frc.robot.TwoWheelShooterRevNeo.*;
 // Drive Imports
 import frc.robot.RevMaxSwerve.*;
+import frc.robot.RevMaxSwerve.Commands.FaceForward;
+import frc.robot.RevMaxSwerve.Commands.SetFastMode;
+import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
+import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
 import frc.robot.Sensors.Limelight;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.constMaxSwerveDrive.DriveConstants;
+import frc.robot.SubmoduleSubsystemConstants.constMaxSwerveDrive.OIConstants;
 // Intake Imports
 import frc.robot.TwoMotorIntakeRevNeo.*;
 import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
@@ -38,6 +43,25 @@ public class RobotContainer {
   // Joystick Controller (I/O)
   XboxController m_driverController = new XboxController(constsJoysticks.kDriverControllerPort);
   XboxController m_gunnerController = new XboxController(constsJoysticks.kGunnerControllerPort);
+
+  // Cardinal Direction functions 
+  private Command pointF = Commands.run(() -> m_robotDrive.rotateToAngle2(0,
+  -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband)), m_robotDrive);
+  private Command pointL = Commands.run(() -> m_robotDrive.rotateToAngle2(90,
+  -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband)), m_robotDrive);
+  private Command pointB = Commands.run(() -> m_robotDrive.rotateToAngle2(180,
+  -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband)), m_robotDrive);
+  private Command pointR = Commands.run(() -> m_robotDrive.rotateToAngle2(270,
+  -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband)), m_robotDrive);
+  
+  private RepeatCommand repeatPointF = new RepeatCommand(pointF);
+  private RepeatCommand repeatPointL = new RepeatCommand(pointL);
+  private RepeatCommand repeatPointB = new RepeatCommand(pointB);
+  private RepeatCommand repeatPointR = new RepeatCommand(pointR);
 
 
   // Autonomous Chooser
@@ -70,7 +94,6 @@ public class RobotContainer {
             m_robotDrive));
   
     //m_shooter.setDefaultCommand(new ShootCommand(m_shooter));
-
   }
 
   private void configureBindings() {
@@ -81,7 +104,15 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kStart.value).whileTrue(new RunCommand(() -> m_robotDrive.setX(), m_robotDrive));
 
     //Cardinal Directional Buttons
-    new JoystickButton(m_driverController, Button.kY.value).whileTrue(new FaceForward(m_robotDrive));
+    // new JoystickButton(m_driverController, Button.kY.value).whileTrue(new FaceForward(m_robotDrive));
+    // rotate robot to face forward
+    new JoystickButton(m_driverController, Button.kY.value).whileTrue(repeatPointF);
+    // rotate robot to face left
+    new JoystickButton(m_driverController, Button.kX.value).whileTrue(repeatPointL);
+    // rotate robot to face back
+    new JoystickButton(m_driverController, Button.kA.value).whileTrue(repeatPointB);
+    // rotate robot to face right
+    new JoystickButton(m_driverController, Button.kB.value).whileTrue(repeatPointR);
 
  
     // Set speed modes
