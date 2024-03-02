@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -21,11 +23,15 @@ import frc.robot.SubmoduleSubsystemConstants.*;
 // Drive Imports
 import frc.robot.RevMaxSwerve.Commands.*;
 import frc.robot.RevMaxSwerve.Commands.FaceForward;
+import frc.robot.RevMaxSwerve.Commands.SetFastMode;
+import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
+import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
 import frc.robot.Sensors.Limelight;
-// import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
+// import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
+import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
 // Intake Imports
-// import frc.robot.TwoMotorIntakeRevNeo.*;
+// import frc.robot.OneMotorIntakeRevNeo.*;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.OneMotorIntakeRevNeo.*;
 import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
@@ -44,6 +50,26 @@ public class RobotContainer {
   // Joystick Controller (I/O)
   XboxController driverController = new XboxController(ConstJoysticks.kDriverControllerPort);
   XboxController gunnerController = new XboxController(ConstJoysticks.kGunnerControllerPort);
+
+  // Cardinal Direction functions 
+  private Command pointF = Commands.run(() -> robotDrive.rotateToAngle2(0,
+  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
+  private Command pointL = Commands.run(() -> robotDrive.rotateToAngle2(90,
+  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
+  private Command pointB = Commands.run(() -> robotDrive.rotateToAngle2(180,
+  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
+  private Command pointR = Commands.run(() -> robotDrive.rotateToAngle2(270,
+  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
+  
+  private RepeatCommand repeatPointF = new RepeatCommand(pointF);
+  private RepeatCommand repeatPointL = new RepeatCommand(pointL);
+  private RepeatCommand repeatPointB = new RepeatCommand(pointB);
+  private RepeatCommand repeatPointR = new RepeatCommand(pointR);
+
 
   // Autonomous Chooser
   private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
@@ -90,10 +116,18 @@ public class RobotContainer {
         .whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
 
     //Cardinal Directional Buttons
-    new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
-    new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
-    new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
-    new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive));
+    // rotate robot to face forward
+    new JoystickButton(driverController, Button.kY.value).whileTrue(repeatPointF);
+    // rotate robot to face left
+    new JoystickButton(driverController, Button.kX.value).whileTrue(repeatPointL);
+    // rotate robot to face back
+    new JoystickButton(driverController, Button.kA.value).whileTrue(repeatPointB);
+    // rotate robot to face right
+    new JoystickButton(driverController, Button.kB.value).whileTrue(repeatPointR);
+    // new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
+    // new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
+    // new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
+    // new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive));
 
 
  

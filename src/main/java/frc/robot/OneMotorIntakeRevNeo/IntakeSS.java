@@ -33,7 +33,7 @@ public class IntakeSS extends SubsystemBase {
       intakeSpeed = 0;
 
 
-      // set PID Constants
+      // set PID constants
       kP = 6e-5;
       kI = 5e-9;
       kD = 1e-4;
