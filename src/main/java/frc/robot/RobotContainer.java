@@ -24,6 +24,7 @@ import frc.robot.Sensors.Limelight;
 import frc.robot.SubmoduleSubsystemConstants.constMaxSwerveDrive.DriveConstants;
 // Intake Imports
 import frc.robot.TwoMotorIntakeRevNeo.*;
+import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 
 public class RobotContainer {
 
@@ -78,6 +79,9 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kBack.value).whileTrue(new RunCommand(() -> m_robotDrive.zeroHeading()));
 
     new JoystickButton(m_driverController, Button.kStart.value).whileTrue(new RunCommand(() -> m_robotDrive.setX(), m_robotDrive));
+
+    //Cardinal Directional Buttons
+    new JoystickButton(m_driverController, Button.kY.value).whileTrue(new FaceForward(m_robotDrive));
 
  
     // Set speed modes
