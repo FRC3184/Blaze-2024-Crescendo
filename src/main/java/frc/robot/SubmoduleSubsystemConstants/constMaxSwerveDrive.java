@@ -21,7 +21,7 @@ import edu.wpi.first.math.util.Units;
  * wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class constMaxSwerveDrive {
+public final class ConstMaxSwerveDrive {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
@@ -156,6 +156,12 @@ public final class constMaxSwerveDrive {
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
         kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+  }
+
+  public static final class CardinalConstants {
+    public static final double CardinalP = 1/75;
+    public static final double CardianlI = 5e-5;
+    public static final double CardinalD = 5e-5;
   }
 
   public static final class NeoMotorConstants {

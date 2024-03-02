@@ -10,7 +10,7 @@ package frc.robot.SubmoduleSubsystemConstants;
  * It is advised to statically import this class (or one of its inner classes)
  * wherever the constants are needed, to reduce verbosity.
  */
-public final class constShooter {
+public final class ConstShooter {
 
     // Constants for the shooter
     public static final int kMotorPortWheel1 = 5;

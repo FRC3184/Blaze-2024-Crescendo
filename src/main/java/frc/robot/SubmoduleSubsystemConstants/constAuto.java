@@ -2,7 +2,7 @@ package frc.robot.SubmoduleSubsystemConstants;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
-public class constAuto {
+public class ConstAuto {
     public static final double kMaxSpeedMetersPerSecond = 3;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;

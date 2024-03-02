@@ -3,7 +3,7 @@ package frc.robot;
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import frc.robot.SubmoduleSubsystemConstants.constMode;
+import frc.robot.SubmoduleSubsystemConstants.ConstMode;
 
 public class ssEnableDisable {
 
@@ -16,32 +16,32 @@ public class ssEnableDisable {
     public ssEnableDisable(){
         inCompMode();
         ssEnableTab = Shuffleboard.getTab("Subsystem Status");
-        competitionStatus = ssEnableTab.add("Competition Mode", constMode.competitionMode).getEntry();
-        drivetrainStatus = ssEnableTab.add("Drivetrain Enabled", constMode.drivetrainRun).getEntry();
-        intakeStatus = ssEnableTab.add("Intake Enabled", constMode.intakeRun).getEntry();
+        competitionStatus = ssEnableTab.add("Competition Mode", ConstMode.competitionMode).getEntry();
+        drivetrainStatus = ssEnableTab.add("Drivetrain Enabled", ConstMode.drivetrainRun).getEntry();
+        intakeStatus = ssEnableTab.add("Intake Enabled", ConstMode.intakeRun).getEntry();
     
     }
 
     public void inCompMode() {
-        if (constMode.competitionMode){
-            constMode.drivetrainRun = true;
-            constMode.intakeRun = true;
+        if (ConstMode.competitionMode){
+            ConstMode.drivetrainRun = true;
+            ConstMode.intakeRun = true;
         }
     }
 
     public void updateSSstatus(){
-        constMode.competitionMode = competitionStatus.getBoolean(false);
-        if (constMode.competitionMode) {
-            constMode.drivetrainRun = true;
-            constMode.intakeRun = true;
+        ConstMode.competitionMode = competitionStatus.getBoolean(false);
+        if (ConstMode.competitionMode) {
+            ConstMode.drivetrainRun = true;
+            ConstMode.intakeRun = true;
         } else {
-            constMode.drivetrainRun = drivetrainStatus.getBoolean(false);
-            constMode.intakeRun = intakeStatus.getBoolean(false);
+            ConstMode.drivetrainRun = drivetrainStatus.getBoolean(false);
+            ConstMode.intakeRun = intakeStatus.getBoolean(false);
         }
 
-        competitionStatus.setBoolean(constMode.competitionMode);
-        intakeStatus.setBoolean(constMode.intakeRun);
-        drivetrainStatus.setBoolean(constMode.drivetrainRun);       
+        competitionStatus.setBoolean(ConstMode.competitionMode);
+        intakeStatus.setBoolean(ConstMode.intakeRun);
+        drivetrainStatus.setBoolean(ConstMode.drivetrainRun);       
     }
     
 }

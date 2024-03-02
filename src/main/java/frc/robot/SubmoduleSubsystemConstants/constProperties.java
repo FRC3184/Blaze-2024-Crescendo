@@ -1,6 +1,6 @@
 package frc.robot.SubmoduleSubsystemConstants;
 
-public class constProperties {
+public class ConstProperties {
     public static class Color{
         public static edu.wpi.first.wpilibj.DriverStation.Alliance AllianceColor = edu.wpi.first.wpilibj.DriverStation.Alliance.Red;  
     }

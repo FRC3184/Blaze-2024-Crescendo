@@ -1,6 +1,6 @@
 package frc.robot.SubmoduleSubsystemConstants;
 
-public class constMode {
+public class ConstMode {
     public static boolean competitionMode = false;
 
     public static final boolean intakeDebug = false;

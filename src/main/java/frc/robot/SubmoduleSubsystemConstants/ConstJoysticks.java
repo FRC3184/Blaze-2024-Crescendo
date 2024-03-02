@@ -1,6 +1,6 @@
 package frc.robot.SubmoduleSubsystemConstants;
 
-public class constsJoysticks {
+public class ConstJoysticks {
 
     public static final int kDriverControllerPort = 0;
     public static final int kGunnerControllerPort = 1;
