@@ -1,8 +1,5 @@
 package frc.robot.SubmoduleSubsystemConstants;
 
-/**
- * TODO.
- */
 public class ConstProperties {
   /**
    * TODO.
