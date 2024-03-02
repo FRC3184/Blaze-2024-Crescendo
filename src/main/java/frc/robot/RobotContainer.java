@@ -14,22 +14,21 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import com.pathplanner.lib.commands.PathPlannerAuto;
 // Drive Imports
 import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
-import frc.robot.RevMaxSwerve.Commands.SetFastMode;
-import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
-import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
 // Constants Imports
 import frc.robot.RevMaxSwerve.*;
 import frc.robot.SubmoduleSubsystemConstants.*;
 // Shooter Imports
-// import frc.robot.TwoWheelShooterRevNeo.*;
 // Drive Imports
 import frc.robot.RevMaxSwerve.Commands.*;
+import frc.robot.RevMaxSwerve.Commands.FaceForward;
 import frc.robot.Sensors.Limelight;
 // import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 // Intake Imports
 // import frc.robot.TwoMotorIntakeRevNeo.*;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
+import frc.robot.OneMotorIntakeRevNeo.*;
+import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 
 /**
  * Contains the robot definition, button bindings for teleop and autonomous configurations.
@@ -38,9 +37,9 @@ public class RobotContainer {
 
   // define subsystems
   private final DriveSubsystemSwerve robotDrive = new DriveSubsystemSwerve();
-  // private final ShooterSubsystem m_shooter = new ShooterSubsystem();
-  // private final IntakeSubsystem m_intake = new IntakeSubsystem();
-  // private final Limelight m_limelight = new Limelight();
+  // private final ShooterSubsystem shooter = new ShooterSubsystem();
+  // private final IntakeSubsystem intake = new IntakeSubsystem();
+  // private final Limelight limelight = new Limelight();
 
   // Joystick Controller (I/O)
   XboxController driverController = new XboxController(ConstJoysticks.kDriverControllerPort);
@@ -77,7 +76,7 @@ public class RobotContainer {
               DriveConstants.kFieldCentric, true),
             robotDrive));
 
-    // m_shooter.setDefaultCommand(new ShootCommand(m_shooter));
+    // shooter.setDefaultCommand(new ShootCommand(shooter));
 
   }
 
@@ -90,20 +89,24 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kStart.value)
         .whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
 
+    //Cardinal Directional Buttons
+    new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
+    new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
+    new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
+    new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive));
+
+
+ 
     // Set speed modes
-    new JoystickButton(driverController, Button.kRightBumper.value)
-      .onTrue(new SetSlowMode(robotDrive));
-    new JoystickButton(driverController, Button.kRightBumper.value)
-      .onFalse(new SetNormalMode(robotDrive));
-    new JoystickButton(driverController, Button.kLeftBumper.value)
-      .onTrue(new SetFastMode(robotDrive));
-    new JoystickButton(driverController, Button.kLeftBumper.value)
-      .onFalse(new SetNormalMode(robotDrive));
+    new JoystickButton(driverController, Button.kRightBumper.value).onTrue(new SetSlowMode(robotDrive));
+    new JoystickButton(driverController, Button.kRightBumper.value).onFalse(new SetNormalMode(robotDrive));
+    new JoystickButton(driverController, Button.kLeftBumper.value).onTrue(new SetFastMode(robotDrive));
+    new JoystickButton(driverController, Button.kLeftBumper.value).onFalse(new SetNormalMode(robotDrive));
 
-    // GUNNER CONTROLS
-    // new JoystickButton(m_gunnerController,
-    // Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
 
+    //GUNNER CONTROLS
+    // new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new Intake(intake));
+    // new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new Outtake(intake));
   }
 
   /**
