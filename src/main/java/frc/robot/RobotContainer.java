@@ -16,26 +16,17 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import com.pathplanner.lib.commands.PathPlannerAuto;
 // Drive Imports
 import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
-// Constants Imports
-import frc.robot.RevMaxSwerve.*;
-import frc.robot.SubmoduleSubsystemConstants.*;
 // Shooter Imports
 // Drive Imports
-import frc.robot.RevMaxSwerve.Commands.*;
-import frc.robot.RevMaxSwerve.Commands.FaceForward;
 import frc.robot.RevMaxSwerve.Commands.SetFastMode;
 import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
 import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
-import frc.robot.Sensors.Limelight;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
 // Intake Imports
 // import frc.robot.OneMotorIntakeRevNeo.*;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
-import frc.robot.OneMotorIntakeRevNeo.*;
-import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
-
 /**
  * Contains the robot definition, button bindings for teleop and autonomous configurations.
  */
