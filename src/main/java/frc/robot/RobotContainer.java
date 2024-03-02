@@ -82,6 +82,10 @@ public class RobotContainer {
 
     //Cardinal Directional Buttons
     new JoystickButton(m_driverController, Button.kY.value).whileTrue(new FaceForward(m_robotDrive));
+    new JoystickButton(m_driverController, Button.kB.value).whileTrue(new FaceRight(m_robotDrive));
+    new JoystickButton(m_driverController, Button.kX.value).whileTrue(new FaceLeft(m_robotDrive));
+    new JoystickButton(m_driverController, Button.kA.value).whileTrue(new FaceBackwards(m_robotDrive));
+
 
  
     // Set speed modes
