@@ -21,6 +21,10 @@ import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
 import frc.robot.RevMaxSwerve.Commands.SetFastMode;
 import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
 import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
+import frc.robot.RevMaxSwerve.Commands.FaceBackwards;
+import frc.robot.RevMaxSwerve.Commands.FaceForward;
+import frc.robot.RevMaxSwerve.Commands.FaceLeft;
+import frc.robot.RevMaxSwerve.Commands.FaceRight;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
@@ -106,19 +110,19 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kStart.value)
         .whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
 
-    //Cardinal Directional Buttons
-    // rotate robot to face forward
-    new JoystickButton(driverController, Button.kY.value).whileTrue(repeatPointF);
-    // rotate robot to face left
-    new JoystickButton(driverController, Button.kX.value).whileTrue(repeatPointL);
-    // rotate robot to face back
-    new JoystickButton(driverController, Button.kA.value).whileTrue(repeatPointB);
-    // rotate robot to face right
-    new JoystickButton(driverController, Button.kB.value).whileTrue(repeatPointR);
-    // new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
-    // new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
-    // new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
-    // new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive));
+    //BACKUP Cardinal Direction Buttons
+    // // rotate robot to face forward
+    // new JoystickButton(driverController, Button.kY.value).whileTrue(repeatPointF);
+    // // rotate robot to face left
+    // new JoystickButton(driverController, Button.kX.value).whileTrue(repeatPointL);
+    // // rotate robot to face back
+    // new JoystickButton(driverController, Button.kA.value).whileTrue(repeatPointB);
+    // // rotate robot to face right
+    // new JoystickButton(driverController, Button.kB.value).whileTrue(repeatPointR);
+    new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
+    new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
+    new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
+    new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive));
 
 
  
