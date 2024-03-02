@@ -16,14 +16,13 @@ import edu.wpi.first.math.MathUtil;
 // Constants Imports
 import frc.robot.SubmoduleSubsystemConstants.*;
 // Shooter Imports
-// import frc.robot.TwoWheelShooterRevNeo.*;
 // Drive Imports
 import frc.robot.RevMaxSwerve.*;
 import frc.robot.Sensors.Limelight;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.constMaxSwerveDrive.DriveConstants;
 // Intake Imports
-import frc.robot.TwoMotorIntakeRevNeo.*;
+import frc.robot.OneMotorIntakeRevNeo.*;
 import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 
 public class RobotContainer {
@@ -31,7 +30,7 @@ public class RobotContainer {
   // define subsystems
   private final DriveSubsystemSwerve m_robotDrive = new DriveSubsystemSwerve();
   // private final ShooterSubsystem m_shooter = new ShooterSubsystem();
-  // private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private final IntakeSS m_intake = new IntakeSS();
   private final Limelight m_limelight = new Limelight();
 
   
@@ -96,8 +95,8 @@ public class RobotContainer {
 
 
     //GUNNER CONTROLS
-    // new JoystickButton(m_gunnerController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
-
+    new JoystickButton(m_gunnerController, Button.kRightBumper.value).whileTrue(new Intake(m_intake));
+    new JoystickButton(m_gunnerController, Button.kLeftBumper.value).whileTrue(new Outtake(m_intake));
   }
 
   public Command getAutonomousCommand() {

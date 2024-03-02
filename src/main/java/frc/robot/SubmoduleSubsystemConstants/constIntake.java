@@ -3,8 +3,8 @@ package frc.robot.SubmoduleSubsystemConstants;
 public final class constIntake {
 
     // Constants for the shooter
-    public static final int kIntakePort1 = 19;
-    public static final int kIntakePort2 = 20;
+    public static final int kIntakePort1 = 9;
+    public static final int kIntakePort2 = 10;
 
     // Does the motor need to be inverted? 
     public static final boolean kIntakeInverted1 = false;
