@@ -12,19 +12,19 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private ssEnableDisable m_ssEnableDisable;
+  private EnableDisable m_ssEnableDisable;
 
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-    m_ssEnableDisable = new ssEnableDisable();
-    m_ssEnableDisable.updateSSstatus();
+    m_ssEnableDisable = new EnableDisable();
+    m_ssEnableDisable.updateSubsystemStatus();
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    m_ssEnableDisable.updateSSstatus();
+    m_ssEnableDisable.updateSubsystemStatus();
   }
 
   @Override
