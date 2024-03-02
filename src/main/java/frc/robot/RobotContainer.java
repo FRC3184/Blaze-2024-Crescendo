@@ -16,7 +16,6 @@ import edu.wpi.first.math.MathUtil;
 // Constants Imports
 import frc.robot.SubmoduleSubsystemConstants.*;
 // Shooter Imports
-// import frc.robot.TwoWheelShooterRevNeo.*;
 // Drive Imports
 import frc.robot.RevMaxSwerve.*;
 import frc.robot.RevMaxSwerve.Commands.FaceForward;
@@ -28,7 +27,7 @@ import frc.robot.Sensors.Limelight;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
 // Intake Imports
-import frc.robot.TwoMotorIntakeRevNeo.*;
+import frc.robot.OneMotorIntakeRevNeo.*;
 import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 
 public class RobotContainer {
@@ -36,7 +35,7 @@ public class RobotContainer {
   // define subsystems
   private final DriveSubsystemSwerve m_robotDrive = new DriveSubsystemSwerve();
   // private final ShooterSubsystem m_shooter = new ShooterSubsystem();
-  // private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private final IntakeSS m_intake = new IntakeSS();
   private final Limelight m_limelight = new Limelight();
 
   
@@ -104,7 +103,6 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kStart.value).whileTrue(new RunCommand(() -> m_robotDrive.setX(), m_robotDrive));
 
     //Cardinal Directional Buttons
-    // new JoystickButton(m_driverController, Button.kY.value).whileTrue(new FaceForward(m_robotDrive));
     // rotate robot to face forward
     new JoystickButton(m_driverController, Button.kY.value).whileTrue(repeatPointF);
     // rotate robot to face left
@@ -113,6 +111,11 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kA.value).whileTrue(repeatPointB);
     // rotate robot to face right
     new JoystickButton(m_driverController, Button.kB.value).whileTrue(repeatPointR);
+    // new JoystickButton(m_driverController, Button.kY.value).whileTrue(new FaceForward(m_robotDrive));
+    // new JoystickButton(m_driverController, Button.kB.value).whileTrue(new FaceRight(m_robotDrive));
+    // new JoystickButton(m_driverController, Button.kX.value).whileTrue(new FaceLeft(m_robotDrive));
+    // new JoystickButton(m_driverController, Button.kA.value).whileTrue(new FaceBackwards(m_robotDrive));
+
 
  
     // Set speed modes
@@ -123,8 +126,8 @@ public class RobotContainer {
 
 
     //GUNNER CONTROLS
-    // new JoystickButton(m_gunnerController, Button.kLeftBumper.value).whileTrue(new Intake(m_intake));
-
+    new JoystickButton(m_gunnerController, Button.kRightBumper.value).whileTrue(new Intake(m_intake));
+    new JoystickButton(m_gunnerController, Button.kLeftBumper.value).whileTrue(new Outtake(m_intake));
   }
 
   public Command getAutonomousCommand() {
