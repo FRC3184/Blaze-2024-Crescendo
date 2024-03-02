@@ -7,3 +7,6 @@
 [submodule "src/main/java/frc/robot/TwoMotorIntakeRevNeo"]
 	path = src/main/java/frc/robot/TwoMotorIntakeRevNeo
 	url = git@github.com:FRC3184/TwoMotorIntakeRevNeo.git
+[submodule "src/main/java/frc/robot/OneMotorIntakeRevNeo"]
+	path = src/main/java/frc/robot/OneMotorIntakeRevNeo
+	url = https://github.com/FRC3184/OneMotorIntakeRevNeo.git
