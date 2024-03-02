@@ -159,7 +159,7 @@ public final class constMaxSwerveDrive {
   }
 
   public static final class CardianlConstants {
-    public static final double CardinalP = 1/75;
+    public static final double CardinalP = 1/75.0;
     public static final double CardianlI = 5e-5;
     public static final double CardinalD = 5e-5;
   }
