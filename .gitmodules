@@ -1,21 +1,9 @@
-[submodule "src/main/java/frc/robot/rev-max-swerve"]
-	path = src/main/java/frc/robot/rev-max-swerve
-	url = git@github.com:FRC3184/rev-max-swerve.git
 [submodule "src/main/java/frc/robot/RevMaxSwerve"]
 	path = src/main/java/frc/robot/RevMaxSwerve
 	url = git@github.com:FRC3184/RevMaxSwerve.git
 [submodule "src/main/java/frc/robot/TwoWheelShooterRevNeo"]
 	path = src/main/java/frc/robot/TwoWheelShooterRevNeo
 	url = git@github.com:FRC3184/TwoWheelShooterRevNeo.git
-[submodule "src/main/java/frc/robot/TwoMotorIntake"]
-	path = src/main/java/frc/robot/TwoMotorIntake
-	url = git@github.com:FRC3184/TwoMotorIntake.git
 [submodule "src/main/java/frc/robot/TwoMotorIntakeRevNeo"]
 	path = src/main/java/frc/robot/TwoMotorIntakeRevNeo
 	url = git@github.com:FRC3184/TwoMotorIntakeRevNeo.git
-[submodule "src/main/java/frc/robot/src/main/java/frc/robot/TwoMotorIntakeRevNeo"]
-	path = src/main/java/frc/robot/src/main/java/frc/robot/TwoMotorIntakeRevNeo
-	url = git@github.com:FRC3184/TwoMotorIntakeRevNeo.git
-[submodule "src/main/java/frc/robot/src/main/java/frc/robot/OneMotorIntakeRevNeo"]
-	path = src/main/java/frc/robot/src/main/java/frc/robot/OneMotorIntakeRevNeo
-	url = https://github.com/FRC3184/OneMotorIntakeRevNeo.git
