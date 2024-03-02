@@ -6,6 +6,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import frc.robot.SubmoduleSubsystemConstants.ConstProperties.NeoMotorConstants;
 
 // import java.util.HashMap;
 
@@ -159,7 +160,7 @@ public final class ConstMaxSwerveDrive {
   }
 
   public static final class CardinalConstants {
-    public static final double CardinalP = 1/75;
+    public static final double CardinalP = 1/75.0;
     public static final double CardinalI = 5e-5;
     public static final double CardinalD = 5e-5;
   }
