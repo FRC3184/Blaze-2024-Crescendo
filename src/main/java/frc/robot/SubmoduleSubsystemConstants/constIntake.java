@@ -1,6 +1,6 @@
 package frc.robot.SubmoduleSubsystemConstants;
 
-public final class constIntake {
+public final class ConstIntake {
 
     // Constants for the shooter
     public static final int kIntakePort1 = 19;

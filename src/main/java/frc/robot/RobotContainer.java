@@ -25,8 +25,8 @@ import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
 import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
 import frc.robot.Sensors.Limelight;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
-import frc.robot.SubmoduleSubsystemConstants.constMaxSwerveDrive.DriveConstants;
-import frc.robot.SubmoduleSubsystemConstants.constMaxSwerveDrive.OIConstants;
+import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
+import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
 // Intake Imports
 import frc.robot.TwoMotorIntakeRevNeo.*;
 import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
@@ -41,8 +41,8 @@ public class RobotContainer {
 
   
   // Joystick Controller (I/O)
-  XboxController m_driverController = new XboxController(constsJoysticks.kDriverControllerPort);
-  XboxController m_gunnerController = new XboxController(constsJoysticks.kGunnerControllerPort);
+  XboxController m_driverController = new XboxController(ConstJoysticks.kDriverControllerPort);
+  XboxController m_gunnerController = new XboxController(ConstJoysticks.kGunnerControllerPort);
 
   // Cardinal Direction functions 
   private Command pointF = Commands.run(() -> m_robotDrive.rotateToAngle2(0,
@@ -87,9 +87,9 @@ public class RobotContainer {
         // Turning is controlled by the X axis of the right stick.
         new RunCommand(
             () -> m_robotDrive.drive(
-                -MathUtil.applyDeadband(m_driverController.getLeftY(), constsJoysticks.kDriveDeadband),
-                -MathUtil.applyDeadband(m_driverController.getLeftX(), constsJoysticks.kDriveDeadband),
-                -MathUtil.applyDeadband(m_driverController.getRightX(), constsJoysticks.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getLeftY(), ConstJoysticks.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getLeftX(), ConstJoysticks.kDriveDeadband),
+                -MathUtil.applyDeadband(m_driverController.getRightX(), ConstJoysticks.kDriveDeadband),
                 DriveConstants.kFieldCentric, true),
             m_robotDrive));
   
