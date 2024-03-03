@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.math.MathUtil;
 import frc.robot.GitRepoImports.RevMaxSwerve.DriveSubsystemSwerve;
+import frc.robot.GitRepoImports.RevMaxSwerve.FaceForward;
 import frc.robot.GitRepoImports.RevMaxSwerve.SetFastMode;
 import frc.robot.GitRepoImports.RevMaxSwerve.SetNormalMode;
 import frc.robot.GitRepoImports.RevMaxSwerve.SetSlowMode;
@@ -57,6 +58,9 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kRightBumper.value).onFalse(new SetNormalMode(m_robotDrive));
     new JoystickButton(m_driverController, Button.kLeftBumper.value).onTrue(new SetFastMode(m_robotDrive));
     new JoystickButton(m_driverController, Button.kLeftBumper.value).onFalse(new SetNormalMode(m_robotDrive));
+
+    //Face direction
+    new JoystickButton(m_driverController, Button.kY.value).whileTrue(new FaceForward(m_robotDrive));
 
   }
 

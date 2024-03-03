@@ -136,6 +136,15 @@ public class DriveSubsystemSwerve extends SubsystemBase {
    *                      field.
    * @param rateLimit     Whether to enable rate limiting for smoother control.
    */
+
+  public double getRotation(){
+    return m_currentRotation;
+  }
+
+  public void setRotation(double rotation){
+    m_currentRotation = rotation;
+  }
+
   public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean rateLimit) {
     
     double xSpeedCommanded;
