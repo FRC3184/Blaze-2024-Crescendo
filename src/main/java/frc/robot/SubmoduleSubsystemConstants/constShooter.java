@@ -12,8 +12,8 @@ package frc.robot.SubmoduleSubsystemConstants;
 public final class ConstShooter {
 
   // Constants for the shooter
-  public static final int kMotorPortWheel1 = 5;
-  public static final int kMotorPortWheel2 = 6;
+  public static final int kMotorPortWheel1 = 10;
+  public static final int kMotorPortWheel2 = 11;
 
   // Does the motor need to be inverted?
   public static final boolean invertedWheel1 = true;
