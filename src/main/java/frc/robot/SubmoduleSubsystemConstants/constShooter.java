@@ -24,8 +24,8 @@ public final class ConstShooter {
   public static final double velFactorWheel2 = 1.0;
 
   // PID Controller Constants
-  public static final double kP = 6e-5;
-  public static final double kI = 0;
+  public static final double kP = 6e-4;
+  public static final double kI = 5e-9;
   public static final double kD = 0;
   public static final double kIz = 0;
   public static final double kFF = 1.0 / 5700.0;
