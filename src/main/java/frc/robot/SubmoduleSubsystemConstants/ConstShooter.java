@@ -12,8 +12,8 @@ package frc.robot.SubmoduleSubsystemConstants;
 public final class ConstShooter {
 
   // Constants for the shooter
-  public static final int kMotorPortWheel1 = 5;
-  public static final int kMotorPortWheel2 = 6;
+  public static final int kMotorPortWheel1 = 10;
+  public static final int kMotorPortWheel2 = 11;
 
   // Does the motor need to be inverted?
   public static final boolean invertedWheel1 = true;
@@ -24,8 +24,8 @@ public final class ConstShooter {
   public static final double velFactorWheel2 = 1.0;
 
   // PID Controller Constants
-  public static final double kP = 6e-5;
-  public static final double kI = 0;
+  public static final double kP = 6e-4;
+  public static final double kI = 5e-9;
   public static final double kD = 0;
   public static final double kIz = 0;
   public static final double kFF = 1.0 / 5700.0;

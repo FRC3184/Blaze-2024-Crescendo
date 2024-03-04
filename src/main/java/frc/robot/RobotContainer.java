@@ -28,8 +28,10 @@ import frc.robot.RevMaxSwerve.Commands.FaceRight;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
+import frc.robot.TwoWheelShooterRevNeo.ShootCommand;
+import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 // Intake Imports
-// import frc.robot.OneMotorIntakeRevNeo.*;
+import frc.robot.OneMotorIntakeRevNeo.*;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 /**
  * Contains the robot definition, button bindings for teleop and autonomous configurations.
@@ -38,8 +40,8 @@ public class RobotContainer {
 
   // define subsystems
   private final DriveSubsystemSwerve robotDrive = new DriveSubsystemSwerve();
-  // private final ShooterSubsystem shooter = new ShooterSubsystem();
-  // private final IntakeSubsystem intake = new IntakeSubsystem();
+  private final ShooterSubsystem shooter = new ShooterSubsystem();
+  private final IntakeSubsystem intake = new IntakeSubsystem();
   // private final Limelight limelight = new Limelight();
 
   // Joystick Controller (I/O)
@@ -96,9 +98,6 @@ public class RobotContainer {
               -MathUtil.applyDeadband(driverController.getRightX(), ConstJoysticks.kDriveDeadband),
               DriveConstants.kFieldCentric, true),
             robotDrive));
-
-    // shooter.setDefaultCommand(new ShootCommand(shooter));
-
   }
 
   private void configureBindings() {
@@ -134,8 +133,10 @@ public class RobotContainer {
 
 
     //GUNNER CONTROLS
-    // new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new Intake(intake));
-    // new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new Outtake(intake));
+    new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new Intake(intake));
+    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new Outtake(intake));
+
+    new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new ShootCommand(shooter));
   }
 
   /**
