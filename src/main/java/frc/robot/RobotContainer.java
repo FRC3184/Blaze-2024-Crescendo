@@ -41,7 +41,7 @@ public class RobotContainer {
   // define subsystems
   private final DriveSubsystemSwerve robotDrive = new DriveSubsystemSwerve();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
-  private final IntakeSS intake = new IntakeSS();
+  private final IntakeSubsystem intake = new IntakeSubsystem();
   // private final Limelight limelight = new Limelight();
 
   // Joystick Controller (I/O)
