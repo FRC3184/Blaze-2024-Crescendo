@@ -2,6 +2,8 @@ package frc.robot;
 
 // General Imports
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -29,6 +31,7 @@ import frc.robot.RevMaxSwerve.Commands.FaceLeft;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
 import frc.robot.TwoWheelShooterRevNeo.ShootCommand;
+import frc.robot.TwoWheelShooterRevNeo.ShooterOff;
 import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 // Intake Imports
 import frc.robot.OneMotorIntakeRevNeo.*;
@@ -76,6 +79,12 @@ public class RobotContainer {
    * Constructor for RobotContainer class.
    */
   public RobotContainer() {
+    //Register named autonomous commands
+    NamedCommands.registerCommand("Intake", new Intake(intake));
+    NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
+    NamedCommands.registerCommand("Shoot", new ShootCommand(shooter));
+    NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
+
     // TELEOP Setup
     configureBindings();
 

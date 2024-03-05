@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.9,
+        "x": 2.1,
         "y": 5.55
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9,
-        "y": 6.504112914512279
+        "x": 2.4,
+        "y": 5.55
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.9,
-        "y": 6.995245539786855
+        "x": 2.5,
+        "y": 5.55
       },
       "prevControl": {
-        "x": 2.9,
-        "y": 5.838784750208658
+        "x": 2.2,
+        "y": 5.55
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "Intake",
-      "waypointRelativePos": 0,
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -74,8 +74,8 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 90.0,
-    "rotateFast": true
+    "rotation": 0,
+    "rotateFast": false
   },
   "reversed": false,
   "folder": null,
