@@ -27,7 +27,11 @@ import frc.robot.RevMaxSwerve.Commands.FaceRight;
 import frc.robot.RevMaxSwerve.Commands.FaceLeft;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
+import frc.robot.TwoWheelShooterRevNeo.Feed;
 import frc.robot.TwoWheelShooterRevNeo.FeedAndShoot;
+import frc.robot.TwoWheelShooterRevNeo.FeederOff;
+import frc.robot.TwoWheelShooterRevNeo.FeederSS;
+import frc.robot.TwoWheelShooterRevNeo.Shoot;
 import frc.robot.TwoWheelShooterRevNeo.ShooterOff;
 import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 // Intake Imports
@@ -40,6 +44,7 @@ public class RobotContainer {
   // define subsystems
   private final DriveSubsystemSwerve robotDrive = new DriveSubsystemSwerve();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
+  private final FeederSS feeder = new FeederSS();
   private final IntakeSubsystem intake = new IntakeSubsystem();
   // private final Limelight limelight = new Limelight();
 
@@ -58,8 +63,10 @@ public class RobotContainer {
     //Register named autonomous commands
     NamedCommands.registerCommand("Intake", new Intake(intake));
     NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
-    NamedCommands.registerCommand("Shoot", new FeedAndShoot(shooter));
+    NamedCommands.registerCommand("Shoot", new Shoot(shooter));
     NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
+    NamedCommands.registerCommand("Feed", new Feed(feeder));
+    NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
 
     // TELEOP Setup
     configureBindings();
@@ -113,9 +120,11 @@ public class RobotContainer {
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new Intake(intake));
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new Outtake(intake));
 
-    new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new FeedAndShoot(shooter));
+    new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new FeedAndShoot(shooter, feeder));
     new JoystickButton(gunnerController, Button.kStart.value).onFalse(new ShooterOff(shooter));
 
+    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new Feed(feeder));
+    new JoystickButton(gunnerController, Button.kB.value).whileTrue(new Shoot(shooter));
   }
 
   /**
