@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -29,8 +27,7 @@ import frc.robot.RevMaxSwerve.Commands.FaceRight;
 import frc.robot.RevMaxSwerve.Commands.FaceLeft;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
-import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
-import frc.robot.TwoWheelShooterRevNeo.ShootCommand;
+import frc.robot.TwoWheelShooterRevNeo.FeedAndShoot;
 import frc.robot.TwoWheelShooterRevNeo.ShooterOff;
 import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 // Intake Imports
@@ -40,7 +37,6 @@ import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
  * Contains the robot definition, button bindings for teleop and autonomous configurations.
  */
 public class RobotContainer {
-
   // define subsystems
   private final DriveSubsystemSwerve robotDrive = new DriveSubsystemSwerve();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
@@ -50,26 +46,6 @@ public class RobotContainer {
   // Joystick Controller (I/O)
   XboxController driverController = new XboxController(ConstJoysticks.kDriverControllerPort);
   XboxController gunnerController = new XboxController(ConstJoysticks.kGunnerControllerPort);
-
-  // Cardinal Direction functions 
-  private Command pointF = Commands.run(() -> robotDrive.rotateToAngle2(0,
-  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
-  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
-  private Command pointL = Commands.run(() -> robotDrive.rotateToAngle2(90,
-  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
-  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
-  private Command pointB = Commands.run(() -> robotDrive.rotateToAngle2(180,
-  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
-  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
-  private Command pointR = Commands.run(() -> robotDrive.rotateToAngle2(270,
-  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
-  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
-  
-  private RepeatCommand repeatPointF = new RepeatCommand(pointF);
-  private RepeatCommand repeatPointL = new RepeatCommand(pointL);
-  private RepeatCommand repeatPointB = new RepeatCommand(pointB);
-  private RepeatCommand repeatPointR = new RepeatCommand(pointR);
-
 
   // Autonomous Chooser
   private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
@@ -82,7 +58,7 @@ public class RobotContainer {
     //Register named autonomous commands
     NamedCommands.registerCommand("Intake", new Intake(intake));
     NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
-    NamedCommands.registerCommand("Shoot", new ShootCommand(shooter));
+    NamedCommands.registerCommand("Shoot", new FeedAndShoot(shooter));
     NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
 
     // TELEOP Setup
@@ -118,15 +94,7 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kStart.value)
         .whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
 
-    //BACKUP Cardinal Direction Buttons
-    // // rotate robot to face forward
-    // new JoystickButton(driverController, Button.kY.value).whileTrue(repeatPointF);
-    // // rotate robot to face left
-    // new JoystickButton(driverController, Button.kX.value).whileTrue(repeatPointL);
-    // // rotate robot to face back
-    // new JoystickButton(driverController, Button.kA.value).whileTrue(repeatPointB);
-    // // rotate robot to face right
-    // new JoystickButton(driverController, Button.kB.value).whileTrue(repeatPointR);
+    //Cardinal Direction Buttons
     new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
     new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
     new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
@@ -145,7 +113,9 @@ public class RobotContainer {
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new Intake(intake));
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new Outtake(intake));
 
-    new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new ShootCommand(shooter));
+    new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new FeedAndShoot(shooter));
+    new JoystickButton(gunnerController, Button.kStart.value).onFalse(new ShooterOff(shooter));
+
   }
 
   /**

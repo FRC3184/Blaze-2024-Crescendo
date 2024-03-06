@@ -14,6 +14,7 @@ public final class ConstShooter {
   // Constants for the shooter
   public static final int kMotorPortWheel1 = 10;
   public static final int kMotorPortWheel2 = 11;
+  public static final int kMotorPortBelt = 12;
 
   // Does the motor need to be inverted?
   public static final boolean invertedWheel1 = true;
@@ -22,6 +23,8 @@ public final class ConstShooter {
   // Velocity Conversion Factor
   public static final double velFactorWheel1 = 1.0;
   public static final double velFactorWheel2 = 1.0;
+  public static final double velFactorBelt = 1.0;
+
 
   // PID Controller Constants
   public static final double kP = 6e-4;
