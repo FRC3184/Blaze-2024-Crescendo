@@ -23,8 +23,8 @@ import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
 import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
 import frc.robot.RevMaxSwerve.Commands.FaceBackwards;
 import frc.robot.RevMaxSwerve.Commands.FaceForward;
-import frc.robot.RevMaxSwerve.Commands.FaceLeft;
 import frc.robot.RevMaxSwerve.Commands.FaceRight;
+import frc.robot.RevMaxSwerve.Commands.FaceLeft;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
@@ -119,8 +119,8 @@ public class RobotContainer {
     // // rotate robot to face right
     // new JoystickButton(driverController, Button.kB.value).whileTrue(repeatPointR);
     new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
-    new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
     new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
+    new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
     new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive));
 
 
