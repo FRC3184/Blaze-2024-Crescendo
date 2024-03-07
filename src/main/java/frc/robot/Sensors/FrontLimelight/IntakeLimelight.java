@@ -8,8 +8,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class IntakeLimelight extends SubsystemBase {
     NetworkTable intakeLimeTable = NetworkTableInstance.getDefault().getTable("limelight-intake");
-    double x, y, area, skew, id_num;
-    NetworkTableEntry tx, ty, ta, ts, tid;
+    double x, y, area, skew, id_num, pipeNum;
+    NetworkTableEntry tx, ty, ta, ts, tid, pipeline;
     public static double[] botposeblue;
     public IntakeLimelight () {
         updateLimelight();
@@ -28,6 +28,7 @@ public class IntakeLimelight extends SubsystemBase {
         ty = intakeLimeTable.getEntry("ty");
         ta = intakeLimeTable.getEntry("ta");
         ts = intakeLimeTable.getEntry("ts");
+        pipeline = intakeLimeTable.getEntry("pipeline");
         botposeblue = intakeLimeTable.getEntry("botpose_wpiblue").getDoubleArray(new double[6]);
         
 
@@ -36,6 +37,11 @@ public class IntakeLimelight extends SubsystemBase {
         y = ty.getDouble(0.0);
         area = ta.getDouble(0.0);
         skew = ts.getDouble(0.0);
+        pipeNum = pipeline.getInteger(0);
+    }
+
+    public void setPipeline(int pl){
+        intakeLimeTable.getEntry("pipeline").setNumber(pl);
     }
     
     public double getIntakeX(){
@@ -68,6 +74,7 @@ public class IntakeLimelight extends SubsystemBase {
         SmartDashboard.putNumber("IntakeLL Y", y);
         SmartDashboard.putNumber("IntakeLL Area", area);
         SmartDashboard.putNumber("IntakeLL Skew", skew);
+        SmartDashboard.putNumber("Intake Pipeline", pipeNum);
     }
 
     public static final class alignmentConstants{
