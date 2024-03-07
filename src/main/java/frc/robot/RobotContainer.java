@@ -21,6 +21,8 @@ import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
 import frc.robot.RevMaxSwerve.Commands.SetFastMode;
 import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
 import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
+import frc.robot.Sensors.BackLimelight.ShooterLimelight;
+import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
 import frc.robot.RevMaxSwerve.Commands.FaceBackwards;
 import frc.robot.RevMaxSwerve.Commands.FaceForward;
 import frc.robot.RevMaxSwerve.Commands.FaceRight;
@@ -46,8 +48,8 @@ public class RobotContainer {
   private final ShooterSubsystem shooter = new ShooterSubsystem();
   private final FeederSS feeder = new FeederSS();
   private final IntakeSubsystem intake = new IntakeSubsystem();
-  // private final Limelight limelight = new Limelight();
-
+  private final ShooterLimelight shooterLL = new ShooterLimelight();
+  private final IntakeLimelight intakeLL = new IntakeLimelight();
   // Joystick Controller (I/O)
   XboxController driverController = new XboxController(ConstJoysticks.kDriverControllerPort);
   XboxController gunnerController = new XboxController(ConstJoysticks.kGunnerControllerPort);

@@ -1,4 +1,4 @@
-package frc.robot.Sensors;
+package frc.robot.Sensors.FrontLimelight;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -6,12 +6,12 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class Limelight extends SubsystemBase {
-    NetworkTable limeTable = NetworkTableInstance.getDefault().getTable("limelight");
+public class IntakeLimelight extends SubsystemBase {
+    NetworkTable intakeLimeTable = NetworkTableInstance.getDefault().getTable("limelight-intake");
     double x, y, area, skew, id_num;
     NetworkTableEntry tx, ty, ta, ts, tid;
     public static double[] botposeblue;
-    public Limelight () {
+    public IntakeLimelight () {
         updateLimelight();
         dashboardDebug();
     }
@@ -23,12 +23,12 @@ public class Limelight extends SubsystemBase {
     }
 
     private void updateLimelight() {
-        tid = limeTable.getEntry("tid");
-        tx = limeTable.getEntry("tx");
-        ty = limeTable.getEntry("ty");
-        ta = limeTable.getEntry("ta");
-        ts = limeTable.getEntry("ts");
-        botposeblue = limeTable.getEntry("botpose_wpiblue").getDoubleArray(new double[6]);
+        tid = intakeLimeTable.getEntry("tid");
+        tx = intakeLimeTable.getEntry("tx");
+        ty = intakeLimeTable.getEntry("ty");
+        ta = intakeLimeTable.getEntry("ta");
+        ts = intakeLimeTable.getEntry("ts");
+        botposeblue = intakeLimeTable.getEntry("botpose_wpiblue").getDoubleArray(new double[6]);
         
 
         id_num = tid.getDouble(0.0);
@@ -38,17 +38,17 @@ public class Limelight extends SubsystemBase {
         skew = ts.getDouble(0.0);
     }
     
-    public double getX(){
+    public double getIntakeX(){
         updateLimelight();
         return x;
     }
 
-    public double getY(){
+    public double getIntakeY(){
         updateLimelight();
         return y;
     }
 
-    public double getS(){
+    public double getIntakeS(){
         updateLimelight();
         return skew;
     }
@@ -64,10 +64,10 @@ public class Limelight extends SubsystemBase {
         // SmartDashboard.putNumber("pitch", botposeblue[4]);
         // SmartDashboard.putNumber("yaw", botposeblue[5]);
 
-        SmartDashboard.putNumber("Note X", x);
-        SmartDashboard.putNumber("Note Y", y);
-        SmartDashboard.putNumber("Note Area", area);
-        SmartDashboard.putNumber("Note Skew", skew);
+        SmartDashboard.putNumber("IntakeLL X", x);
+        SmartDashboard.putNumber("IntakeLL Y", y);
+        SmartDashboard.putNumber("IntakeLL Area", area);
+        SmartDashboard.putNumber("IntakeLL Skew", skew);
     }
 
     public static final class alignmentConstants{
