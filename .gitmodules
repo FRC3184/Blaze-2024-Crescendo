@@ -10,3 +10,12 @@
 [submodule "src/main/java/frc/robot/OneMotorIntakeRevNeo"]
 	path = src/main/java/frc/robot/OneMotorIntakeRevNeo
 	url = https://github.com/FRC3184/OneMotorIntakeRevNeo.git
+[submodule "src/main/java/frc/robot/OneMotorNeoSubsystem"]
+	path = src/main/java/frc/robot/OneMotorNeoSubsystem
+	url = https://github.com/FRC3184/OneMotorNeoSubsystem.git
+[submodule "src/main/java/frc/robot/WinchTwoMotorNeo"]
+	path = src/main/java/frc/robot/WinchTwoMotorNeo
+	url = https://github.com/FRC3184/WinchTwoMotorNeo.git
+[submodule "src/main/java/frc/robot/HangTwoMotorNeo"]
+	path = src/main/java/frc/robot/HangTwoMotorNeo
+	url = https://github.com/FRC3184/HangTwoMotorNeo.git
