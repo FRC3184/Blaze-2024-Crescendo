@@ -8,8 +8,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class IntakeLimelight extends SubsystemBase {
     NetworkTable intakeLimeTable = NetworkTableInstance.getDefault().getTable("limelight-intake");
-    double x, y, area, skew, id_num, pipeNum;
-    NetworkTableEntry tx, ty, ta, ts, tid, pipeline;
+    double x, y, v, area, skew, id_num, pipeNum;
+    NetworkTableEntry tx, ty, ta, ts, tid, tv, pipeline;
     public static double[] botposeblue;
     public IntakeLimelight () {
         updateLimelight();
@@ -28,6 +28,7 @@ public class IntakeLimelight extends SubsystemBase {
         ty = intakeLimeTable.getEntry("ty");
         ta = intakeLimeTable.getEntry("ta");
         ts = intakeLimeTable.getEntry("ts");
+        tv = intakeLimeTable.getEntry("tv");
         pipeline = intakeLimeTable.getEntry("pipeline");
         botposeblue = intakeLimeTable.getEntry("botpose_wpiblue").getDoubleArray(new double[6]);
         
@@ -35,6 +36,7 @@ public class IntakeLimelight extends SubsystemBase {
         id_num = tid.getDouble(0.0);
         x = tx.getDouble(0.0);
         y = ty.getDouble(0.0);
+        v = tv.getDouble(0.0);
         area = ta.getDouble(0.0);
         skew = ts.getDouble(0.0);
         pipeNum = pipeline.getInteger(0);
@@ -42,6 +44,10 @@ public class IntakeLimelight extends SubsystemBase {
 
     public void setPipeline(int pl){
         intakeLimeTable.getEntry("pipeline").setNumber(pl);
+    }
+
+    public double getV(){
+        return v;
     }
     
     public double getIntakeX(){
@@ -72,6 +78,7 @@ public class IntakeLimelight extends SubsystemBase {
 
         SmartDashboard.putNumber("IntakeLL X", x);
         SmartDashboard.putNumber("IntakeLL Y", y);
+        SmartDashboard.putNumber("Intake V", v);
         SmartDashboard.putNumber("IntakeLL Area", area);
         SmartDashboard.putNumber("IntakeLL Skew", skew);
         SmartDashboard.putNumber("Intake Pipeline", pipeNum);
