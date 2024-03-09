@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 // import com.pathplanner.lib.commands.PathPlannerAuto;
 // Drive Imports
 import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
@@ -90,7 +91,7 @@ public class RobotContainer {
               -MathUtil.applyDeadband(driverController.getLeftY(), ConstJoysticks.kDriveDeadband),
               -MathUtil.applyDeadband(driverController.getLeftX(), ConstJoysticks.kDriveDeadband),
               -MathUtil.applyDeadband(driverController.getRightX(), ConstJoysticks.kDriveDeadband),
-              DriveConstants.kFieldCentric, true),
+              DriveConstants.kFieldCentric, true, DriveConstants.rotPt),
             robotDrive));
   }
 
@@ -108,14 +109,21 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
     new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
     new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive));
-
-
  
     // Set speed modes
     new JoystickButton(driverController, Button.kRightBumper.value).onTrue(new SetSlowMode(robotDrive));
     new JoystickButton(driverController, Button.kRightBumper.value).onFalse(new SetNormalMode(robotDrive));
     new JoystickButton(driverController, Button.kLeftBumper.value).onTrue(new SetFastMode(robotDrive));
     new JoystickButton(driverController, Button.kLeftBumper.value).onFalse(new SetNormalMode(robotDrive));
+
+    // Set point of rotation
+    new JoystickButton(driverController, driverLTPressed()).whileTrue(new RunCommand(() -> robotDrive.setRotPoint(driverController.getLeftX(), driverController.getLeftY())));
+    new JoystickButton(driverController, driverLTPressed()).whileFalse(new RunCommand(() -> robotDrive.setRotPoint(0, 0)));
+
+    // Field Centric vs. Robot Centric
+    new POVButton(driverController, 90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
+    new POVButton(driverController, 270).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(true)));
+
 
 
     //GUNNER CONTROLS
@@ -127,6 +135,14 @@ public class RobotContainer {
 
     new JoystickButton(gunnerController, Button.kA.value).whileTrue(new Feed(feeder));
     new JoystickButton(gunnerController, Button.kB.value).whileTrue(new Shoot(shooter));
+  }
+
+  public int driverLTPressed() {
+    if (Math.abs(driverController.getLeftTriggerAxis()) > 0.3) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   /**

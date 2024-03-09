@@ -84,6 +84,8 @@ public final class ConstMaxSwerveDrive {
     public static boolean kFieldCentric = true;
 
     public static boolean kRightStickNormalMode = true;
+
+    public static Translation2d rotPt = new Translation2d(0, 0);
   }
 
   public static final class ModuleConstants {
