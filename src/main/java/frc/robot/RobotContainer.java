@@ -24,6 +24,7 @@ import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
 import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
 import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
+import frc.robot.RevMaxSwerve.Commands.AutoIntakeNote;
 import frc.robot.RevMaxSwerve.Commands.FaceBackwards;
 import frc.robot.RevMaxSwerve.Commands.FaceForward;
 import frc.robot.RevMaxSwerve.Commands.FaceRight;
@@ -134,7 +135,10 @@ public class RobotContainer {
     new JoystickButton(gunnerController, Button.kStart.value).onFalse(new ShooterOff(shooter));
 
     new JoystickButton(gunnerController, Button.kA.value).whileTrue(new Feed(feeder));
-    new JoystickButton(gunnerController, Button.kB.value).whileTrue(new Shoot(shooter));
+    new JoystickButton(gunnerController, Button.kB.value).whileTrue(new AutoIntakeNote(robotDrive, intakeLL, intake));
+
+    new JoystickButton(gunnerController, Button.kX.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(0), intakeLL));
+    new JoystickButton(gunnerController, Button.kY.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(1), intakeLL));
   }
 
   public int driverLTPressed() {
