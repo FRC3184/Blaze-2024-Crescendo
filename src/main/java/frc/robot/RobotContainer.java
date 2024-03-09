@@ -112,9 +112,9 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive));
  
     // Set speed modes
-    new JoystickButton(driverController, Button.kRightBumper.value).onTrue(new SetSlowMode(robotDrive));
+    new JoystickButton(driverController, Button.kLeftBumper.value).onTrue(new SetSlowMode(robotDrive));
     new JoystickButton(driverController, Button.kRightBumper.value).onFalse(new SetNormalMode(robotDrive));
-    new JoystickButton(driverController, Button.kLeftBumper.value).onTrue(new SetFastMode(robotDrive));
+    new JoystickButton(driverController, Button.kRightBumper.value).onTrue(new SetFastMode(robotDrive));
     new JoystickButton(driverController, Button.kLeftBumper.value).onFalse(new SetNormalMode(robotDrive));
 
     // Set point of rotation
