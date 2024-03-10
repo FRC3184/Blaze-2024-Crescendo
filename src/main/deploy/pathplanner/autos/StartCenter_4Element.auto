@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.42,
+      "y": 5.56
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "StartCenter_RingNearCenter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RingNearCenter_RingNearAmp"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NearRingAmp_ShootNearCenter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ShootNearCenter_RingNearStage"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RingNearStage_ShootNearCenter"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
