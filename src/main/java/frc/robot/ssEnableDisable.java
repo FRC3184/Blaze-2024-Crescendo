@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.SubmoduleSubsystemConstants.ConstMode;
@@ -16,9 +17,9 @@ public class ssEnableDisable {
     public ssEnableDisable(){
         inCompMode();
         ssEnableTab = Shuffleboard.getTab("Subsystem Status");
-        competitionStatus = ssEnableTab.add("Competition Mode", ConstMode.competitionMode).getEntry();
-        drivetrainStatus = ssEnableTab.add("Drivetrain Enabled", ConstMode.drivetrainRun).getEntry();
-        intakeStatus = ssEnableTab.add("Intake Enabled", ConstMode.intakeRun).getEntry();
+        competitionStatus = ssEnableTab.add("Competition", ConstMode.competitionMode).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
+        drivetrainStatus = ssEnableTab.add("Drivetrain", ConstMode.drivetrainRun).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
+        intakeStatus = ssEnableTab.add("Intake", ConstMode.intakeRun).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
     
     }
 

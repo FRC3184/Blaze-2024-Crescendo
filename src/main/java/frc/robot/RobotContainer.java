@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -31,6 +33,7 @@ import frc.robot.RevMaxSwerve.Commands.FaceRight;
 import frc.robot.RevMaxSwerve.Commands.FaceLeft;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
+import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
 import frc.robot.TwoWheelShooterRevNeo.Feed;
 import frc.robot.TwoWheelShooterRevNeo.FeedAndShoot;
 import frc.robot.TwoWheelShooterRevNeo.FeederOff;
@@ -41,6 +44,7 @@ import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
 // Intake Imports
 import frc.robot.OneMotorIntakeRevNeo.*;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
+import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
 /**
  * Contains the robot definition, button bindings for teleop and autonomous configurations.
  */
@@ -57,8 +61,27 @@ public class RobotContainer {
   XboxController gunnerController = new XboxController(ConstJoysticks.kGunnerControllerPort);
 
   // Autonomous Chooser
-  private ShuffleboardTab sbCompTab = Shuffleboard.getTab("Competition");
+  private ShuffleboardTab sbCompTab = Shuffleboard.getTab(ConstProperties.CompDashboard.COMPDASHNAME_STRING);
   SendableChooser<Command> autoChooserPathPlan = new SendableChooser<>();
+
+  // Backup Cardinal Directions
+  private Command pointF = Commands.run(() -> robotDrive.rotateToAngle(0,
+  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
+  private Command pointL = Commands.run(() -> robotDrive.rotateToAngle(90,
+  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
+  private Command pointB = Commands.run(() -> robotDrive.rotateToAngle(180,
+  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
+  private Command pointR = Commands.run(() -> robotDrive.rotateToAngle(270,
+  -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband), 
+  -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband)), robotDrive);
+  
+  private RepeatCommand repeatPointF = new RepeatCommand(pointF);
+  private RepeatCommand repeatPointL = new RepeatCommand(pointL);
+  private RepeatCommand repeatPointB = new RepeatCommand(pointB);
+  private RepeatCommand repeatPointR = new RepeatCommand(pointR);
 
   /**
    * Constructor for RobotContainer class.
@@ -81,7 +104,7 @@ public class RobotContainer {
 
     // Another option that allows you to specify the default auto by its name
     // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
-    sbCompTab.add("Choose Path Planner Auto", autoChooserPathPlan);
+    sbCompTab.add("Choose Path Planner Auto", autoChooserPathPlan).withSize(2, 1).withPosition(0, 0);
 
     // Configure default commands
     robotDrive.setDefaultCommand(
@@ -105,11 +128,17 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kStart.value)
         .whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
 
-    //Cardinal Direction Buttons
+    // Cardinal Direction Buttons
     new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
     new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
     new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
     new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive));
+    
+    // Backup Cardinal Direction Buttons
+    // new JoystickButton(driverController, Button.kY.value).whileTrue(repeatPointF);
+    // new JoystickButton(driverController, Button.kX.value).whileTrue(repeatPointL);
+    // new JoystickButton(driverController, Button.kA.value).whileTrue(repeatPointB);
+    // new JoystickButton(driverController, Button.kB.value).whileTrue(repeatPointR);
  
     // Set speed modes
     new JoystickButton(driverController, Button.kLeftBumper.value).onTrue(new SetSlowMode(robotDrive));
@@ -118,12 +147,15 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kLeftBumper.value).onFalse(new SetNormalMode(robotDrive));
 
     // Set point of rotation
-    new JoystickButton(driverController, driverLTPressed()).whileTrue(new RunCommand(() -> robotDrive.setRotPoint(driverController.getLeftX(), driverController.getLeftY())));
-    new JoystickButton(driverController, driverLTPressed()).whileFalse(new RunCommand(() -> robotDrive.setRotPoint(0, 0)));
+    new POVButton(driverController, 45).whileTrue(new RunCommand(() -> robotDrive.setRotPoint(1, -1)));
+    new POVButton(driverController, 135).whileTrue(new RunCommand(() -> robotDrive.setRotPoint(1, 1)));
+    new POVButton(driverController, 225).whileTrue(new RunCommand(() -> robotDrive.setRotPoint(-1, 1)));
+    new POVButton(driverController, 315).whileTrue(new RunCommand(() -> robotDrive.setRotPoint(-1, -1)));
+    new JoystickButton(driverController, Button.kRightStick.value).whileTrue(new RunCommand(() -> robotDrive.setRotPoint(0, 0)));
 
     // Field Centric vs. Robot Centric
-    new POVButton(driverController, 90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
-    new POVButton(driverController, 270).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(true)));
+    // new POVButton(driverController, 90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
+    // new POVButton(driverController, 270).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(true)));
 
 
 
