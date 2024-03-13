@@ -34,6 +34,7 @@ import frc.robot.RevMaxSwerve.Commands.FaceLeft;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
+import frc.robot.Subsystems.Intake.*;
 import frc.robot.TwoWheelShooterRevNeo.FeedForward;
 import frc.robot.TwoWheelShooterRevNeo.FeedReverse;
 import frc.robot.TwoWheelShooterRevNeo.FeedAndShoot;
@@ -51,8 +52,6 @@ import frc.robot.CarriageTwoMotorNeo.ElevatorUp;
 import frc.robot.ClimbWheelNeo.Climb;
 import frc.robot.ClimbWheelNeo.ClimbWheelSubsystem;
 import frc.robot.ClimbWheelNeo.Descend;
-// Intake Imports
-import frc.robot.OneMotorIntakeRevNeo.*;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
 /**
@@ -61,7 +60,7 @@ import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
 public class RobotContainer {
   // define subsystems
   private final DriveSubsystemSwerve robotDrive = new DriveSubsystemSwerve();
-  private final IntakeSubsystem intake = new IntakeSubsystem();
+  private final IntakeRevNeo intake = new IntakeRevNeo();
   private final CarriageSubsystem carriage = new CarriageSubsystem();
   // private final ElevatorSubsystem elevator = new ElevatorSubsystem();
   private final FeederSS feeder = new FeederSS();

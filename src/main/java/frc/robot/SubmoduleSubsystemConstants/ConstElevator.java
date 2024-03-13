@@ -1,6 +1,6 @@
 package frc.robot.SubmoduleSubsystemConstants;
 
-public class ConstCarriageAndElevator {
+public class ConstElevator {
     //Carriage & Elevator motor ports
     public static final int kMotorPortCarriage = 13;
     public static final int kMotorPortElevator1 = 11;
