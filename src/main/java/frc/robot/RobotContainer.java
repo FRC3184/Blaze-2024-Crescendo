@@ -34,13 +34,23 @@ import frc.robot.RevMaxSwerve.Commands.FaceLeft;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
-import frc.robot.TwoWheelShooterRevNeo.Feed;
+import frc.robot.TwoWheelShooterRevNeo.FeedForward;
+import frc.robot.TwoWheelShooterRevNeo.FeedReverse;
 import frc.robot.TwoWheelShooterRevNeo.FeedAndShoot;
 import frc.robot.TwoWheelShooterRevNeo.FeederOff;
 import frc.robot.TwoWheelShooterRevNeo.FeederSS;
 import frc.robot.TwoWheelShooterRevNeo.Shoot;
 import frc.robot.TwoWheelShooterRevNeo.ShooterOff;
 import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
+import frc.robot.CarriageTwoMotorNeo.CarriageForward;
+import frc.robot.CarriageTwoMotorNeo.CarriageReverse;
+import frc.robot.CarriageTwoMotorNeo.CarriageSubsystem;
+import frc.robot.CarriageTwoMotorNeo.ElevatorDown;
+import frc.robot.CarriageTwoMotorNeo.ElevatorSubsystem;
+import frc.robot.CarriageTwoMotorNeo.ElevatorUp;
+import frc.robot.ClimbWheelNeo.Climb;
+import frc.robot.ClimbWheelNeo.ClimbWheelSubsystem;
+import frc.robot.ClimbWheelNeo.Descend;
 // Intake Imports
 import frc.robot.OneMotorIntakeRevNeo.*;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
@@ -51,11 +61,14 @@ import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
 public class RobotContainer {
   // define subsystems
   private final DriveSubsystemSwerve robotDrive = new DriveSubsystemSwerve();
-  private final ShooterSubsystem shooter = new ShooterSubsystem();
-  private final FeederSS feeder = new FeederSS();
   private final IntakeSubsystem intake = new IntakeSubsystem();
-  private final ShooterLimelight shooterLL = new ShooterLimelight();
-  private final IntakeLimelight intakeLL = new IntakeLimelight();
+  private final CarriageSubsystem carriage = new CarriageSubsystem();
+  // private final ElevatorSubsystem elevator = new ElevatorSubsystem();
+  private final FeederSS feeder = new FeederSS();
+  private final ShooterSubsystem shooter = new ShooterSubsystem();
+  // private final ClimbWheelSubsystem climbWheel = new ClimbWheelSubsystem();
+  // private final ShooterLimelight shooterLL = new ShooterLimelight();
+  // private final IntakeLimelight intakeLL = new IntakeLimelight();
   // Joystick Controller (I/O)
   XboxController driverController = new XboxController(ConstJoysticks.kDriverControllerPort);
   XboxController gunnerController = new XboxController(ConstJoysticks.kGunnerControllerPort);
@@ -88,12 +101,12 @@ public class RobotContainer {
    */
   public RobotContainer() {
     //Register named autonomous commands
-    NamedCommands.registerCommand("Intake", new Intake(intake));
-    NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
-    NamedCommands.registerCommand("Shoot", new Shoot(shooter));
-    NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
-    NamedCommands.registerCommand("Feed", new Feed(feeder));
-    NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
+    // NamedCommands.registerCommand("Intake", new Intake(intake));
+    // NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
+    // NamedCommands.registerCommand("Shoot", new Shoot(shooter));
+    // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
+    // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
+    // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
 
     // TELEOP Setup
     configureBindings();
@@ -160,17 +173,34 @@ public class RobotContainer {
 
 
     //GUNNER CONTROLS
+    // // intake
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new Intake(intake));
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new Outtake(intake));
+    // // carriage belts
+    new JoystickButton(gunnerController, Button.kY.value).whileTrue(new CarriageForward(carriage));
+    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new CarriageReverse(carriage));
+    // // feeder
+    new JoystickButton(gunnerController, Button.kX.value).whileTrue(new FeedForward(feeder));
+    new JoystickButton(gunnerController, Button.kB.value).whileTrue(new FeedReverse(feeder));
+    // // elevator 
+    // new POVButton(gunnerController, 0).whileTrue(new ElevatorUp(elevator));
+    // new POVButton(gunnerController, 180).whileTrue(new ElevatorDown(elevator));
+    // shoot
+    new POVButton(gunnerController, 90).whileTrue(new Shoot(shooter));
+    new POVButton(gunnerController, 90).whileFalse(new ShooterOff(shooter));
+    // // climb wheel
+    // new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new Climb(climbWheel));
+    // new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new Descend(climbWheel));
 
-    new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new FeedAndShoot(shooter, feeder));
-    new JoystickButton(gunnerController, Button.kStart.value).onFalse(new ShooterOff(shooter));
 
-    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new Feed(feeder));
-    new JoystickButton(gunnerController, Button.kB.value).whileTrue(new AutoIntakeNote(robotDrive, intakeLL, intake));
+    // new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new FeedAndShoot(shooter, feeder));
+    // new JoystickButton(gunnerController, Button.kStart.value).onFalse(new ShooterOff(shooter));
 
-    new JoystickButton(gunnerController, Button.kX.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(0), intakeLL));
-    new JoystickButton(gunnerController, Button.kY.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(1), intakeLL));
+    // new JoystickButton(gunnerController, Button.kA.value).whileTrue(new FeedForward(feeder));
+    // new JoystickButton(gunnerController, Button.kB.value).whileTrue(new AutoIntakeNote(robotDrive, intakeLL, intake));
+
+    // new JoystickButton(gunnerController, Button.kX.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(0), intakeLL));
+    // new JoystickButton(gunnerController, Button.kY.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(1), intakeLL));
   }
 
   public int driverLTPressed() {

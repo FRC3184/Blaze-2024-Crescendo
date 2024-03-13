@@ -2,9 +2,9 @@ package frc.robot.SubmoduleSubsystemConstants;
 
 public class ConstCarriageAndElevator {
     //Carriage & Elevator motor ports
-    public static final int kMotorPortCarriage = 16;
-    public static final int kMotorPortElevator1 = 17;
-    public static final int kMotorPortElevator2 = 18;
+    public static final int kMotorPortCarriage = 13;
+    public static final int kMotorPortElevator1 = 11;
+    public static final int kMotorPortElevator2 = 12;
 
     //Does the motor need to be inverted?
     public static final boolean kCarriageInverted = false;
