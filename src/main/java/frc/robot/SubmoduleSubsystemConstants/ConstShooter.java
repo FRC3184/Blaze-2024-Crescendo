@@ -20,11 +20,13 @@ public final class ConstShooter {
   // Does the motor need to be inverted?
   public static final boolean invertedWheel1 = true;
   public static final boolean invertedWheel2 = false;
+  public static final boolean invertedPivot = false;
 
   // Velocity Conversion Factor
   public static final double velFactorWheel1 = 1.0;
   public static final double velFactorWheel2 = 1.0;
   public static final double velFactorBelt = 1.0;
+  public static final double velFactorPivot = 1.0;
 
 
   // PID Controller Constants
