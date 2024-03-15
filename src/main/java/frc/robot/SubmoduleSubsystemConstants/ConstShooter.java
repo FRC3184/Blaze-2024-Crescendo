@@ -50,5 +50,5 @@ public final class ConstShooter {
   public static final double pivotmaxRPM = 5700;
 
   // 
-  public static final double defVelocity = 2000;
+  public static final double defVelocity = 4000;
 }

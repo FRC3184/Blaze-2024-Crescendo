@@ -13,12 +13,12 @@ public class feederForward extends Command {
     }
 
     public void initialize() {
-        feeder.setVelocity(ConstFeeder.defaultVelocity);
+        feeder.setSpeed(0.5);
     }
 
     @Override
     public void execute() {
-        feeder.runVel();
+        feeder.runSpeed();
     }
 
     @Override

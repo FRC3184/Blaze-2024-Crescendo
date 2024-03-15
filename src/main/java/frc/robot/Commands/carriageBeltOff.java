@@ -12,12 +12,12 @@ public class carriageBeltOff extends Command {
     }
 
     public void initialize() {
-        carriageBelt.setVelocity(0);
+        carriageBelt.setSpeed(0);
     }
 
     @Override
     public void execute() {
-        carriageBelt.runVel();
+        carriageBelt.runSpeed();
     }
 
     @Override

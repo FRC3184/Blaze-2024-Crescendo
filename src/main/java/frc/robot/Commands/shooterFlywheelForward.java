@@ -14,7 +14,7 @@ public class shooterFlywheelForward extends Command {
     }
 
     public void initialize() {
-        shooterFlywheels.setTargtetVelocity(ConstShooter.defVelocity);
+        shooterFlywheels.setTargetVelocity(ConstShooter.defVelocity);
     }
 
     @Override

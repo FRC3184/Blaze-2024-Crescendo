@@ -8,23 +8,23 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.765872873427322,
+        "x": 1.765872873427326,
         "y": 6.681985456994171
       },
-      "isLocked": true,
+      "isLocked": false,
       "linkedName": "StartAmp"
     },
     {
       "anchor": {
-        "x": 2.5050915556376565,
-        "y": 7.001
+        "x": 4.026094349147554,
+        "y": 6.975699103455452
       },
       "prevControl": {
-        "x": 1.5050915556376565,
-        "y": 7.001
+        "x": 3.026094349147554,
+        "y": 6.975699103455452
       },
       "nextControl": null,
-      "isLocked": true,
+      "isLocked": false,
       "linkedName": null
     }
   ],
@@ -45,7 +45,7 @@
   "reversed": false,
   "folder": "StartAmp",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 59.03624346792652,
     "velocity": 0
   },
   "useDefaultConstraints": true

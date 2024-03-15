@@ -14,12 +14,12 @@ public class carriageBeltBackward extends Command {
     }
 
     public void initialize() {
-        carriageBelt.setVelocity(-ConstCarriage.defaultVelocity);
+        carriageBelt.setSpeed(-0.5);
     }
 
     @Override
     public void execute() {
-        carriageBelt.runVel();
+        carriageBelt.runSpeed();
     }
 
     @Override

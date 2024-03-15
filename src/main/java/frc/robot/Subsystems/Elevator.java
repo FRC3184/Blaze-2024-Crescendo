@@ -1,6 +1,6 @@
 package frc.robot.Subsystems;
 
-import frc.Mechanisms.SubsystemType.TwoMotorSSwithSparkMax;
+import frc.Mechanisms.configurationTypes.TwoMotorSSwithSparkMax;
 import frc.robot.SubmoduleSubsystemConstants.ConstElevator;
 
 public class Elevator extends TwoMotorSSwithSparkMax {

@@ -42,6 +42,8 @@ import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Feeder;
 import frc.robot.Subsystems.ShooterPitch;
 import frc.robot.Commands.carriageBeltBackward;
+import frc.robot.Commands.carriageBeltForward;
+import frc.robot.Commands.carriageBeltOff;
 import frc.robot.Commands.climbDown;
 import frc.robot.Commands.climbDownMotor1;
 import frc.robot.Commands.climbOff;
@@ -78,9 +80,9 @@ public class RobotContainer {
   private final CarriageBelt carriage = new CarriageBelt();
   private final Feeder feeder = new Feeder();
   private final ShooterFlywheels shooterFlywheels = new ShooterFlywheels();
-  private final ShooterPitch shooterPitch = new ShooterPitch();
-  private final Climber climber = new Climber();
-  private final Elevator elevator = new Elevator();
+  // private final ShooterPitch shooterPitch = new ShooterPitch();
+  // private final Climber climber = new Climber();
+  // private final Elevator elevator = new Elevator();
 
   // private final ClimbWheelSubsystem climbWheel = new ClimbWheelSubsystem();
   // private final ShooterLimelight shooterLL = new ShooterLimelight();
@@ -119,7 +121,7 @@ public class RobotContainer {
     //Register named autonomous commands
     // NamedCommands.registerCommand("Intake", new Intake(intake));
     // NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
-    // NamedCommands.registerCommand("Shoot", new Shoot(shooter));
+    NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(3));
     // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
     // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
@@ -195,40 +197,32 @@ public class RobotContainer {
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
 
-    // // shooter flywheels
-    // new JoystickButton(gunnerController, Button.kX.value).whileTrue(new shooterFlywheelForward(shooterFlywheels));
-    // new JoystickButton(gunnerController, Button.kX.value).whileFalse(new shooterFlywheelOff(shooterFlywheels));
-    // new JoystickButton(gunnerController, Button.kB.value).whileTrue(new shooterFlywheelBackward(shooterFlywheels));
-    // new JoystickButton(gunnerController, Button.kB.value).whileFalse(new shooterFlywheelOff(shooterFlywheels));
-    new JoystickButton(gunnerController, Button.kX.value).whileTrue(new shoot(shooterFlywheels, feeder));
+    // // shooter
+    new JoystickButton(gunnerController, Button.kX.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
     new JoystickButton(gunnerController, Button.kX.value).whileFalse(new shooterFlywheelOff(shooterFlywheels));
-    new JoystickButton(gunnerController, Button.kB.value).whileTrue(new shoot(shooterFlywheels, feeder));
-    new JoystickButton(gunnerController, Button.kB.value).whileFalse(new shooterFlywheelOff(shooterFlywheels));
+
+        // // climber
+        new POVButton(gunnerController, 90).whileTrue(new carriageBeltBackward(carriage));
+        new POVButton(gunnerController, 90).whileFalse(new carriageBeltOff(carriage));
 
     // // feeder
-    new JoystickButton(gunnerController, Button.kY.value).whileTrue(new feederForward(feeder));
-    new JoystickButton(gunnerController, Button.kY.value).whileFalse(new feederOff(feeder));
-    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new feederBackward(feeder));
-    new JoystickButton(gunnerController, Button.kA.value).whileFalse(new feederOff(feeder));
+    // new JoystickButton(gunnerController, Button.kY.value).whileTrue(new feederForward(feeder));
+    // new JoystickButton(gunnerController, Button.kY.value).whileFalse(new feederOff(feeder));
+    // new JoystickButton(gunnerController, Button.kA.value).whileTrue(new feederBackward(feeder));
+    // new JoystickButton(gunnerController, Button.kA.value).whileFalse(new feederOff(feeder));
 
-    // // shooter pitch 
-    new POVButton(gunnerController, 0).whileTrue(new shooterPitchUp(shooterPitch));
-    new POVButton(gunnerController, 0).whileFalse(new shooterPitchOff(shooterPitch));
-    new POVButton(gunnerController, 180).whileTrue(new shooterPitchDown(shooterPitch));
-    new POVButton(gunnerController, 180).whileFalse(new shooterPitchOff(shooterPitch));
-
-    // // climber
-    new POVButton(gunnerController, 90).whileTrue(new climbUp(climber));
-    new POVButton(gunnerController, 90).whileFalse(new climbOff(climber));
-    new POVButton(gunnerController, 270).whileTrue(new climbDown(climber));
-    new POVButton(gunnerController, 270).whileFalse(new climbOff(climber));
+    // // // shooter pitch 
+    // new POVButton(gunnerController, 0).whileTrue(new shooterPitchUp(shooterPitch));
+    // new POVButton(gunnerController, 0).whileFalse(new shooterPitchOff(shooterPitch));
+    // new POVButton(gunnerController, 180).whileTrue(new shooterPitchDown(shooterPitch));
+    // new POVButton(gunnerController, 180).whileFalse(new shooterPitchOff(shooterPitch));
 
     // // elevator
-    new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUp(elevator));
-    new JoystickButton(gunnerController, Button.kLeftStick.value).whileFalse(new elevatorOff(elevator));
-    new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDown(elevator));
-    new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorOff(elevator));
-    // shoot
+    // new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUp(elevator));
+    // new JoystickButton(gunnerController, Button.kLeftStick.value).whileFalse(new elevatorOff(elevator));
+    // new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDown(elevator));
+    // new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorOff(elevator));
+    // // shoot
     // new POVButton(gunnerController, 90).whi                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  terOff(shooter));
     // // climb wheel
     // new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new Climb(climbWheel));
