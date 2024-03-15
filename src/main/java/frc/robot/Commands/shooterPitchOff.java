@@ -2,26 +2,27 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.CarriageBelt;
+import frc.robot.Subsystems.ShooterPitch;
 
-public class carriageBeltOff extends Command {
-    private final CarriageBelt carriageBelt;
+public class shooterPitchOff extends Command {
+    private final ShooterPitch shooterPitch;
 
-    public carriageBeltOff(CarriageBelt subsystem){
-        carriageBelt = subsystem;
+    public shooterPitchOff(ShooterPitch subsystem){
+        shooterPitch = subsystem;
         addRequirements(subsystem); 
     }
 
     public void initialize() {
-        carriageBelt.setVelocity(0);
+        shooterPitch.setSpeed(0);
     }
 
     @Override
     public void execute() {
-        carriageBelt.runVel();
+        shooterPitch.run();
     }
 
     @Override
     public void end(boolean interrupted) {
-        carriageBelt.stop();
+        shooterPitch.stop();
     }
 }

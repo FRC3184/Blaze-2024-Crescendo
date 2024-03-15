@@ -2,28 +2,28 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.SubmoduleSubsystemConstants.ConstIntake;
+import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Intake;
 
-public class intakeForward extends Command {
-    private final Intake intake;
+public class climbDown extends Command {
+    private final Climber climber;
 
-    public intakeForward(Intake subsystem){
-        intake = subsystem;
+    public climbDown(Climber subsystem){
+        climber = subsystem;
         addRequirements(subsystem); 
     }
 
     public void initialize() {
-        intake.setSpeed(0.5);
-        intake.setVelocity(ConstIntake.kIntakeVelocity);
+        climber.setSpeed(-0.5);
     }
 
     @Override
     public void execute() {
-        intake.runVel();
+        climber.run();
     }
 
     @Override
     public void end(boolean interrupted) {
-        intake.stop();
+        climber.stop();
     }
 }

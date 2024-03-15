@@ -1,12 +1,13 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Intake;
 
-public class intakeOff extends Command {
-    private final Intake intake;
+public class climbOff extends Command {
+    private final Climber intake;
 
-    public intakeOff(Intake subsystem){
+    public climbOff(Climber subsystem){
         intake = subsystem;
         addRequirements(subsystem); 
     }
@@ -17,7 +18,7 @@ public class intakeOff extends Command {
 
     @Override
     public void execute() {
-        intake.runSpeed();
+        intake.run();
     }
 
     @Override

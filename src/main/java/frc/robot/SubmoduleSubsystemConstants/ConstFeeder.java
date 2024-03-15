@@ -2,10 +2,10 @@ package frc.robot.SubmoduleSubsystemConstants;
 
 public class ConstFeeder {
     //Carriage & Elevator motor ports
-    public static final int kMotorPort = 13;
+    public static final int kMotorPort = 7;
 
     //Does the motor need to be inverted?
-    public static final boolean kInverted = false;
+    public static final boolean kInverted = true;
 
     //Velocity Conversion Factor
     public static final double velFactor = 1.0;

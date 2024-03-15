@@ -1,13 +1,29 @@
 package frc.robot.Commands;
 
-import frc.Mechanisms.flywheel.forward;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
+import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.ShooterFlywheels;
 
-public class shooterFlywheelForward extends forward {
+public class shooterFlywheelForward extends Command {
+    private final ShooterFlywheels shooterFlywheels;
 
     public shooterFlywheelForward(ShooterFlywheels subsystem){
-        super(subsystem);
+        shooterFlywheels = subsystem;
+        addRequirements(subsystem); 
     }
 
-    public void initialize() {}
+    public void initialize() {
+        shooterFlywheels.setTargtetVelocity(ConstShooter.defVelocity);
+    }
+
+    @Override
+    public void execute() {
+        shooterFlywheels.runVelocity();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        shooterFlywheels.stop();
+    }
 }

@@ -1,27 +1,27 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Subsystems.Feeder;
+import frc.robot.Subsystems.Elevator;
 
-public class feederOff extends Command {
-    private final Feeder feeder;
+public class elevatorOff extends Command {
+    private final Elevator elevator;
 
-    public feederOff(Feeder subsystem){
-        feeder = subsystem;
+    public elevatorOff(Elevator subsystem){
+        elevator = subsystem;
         addRequirements(subsystem); 
     }
 
     public void initialize() {
-        feeder.setSpeed(0);
+        elevator.setSpeed(0.5);
     }
 
     @Override
     public void execute() {
-        feeder.runSpeed();
+        elevator.run();
     }
 
     @Override
     public void end(boolean interrupted) {
-        feeder.stop();
+        elevator.stop();
     }
 }
