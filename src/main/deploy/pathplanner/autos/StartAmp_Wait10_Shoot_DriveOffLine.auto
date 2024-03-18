@@ -5,7 +5,7 @@
       "x": 0.765872873427322,
       "y": 6.681985456994171
     },
-    "rotation": 60.75117366345303
+    "rotation": 59.17956107651273
   },
   "command": {
     "type": "sequential",
@@ -32,6 +32,6 @@
       ]
     }
   },
-  "folder": null,
+  "folder": "CompAutos",
   "choreoAuto": false
 }

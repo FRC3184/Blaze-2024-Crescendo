@@ -2,15 +2,21 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.4042995358717991,
-      "y": 5.565873600441298
+      "x": 0.8072597963377744,
+      "y": 4.421825570923869
     },
-    "rotation": 0
+    "rotation": -60.80251395393547
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 10.0
+          }
+        },
         {
           "type": "named",
           "data": {
@@ -20,12 +26,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "DriveOffLineOnly"
+            "pathName": "StartSource_Line"
           }
         }
       ]
     }
   },
-  "folder": null,
+  "folder": "CompAutos",
   "choreoAuto": false
 }

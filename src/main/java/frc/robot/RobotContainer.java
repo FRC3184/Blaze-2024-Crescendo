@@ -55,6 +55,7 @@ import frc.robot.Commands.elevatorUp;
 import frc.robot.Commands.shooterPitchDown;
 import frc.robot.Commands.shooterPitchOff;
 import frc.robot.Commands.shooterPitchUp;
+import frc.robot.Commands.spinUpFlywheels;
 import frc.robot.Commands.feederBackward;
 import frc.robot.Commands.feederForward;
 import frc.robot.Commands.feederOff;
@@ -122,6 +123,7 @@ public class RobotContainer {
     // NamedCommands.registerCommand("Intake", new Intake(intake));
     // NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
     NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(3));
+    NamedCommands.registerCommand("Intake", new intake(intake, carriage).withTimeout(2));
     // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
     // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
@@ -199,7 +201,9 @@ public class RobotContainer {
 
     // // shooter
     new JoystickButton(gunnerController, Button.kX.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
-    new JoystickButton(gunnerController, Button.kX.value).whileFalse(new shooterFlywheelOff(shooterFlywheels));
+    // new JoystickButton(gunnerController, Button.kX.value).whileFalse(new shooterFlywheelOff(shooterFlywheels));
+    new POVButton(gunnerController, 0).whileTrue(new spinUpFlywheels(shooterFlywheels));
+    // new POVButton(gunnerController, 0).whileFalse(new shooterFlywheelOff(shooterFlywheels));
 
         // // climber
         new POVButton(gunnerController, 90).whileTrue(new carriageBeltBackward(carriage));

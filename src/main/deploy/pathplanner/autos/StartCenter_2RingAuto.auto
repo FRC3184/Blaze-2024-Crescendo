@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.42,
-      "y": 1.59
+      "x": 1.4042995358717991,
+      "y": 5.559932574410603
     },
     "rotation": 0
   },
@@ -12,38 +12,38 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "StartSource_ShootMidStage"
+            "name": "Shoot"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "ShootMidStage_RingFar2"
+            "pathName": "StartCenter_RingNearCenter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RingFar2_ShootMidStage"
+            "pathName": "RingNearCenter_Shoot"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "ShootMidStage_RingFar3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "RingFar3_ShootMidCenter"
+            "name": "Shoot"
           }
         }
       ]
     }
   },
-  "folder": null,
+  "folder": "CompAutos",
   "choreoAuto": false
 }
