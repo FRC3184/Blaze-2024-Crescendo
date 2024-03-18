@@ -18,41 +18,57 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 // import com.pathplanner.lib.commands.PathPlannerAuto;
 // Drive Imports
-import frc.robot.RevMaxSwerve.DriveSubsystemSwerve;
+import frc.robot.Subsystems.RevMaxSwerve.DriveSubsystemSwerve;
 // Shooter Imports
 // Drive Imports
-import frc.robot.RevMaxSwerve.Commands.SetFastMode;
-import frc.robot.RevMaxSwerve.Commands.SetNormalMode;
-import frc.robot.RevMaxSwerve.Commands.SetSlowMode;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.SetFastMode;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.SetNormalMode;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.SetSlowMode;
 import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
-import frc.robot.RevMaxSwerve.Commands.AutoIntakeNote;
-import frc.robot.RevMaxSwerve.Commands.FaceBackwards;
-import frc.robot.RevMaxSwerve.Commands.FaceForward;
-import frc.robot.RevMaxSwerve.Commands.FaceRight;
-import frc.robot.RevMaxSwerve.Commands.FaceLeft;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.AutoIntakeNote;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.FaceBackwards;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.FaceForward;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.FaceRight;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.FaceLeft;
 // import frc.robot.SubmoduleSubsystemConstants.constsJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
-import frc.robot.TwoWheelShooterRevNeo.FeedForward;
-import frc.robot.TwoWheelShooterRevNeo.FeedReverse;
-import frc.robot.TwoWheelShooterRevNeo.FeedAndShoot;
-import frc.robot.TwoWheelShooterRevNeo.FeederOff;
-import frc.robot.TwoWheelShooterRevNeo.FeederSS;
-import frc.robot.TwoWheelShooterRevNeo.Shoot;
-import frc.robot.TwoWheelShooterRevNeo.ShooterOff;
-import frc.robot.TwoWheelShooterRevNeo.ShooterSubsystem;
-import frc.robot.CarriageTwoMotorNeo.CarriageForward;
-import frc.robot.CarriageTwoMotorNeo.CarriageReverse;
-import frc.robot.CarriageTwoMotorNeo.CarriageSubsystem;
-import frc.robot.CarriageTwoMotorNeo.ElevatorDown;
-import frc.robot.CarriageTwoMotorNeo.ElevatorSubsystem;
-import frc.robot.CarriageTwoMotorNeo.ElevatorUp;
-import frc.robot.ClimbWheelNeo.Climb;
-import frc.robot.ClimbWheelNeo.ClimbWheelSubsystem;
-import frc.robot.ClimbWheelNeo.Descend;
-// Intake Imports
-import frc.robot.OneMotorIntakeRevNeo.*;
+import frc.robot.Subsystems.Intake;
+import frc.robot.Subsystems.ShooterFlywheels;
+import frc.robot.Subsystems.CarriageBelt;
+import frc.robot.Subsystems.Climber;
+import frc.robot.Subsystems.Elevator;
+import frc.robot.Subsystems.Feeder;
+import frc.robot.Subsystems.ShooterPitch;
+import frc.robot.Commands.carriageBeltBackward;
+import frc.robot.Commands.carriageBeltForward;
+import frc.robot.Commands.carriageBeltOff;
+import frc.robot.Commands.climbDown;
+import frc.robot.Commands.climbDownMotor1;
+import frc.robot.Commands.climbOff;
+import frc.robot.Commands.climbUp;
+import frc.robot.Commands.climbUpMotor1;
+import frc.robot.Commands.elevatorDown;
+import frc.robot.Commands.elevatorOff;
+import frc.robot.Commands.elevatorUp;
+import frc.robot.Commands.shooterPitchDown;
+import frc.robot.Commands.shooterPitchOff;
+import frc.robot.Commands.shooterPitchUp;
+import frc.robot.Commands.spinUpFlywheels;
+import frc.robot.Commands.feederBackward;
+import frc.robot.Commands.feederForward;
+import frc.robot.Commands.feederOff;
+import frc.robot.Commands.fullIntakeOff;
+import frc.robot.Commands.intake;
+import frc.robot.Commands.intakeBackward;
+import frc.robot.Commands.intakeForward;
+import frc.robot.Commands.intakeOff;
+import frc.robot.Commands.outtake;
+import frc.robot.Commands.shoot;
+import frc.robot.Commands.shooterFlywheelBackward;
+import frc.robot.Commands.shooterFlywheelForward;
+import frc.robot.Commands.shooterFlywheelOff;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
 /**
@@ -61,11 +77,14 @@ import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
 public class RobotContainer {
   // define subsystems
   private final DriveSubsystemSwerve robotDrive = new DriveSubsystemSwerve();
-  private final IntakeSubsystem intake = new IntakeSubsystem();
-  private final CarriageSubsystem carriage = new CarriageSubsystem();
-  // private final ElevatorSubsystem elevator = new ElevatorSubsystem();
-  private final FeederSS feeder = new FeederSS();
-  private final ShooterSubsystem shooter = new ShooterSubsystem();
+  private final Intake intake = new Intake();
+  private final CarriageBelt carriage = new CarriageBelt();
+  private final Feeder feeder = new Feeder();
+  private final ShooterFlywheels shooterFlywheels = new ShooterFlywheels();
+  // private final ShooterPitch shooterPitch = new ShooterPitch();
+  // private final Climber climber = new Climber();
+  // private final Elevator elevator = new Elevator();
+
   // private final ClimbWheelSubsystem climbWheel = new ClimbWheelSubsystem();
   // private final ShooterLimelight shooterLL = new ShooterLimelight();
   // private final IntakeLimelight intakeLL = new IntakeLimelight();
@@ -103,7 +122,8 @@ public class RobotContainer {
     //Register named autonomous commands
     // NamedCommands.registerCommand("Intake", new Intake(intake));
     // NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
-    // NamedCommands.registerCommand("Shoot", new Shoot(shooter));
+    NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(3));
+    NamedCommands.registerCommand("Intake", new intake(intake, carriage).withTimeout(2));
     // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
     // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
@@ -173,21 +193,41 @@ public class RobotContainer {
 
 
     //GUNNER CONTROLS
-    // // intake
-    new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new Intake(intake));
-    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new Outtake(intake));
-    // // carriage belts
-    new JoystickButton(gunnerController, Button.kY.value).whileTrue(new CarriageForward(carriage));
-    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new CarriageReverse(carriage));
+    // // full intake
+    new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new intake(intake, carriage));
+    new JoystickButton(gunnerController, Button.kRightBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
+    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));
+    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
+
+    // // shooter
+    new JoystickButton(gunnerController, Button.kX.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
+    // new JoystickButton(gunnerController, Button.kX.value).whileFalse(new shooterFlywheelOff(shooterFlywheels));
+    new POVButton(gunnerController, 0).whileTrue(new spinUpFlywheels(shooterFlywheels));
+    // new POVButton(gunnerController, 0).whileFalse(new shooterFlywheelOff(shooterFlywheels));
+
+        // // climber
+        new POVButton(gunnerController, 90).whileTrue(new carriageBeltBackward(carriage));
+        new POVButton(gunnerController, 90).whileFalse(new carriageBeltOff(carriage));
+
     // // feeder
-    new JoystickButton(gunnerController, Button.kX.value).whileTrue(new FeedForward(feeder));
-    new JoystickButton(gunnerController, Button.kB.value).whileTrue(new FeedReverse(feeder));
-    // // elevator 
-    // new POVButton(gunnerController, 0).whileTrue(new ElevatorUp(elevator));
-    // new POVButton(gunnerController, 180).whileTrue(new ElevatorDown(elevator));
-    // shoot
-    new POVButton(gunnerController, 90).whileTrue(new Shoot(shooter));
-    new POVButton(gunnerController, 90).whileFalse(new ShooterOff(shooter));
+    // new JoystickButton(gunnerController, Button.kY.value).whileTrue(new feederForward(feeder));
+    // new JoystickButton(gunnerController, Button.kY.value).whileFalse(new feederOff(feeder));
+    // new JoystickButton(gunnerController, Button.kA.value).whileTrue(new feederBackward(feeder));
+    // new JoystickButton(gunnerController, Button.kA.value).whileFalse(new feederOff(feeder));
+
+    // // // shooter pitch 
+    // new POVButton(gunnerController, 0).whileTrue(new shooterPitchUp(shooterPitch));
+    // new POVButton(gunnerController, 0).whileFalse(new shooterPitchOff(shooterPitch));
+    // new POVButton(gunnerController, 180).whileTrue(new shooterPitchDown(shooterPitch));
+    // new POVButton(gunnerController, 180).whileFalse(new shooterPitchOff(shooterPitch));
+
+    // // elevator
+    // new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUp(elevator));
+    // new JoystickButton(gunnerController, Button.kLeftStick.value).whileFalse(new elevatorOff(elevator));
+    // new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDown(elevator));
+    // new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorOff(elevator));
+    // // shoot
+    // new POVButton(gunnerController, 90).whi                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  terOff(shooter));
     // // climb wheel
     // new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new Climb(climbWheel));
     // new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new Descend(climbWheel));

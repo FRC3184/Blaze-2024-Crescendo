@@ -2,8 +2,8 @@ package frc.robot.SubmoduleSubsystemConstants;
 
 public class ConstClimber {
     //Climber motor ports
-    public static final int kMotorPortClimber1 = 13;
-    public static final int kMotorPortClimber2 = 9;
+    public static final int kMotorPortClimber1 = 13; //left
+    public static final int kMotorPortClimber2 = 6; //right
 
     //Does the motor need to be inverted?
     public static final boolean invertedMotor1 = true;
@@ -15,7 +15,7 @@ public class ConstClimber {
 
     // PID Controller Constants
   public static final double kP = 6e-4;
-  public static final double kI = 5e-9;
+  public static final double kI = 0;
   public static final double kD = 0;
   public static final double kIz = 0;
   public static final double kFF = 1.0 / 5700.0;

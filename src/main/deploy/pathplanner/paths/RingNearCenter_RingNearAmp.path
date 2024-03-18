@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.5,
-        "y": 5.56
+        "x": 2.9155563765672983,
+        "y": 5.559932574410603
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5559724755813154,
-        "y": 5.793218648255477
+        "x": 2.9715288521486136,
+        "y": 5.793151222666081
       },
       "isLocked": false,
       "linkedName": "RingNearCenter"

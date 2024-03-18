@@ -3,9 +3,9 @@
   "robotLength": 0.89,
   "holonomicMode": true,
   "pathFolders": [
-    "RingFarFeeder",
     "RingFar2",
     "RingFar3",
+    "RingFarFeeder",
     "RingNearAmp",
     "RingNearCenter",
     "RingNearStage",
@@ -14,10 +14,12 @@
     "ShootNearCenter",
     "StartAmp",
     "StartCenter",
-    "StartFeeder",
+    "StartSource",
     "StartStage"
   ],
-  "autoFolders": [],
+  "autoFolders": [
+    "CompAutos"
+  ],
   "defaultMaxVel": 7.22,
   "defaultMaxAccel": 2.5,
   "defaultMaxAngVel": 360.0,
