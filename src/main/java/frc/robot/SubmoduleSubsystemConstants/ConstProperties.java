@@ -24,4 +24,9 @@ public class ConstProperties {
     public static final int LEDLen = 150; // length of current full LED strip
   }
 
+  public static final class CompDashboard {
+    public static final String COMPDASHNAME_STRING = "Competition";
+
+  }
+
 }

@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.42,
+      "y": 1.59
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "StartSource_ShootMidStage"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ShootMidStage_RingFar2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RingFar2_ShootMidStage"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ShootMidStage_RingFar3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RingFar3_ShootMidCenter"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

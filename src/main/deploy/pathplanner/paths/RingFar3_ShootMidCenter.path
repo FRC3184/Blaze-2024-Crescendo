@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 7.794490498071905,
+        "y": 4.123305701156857
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.4138361003994735,
+        "y": 3.069157411042095
+      },
+      "isLocked": false,
+      "linkedName": "RingFar3"
+    },
+    {
+      "anchor": {
+        "x": 4.0,
+        "y": 5.56
+      },
+      "prevControl": {
+        "x": 3.7644722562172395,
+        "y": 4.804304154062854
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "ShootMidCenter"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 7.22,
+    "maxAcceleration": 2.5,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "RingFar3",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

@@ -1,9 +1,25 @@
 {
-  "robotWidth": 0.84455,
-  "robotLength": 0.79375,
+  "robotWidth": 0.94,
+  "robotLength": 0.89,
   "holonomicMode": true,
-  "pathFolders": [],
-  "autoFolders": [],
+  "pathFolders": [
+    "RingFar2",
+    "RingFar3",
+    "RingFarFeeder",
+    "RingNearAmp",
+    "RingNearCenter",
+    "RingNearStage",
+    "ShootMidCenter",
+    "ShootMidStage",
+    "ShootNearCenter",
+    "StartAmp",
+    "StartCenter",
+    "StartSource",
+    "StartStage"
+  ],
+  "autoFolders": [
+    "CompAutos"
+  ],
   "defaultMaxVel": 7.22,
   "defaultMaxAccel": 2.5,
   "defaultMaxAngVel": 360.0,

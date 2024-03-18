@@ -24,9 +24,9 @@ public final class ConstMaxSwerveDrive {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 4.8;
-    public static final double kMaxDefaultMPS = 2.5;
-    public static final double kMaxSlowMPS = 1;
+    public static final double kMaxSpeedMetersPerSecond = 6.7;
+    public static final double kMaxDefaultMPS = 4.8;
+    public static final double kMaxSlowMPS = 2;
     public static final double kMaxGrannyMPS = 0.4;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
@@ -69,15 +69,15 @@ public final class ConstMaxSwerveDrive {
     public static final double kBackRightChassisAngularOffset = Math.PI /2;
 
     // SPARK MAX CAN IDs
-    public static final int kFrontLeftDrivingCanId = 1;
-    public static final int kRearLeftDrivingCanId = 3;
-    public static final int kFrontRightDrivingCanId = 7;
-    public static final int kRearRightDrivingCanId = 5;
+    public static final int kFrontLeftDrivingCanId = 18;
+    public static final int kRearLeftDrivingCanId = 19;
+    public static final int kFrontRightDrivingCanId = 1;
+    public static final int kRearRightDrivingCanId = 20;
 
-    public static final int kFrontLeftTurningCanId = 2;
-    public static final int kRearLeftTurningCanId = 4;
-    public static final int kFrontRightTurningCanId = 8;
-    public static final int kRearRightTurningCanId = 6;
+    public static final int kFrontLeftTurningCanId = 16;
+    public static final int kRearLeftTurningCanId = 17;
+    public static final int kFrontRightTurningCanId = 3;
+    public static final int kRearRightTurningCanId = 2;
 
     public static final boolean kGyroReversed = true;
 

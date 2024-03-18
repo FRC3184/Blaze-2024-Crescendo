@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.9155563765672983,
+        "y": 5.559932574410603
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.2159004318008635,
+        "y": 5.559932574410603
+      },
+      "isLocked": true,
+      "linkedName": "RingNearCenter"
+    },
+    {
+      "anchor": {
+        "x": 1.4042995358717991,
+        "y": 5.559932574410603
+      },
+      "prevControl": {
+        "x": 2.46777657191678,
+        "y": 5.569261320340823
+      },
+      "nextControl": null,
+      "isLocked": true,
+      "linkedName": "StartCenter"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 7.22,
+    "maxAcceleration": 2.5,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "RingNearCenter",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}
