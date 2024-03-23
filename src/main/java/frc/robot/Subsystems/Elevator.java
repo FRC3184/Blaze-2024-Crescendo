@@ -9,6 +9,5 @@ public class Elevator extends TwoMotorSSwithSparkMax {
     super(ConstElevator.kMotorPortElevator1, ConstElevator.kMotorPortElevator2,
           ConstElevator.kElevator1Inverted, ConstElevator.kElevator2Inverted,
           ConstElevator.velFactorElevator1, ConstElevator.velFactorElevator2, "Elevator");
-    
-  }
+      }
 }

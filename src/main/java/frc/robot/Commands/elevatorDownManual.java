@@ -3,21 +3,21 @@ package frc.robot.Commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Elevator;
 
-public class elevatorOff extends Command {
+public class elevatorDownManual extends Command {
     private final Elevator elevator;
 
-    public elevatorOff(Elevator subsystem){
+    public elevatorDownManual(Elevator subsystem){
         elevator = subsystem;
         addRequirements(subsystem); 
     }
 
     public void initialize() {
-        elevator.setSpeed(0);
+        elevator.setSpeed(-0.25);
     }
 
     @Override
     public void execute() {
-        elevator.setSpeed(0);
+        elevator.setSpeed(-0.25);
         elevator.run();
     }
 

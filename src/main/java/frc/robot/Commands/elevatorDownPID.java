@@ -1,25 +1,23 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.SubmoduleSubsystemConstants.ConstIntake;
 import frc.robot.Subsystems.Elevator;
-import frc.robot.Subsystems.Intake;
 
-public class elevatorDown extends Command {
+public class elevatorDownPID extends Command {
     private final Elevator Elevator;
 
-    public elevatorDown(Elevator subsystem){
+    public elevatorDownPID(Elevator subsystem){
         Elevator = subsystem;
         addRequirements(subsystem); 
     }
 
     public void initialize() {
-        Elevator.setSpeed(-0.5);
+        // Elevator.setSpeed(-0.25);
     }
 
     @Override
     public void execute() {
-        Elevator.run();
+        Elevator.seekPosition(0);
     }
 
     @Override

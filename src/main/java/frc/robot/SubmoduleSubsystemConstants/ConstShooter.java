@@ -12,9 +12,9 @@ package frc.robot.SubmoduleSubsystemConstants;
 public final class ConstShooter {
 
   // Constants for the shooter
-  public static final int kMotorPortWheel1 = 15;
-  public static final int kMotorPortWheel2 = 8;
-  public static final int kMotorPortBelt = 7;
+  public static final int kMotorPortWheel1 = 15; //Bottom
+  public static final int kMotorPortWheel2 = 8;  //top
+  // public static final int kMotorPortBelt = 7;
   public static final int kPivot = 12;
 
   // Does the motor need to be inverted?
@@ -25,7 +25,7 @@ public final class ConstShooter {
   // Velocity Conversion Factor
   public static final double velFactorWheel1 = 1.0;
   public static final double velFactorWheel2 = 1.0;
-  public static final double velFactorBelt = 1.0;
+  // public static final double velFactorBelt = 1.0;
   public static final double velFactorPivot = 1.0;
 
 
