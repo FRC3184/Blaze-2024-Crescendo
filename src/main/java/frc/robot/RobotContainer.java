@@ -55,6 +55,7 @@ import frc.robot.Commands.climbWheelOff;
 import frc.robot.Commands.climbWheelUp;
 import frc.robot.Commands.elevatorDownManual;
 import frc.robot.Commands.elevatorDownPID;
+import frc.robot.Commands.elevatorHoldPosition;
 import frc.robot.Commands.elevatorOff;
 import frc.robot.Commands.elevatorUpManual;
 import frc.robot.Commands.elevatorUpPID;
@@ -235,9 +236,9 @@ public class RobotContainer {
 
     // // elevator
     new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUpManual(elevator));
-    new JoystickButton(gunnerController, Button.kLeftStick.value).whileFalse(new elevatorOff(elevator));
+    new JoystickButton(gunnerController, Button.kLeftStick.value).whileFalse(new elevatorHoldPosition(elevator));
     new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDownManual(elevator));
-    new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorOff(elevator));
+    new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorHoldPosition(elevator));
     // // climb wheel
     new POVButton(driverController, 0).whileTrue(new climbWheelUp(climbWheel)).whileFalse(new climbWheelOff(climbWheel));
     new POVButton(driverController, 180).whileTrue(new climbWheelDown(climbWheel)).whileFalse(new climbWheelOff(climbWheel));
