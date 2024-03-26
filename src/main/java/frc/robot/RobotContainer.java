@@ -216,11 +216,11 @@ public class RobotContainer {
     new POVButton(gunnerController, 270).whileTrue(new spinUpFlywheels(shooterFlywheels));
     // new POVButton(gunnerController, 0).whileFalse(new shooterFlywheelOff(shooterFlywheels));
 
-        // // climber
-    new POVButton(gunnerController, 0).whileTrue(new climbUpLeft(climber));
-    new POVButton(gunnerController, 180).whileTrue(new climbDownLeft(climber));
-    new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbUpRight(climber));
-    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbDownRight(climber));
+    // // climber
+    new POVButton(gunnerController, 180).whileTrue(new climbUpLeft(climber));
+    new POVButton(gunnerController, 0).whileTrue(new climbDownLeft(climber));
+    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpRight(climber));
+    new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbDownRight(climber));
 
     // // feeder
     // new JoystickButton(gunnerController, Button.kY.value).whileTrue(new feederForward(feeder));
