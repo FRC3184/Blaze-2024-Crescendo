@@ -78,6 +78,7 @@ import frc.robot.Commands.shooterFlywheelForward;
 import frc.robot.Commands.shooterFlywheelOff;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
+import frc.robot.Subsystems.CarriageODS;
 /**
  * Contains the robot definition, button bindings for teleop and autonomous configurations.
  */
@@ -88,10 +89,12 @@ public class RobotContainer {
   private final CarriageBelt carriage = new CarriageBelt();
   private final Feeder feeder = new Feeder();
   private final ShooterFlywheels shooterFlywheels = new ShooterFlywheels();
-  // private final ShooterPitch shooterPitch = new ShooterPitch();
   private final Climber climber = new Climber();
   private final ClimbWheel climbWheel = new ClimbWheel();
   private final Elevator elevator = new Elevator();
+  private final CarriageODS carriageODS = new CarriageODS();
+
+    // private final ShooterPitch shooterPitch = new ShooterPitch();
 
   // private final ClimbWheelSubsystem climbWheel = new ClimbWheelSubsystem();
   // private final ShooterLimelight shooterLL = new ShooterLimelight();

@@ -1,6 +1,7 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.SubmoduleSubsystemConstants.ConstClimber;
 import frc.robot.Subsystems.Climber;
 
 public class climbDownLeft extends Command {
@@ -16,7 +17,7 @@ public class climbDownLeft extends Command {
 
     @Override
     public void execute() {
-        climber.runMotor2Seperate(-0.5);
+        climber.runMotor2Seperate(-ConstClimber.climbPower);
     }
 
     @Override

@@ -26,4 +26,7 @@ public class ConstClimber {
   //Max extention and retraction of the climber
   public static final double maxExt = 40;
   public static final double minExt = 0;
+
+  //Speed of the climber
+  public static final double climbPower = 1;
 }
