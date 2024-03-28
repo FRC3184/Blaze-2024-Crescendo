@@ -26,6 +26,8 @@ import frc.robot.Subsystems.RevMaxSwerve.Commands.SetNormalMode;
 import frc.robot.Subsystems.RevMaxSwerve.Commands.SetSlowMode;
 import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
+import frc.robot.Sensors.ODS.CarriageODS;
+import frc.robot.Sensors.ODS.IntakeODS;
 import frc.robot.Subsystems.RevMaxSwerve.Commands.AutoIntakeNote;
 import frc.robot.Subsystems.RevMaxSwerve.Commands.FaceBackwards;
 import frc.robot.Subsystems.RevMaxSwerve.Commands.FaceForward;
@@ -78,7 +80,6 @@ import frc.robot.Commands.shooterFlywheelForward;
 import frc.robot.Commands.shooterFlywheelOff;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
-import frc.robot.Subsystems.CarriageODS;
 /**
  * Contains the robot definition, button bindings for teleop and autonomous configurations.
  */
@@ -93,6 +94,7 @@ public class RobotContainer {
   private final ClimbWheel climbWheel = new ClimbWheel();
   private final Elevator elevator = new Elevator();
   private final CarriageODS carriageODS = new CarriageODS();
+  private final IntakeODS intakeODS = new IntakeODS();
 
     // private final ShooterPitch shooterPitch = new ShooterPitch();
 
