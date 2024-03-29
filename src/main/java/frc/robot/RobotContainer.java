@@ -99,8 +99,8 @@ public class RobotContainer {
     // private final ShooterPitch shooterPitch = new ShooterPitch();
 
   // private final ClimbWheelSubsystem climbWheel = new ClimbWheelSubsystem();
-  // private final ShooterLimelight shooterLL = new ShooterLimelight();
-  // private final IntakeLimelight intakeLL = new IntakeLimelight();
+  private final ShooterLimelight shooterLL = new ShooterLimelight();
+  private final IntakeLimelight intakeLL = new IntakeLimelight();
   // Joystick Controller (I/O)
   XboxController driverController = new XboxController(ConstJoysticks.kDriverControllerPort);
   XboxController gunnerController = new XboxController(ConstJoysticks.kGunnerControllerPort);
