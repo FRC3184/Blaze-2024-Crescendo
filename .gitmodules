@@ -3,4 +3,4 @@
 	url = git@github.com:FRC3184/RevMaxSwerve.git
 [submodule "src/main/java/frc/Mechanisms"]
 	path = src/main/java/frc/Mechanisms
-	url = https://github.com/FRC3184/Mechanisms.git
+	url = git@github.com:FRC3184/Mechanisms.git
