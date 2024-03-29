@@ -1,6 +1,6 @@
 package frc.robot.Subsystems;
 
-import frc.Mechanisms.motorConfigTypes.TwoMotorSSwithSparkMax;
+import frc.Mechanisms.configurationTypes.TwoMotorSSwithSparkMax;
 import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 
 public class ShooterFlywheels extends TwoMotorSSwithSparkMax {

@@ -10,7 +10,7 @@ public class intakeOff extends Command {
         intake = subsystem;
         addRequirements(subsystem); 
     }
-
+    
     public void initialize() {
         intake.setSpeed(0);
     }
