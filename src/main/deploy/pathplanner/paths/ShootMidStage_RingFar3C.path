@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.512480010875515,
-        "y": 3.9312123694669934
+        "x": 2.817276067330623,
+        "y": 2.9198974761585896
       },
       "isLocked": false,
       "linkedName": "ShootMidStage"
@@ -20,8 +20,8 @@
         "y": 4.104648209296419
       },
       "prevControl": {
-        "x": 6.521445155566369,
-        "y": 4.162460155906228
+        "x": 7.112703700439411,
+        "y": 4.720345440690882
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,21 +30,16 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.45,
-      "rotationDegrees": -60.0,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 0.5,
       "rotationDegrees": 0,
-      "rotateFast": true
+      "rotateFast": false
     }
   ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "Intake",
-      "waypointRelativePos": 0.7,
+      "waypointRelativePos": 0.75,
       "command": {
         "type": "parallel",
         "data": {
@@ -65,9 +60,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "OldPaths",
   "previewStartingState": {
-    "rotation": -27.404811042469433,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

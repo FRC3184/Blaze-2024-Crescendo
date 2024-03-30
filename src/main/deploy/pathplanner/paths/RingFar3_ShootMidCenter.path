@@ -3,47 +3,64 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.794490498071905,
-        "y": 4.123305701156857
+        "x": 7.952290834159133,
+        "y": 4.104648209296419
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.4138361003994735,
-        "y": 3.069157411042095
+        "x": 5.639812969766784,
+        "y": 4.393707942345462
       },
       "isLocked": false,
       "linkedName": "RingFar3"
     },
     {
       "anchor": {
-        "x": 4.0,
-        "y": 5.56
+        "x": 3.862095611515167,
+        "y": 2.4441314337174136
       },
       "prevControl": {
-        "x": 3.7644722562172395,
-        "y": 4.804304154062854
+        "x": 4.194514304521567,
+        "y": 2.948409277100245
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ShootMidCenter"
+      "linkedName": "ShootMidStage"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": -60.0,
+      "rotateFast": true
+    }
+  ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "SpinUpShooter",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": []
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 7.22,
-    "maxAcceleration": 2.5,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 180.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -30.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "RingFar3",
+  "folder": null,
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

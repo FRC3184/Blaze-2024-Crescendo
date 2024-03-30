@@ -37,6 +37,7 @@ import frc.robot.Subsystems.RevMaxSwerve.Commands.FaceLeft;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.DriveConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.OIConstants;
 import frc.robot.Subsystems.Intake;
+import frc.robot.Subsystems.LEDs;
 import frc.robot.Subsystems.ShooterFlywheels;
 import frc.robot.Subsystems.CarriageBelt;
 import frc.robot.Subsystems.ClimbWheel;
@@ -44,40 +45,43 @@ import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Feeder;
 import frc.robot.Subsystems.ShooterPitch;
-import frc.robot.Commands.carriageBeltBackward;
-import frc.robot.Commands.carriageBeltForward;
-import frc.robot.Commands.carriageBeltOff;
-import frc.robot.Commands.climbDownLeft;
-import frc.robot.Commands.climbDownRight;
-import frc.robot.Commands.climbOff;
-import frc.robot.Commands.climbUpLeft;
-import frc.robot.Commands.climbUpRight;
-import frc.robot.Commands.climbWheelDown;
-import frc.robot.Commands.climbWheelOff;
-import frc.robot.Commands.climbWheelUp;
-import frc.robot.Commands.elevatorDownManual;
-import frc.robot.Commands.elevatorDownPID;
-import frc.robot.Commands.elevatorHoldPosition;
-import frc.robot.Commands.elevatorOff;
-import frc.robot.Commands.elevatorUpManual;
-import frc.robot.Commands.elevatorUpPID;
-import frc.robot.Commands.shooterPitchDown;
-import frc.robot.Commands.shooterPitchOff;
-import frc.robot.Commands.shooterPitchUp;
-import frc.robot.Commands.spinUpFlywheels;
-import frc.robot.Commands.feederBackward;
-import frc.robot.Commands.feederForward;
-import frc.robot.Commands.feederOff;
-import frc.robot.Commands.fullIntakeOff;
-import frc.robot.Commands.intake;
-import frc.robot.Commands.intakeBackward;
-import frc.robot.Commands.intakeForward;
-import frc.robot.Commands.intakeOff;
-import frc.robot.Commands.outtake;
-import frc.robot.Commands.shoot;
-import frc.robot.Commands.shooterFlywheelBackward;
-import frc.robot.Commands.shooterFlywheelForward;
-import frc.robot.Commands.shooterFlywheelOff;
+import frc.robot.Commands.CarriageCommands.carriageBeltBackward;
+import frc.robot.Commands.CarriageCommands.carriageBeltForward;
+import frc.robot.Commands.CarriageCommands.carriageBeltOff;
+import frc.robot.Commands.ClimberAndWheelCommands.climbDownLeft;
+import frc.robot.Commands.ClimberAndWheelCommands.climbDownRight;
+import frc.robot.Commands.ClimberAndWheelCommands.climbOff;
+import frc.robot.Commands.ClimberAndWheelCommands.climbUpLeft;
+import frc.robot.Commands.ClimberAndWheelCommands.climbUpRight;
+import frc.robot.Commands.ClimberAndWheelCommands.climbWheelDown;
+import frc.robot.Commands.ClimberAndWheelCommands.climbWheelOff;
+import frc.robot.Commands.ClimberAndWheelCommands.climbWheelUp;
+import frc.robot.Commands.ElevatorCommands.elevatorDownManual;
+import frc.robot.Commands.ElevatorCommands.elevatorDownPID;
+import frc.robot.Commands.ElevatorCommands.elevatorHoldPosition;
+import frc.robot.Commands.ElevatorCommands.elevatorOff;
+import frc.robot.Commands.ElevatorCommands.elevatorUpManual;
+import frc.robot.Commands.ElevatorCommands.elevatorUpPID;
+import frc.robot.Commands.IntakeCommands.fullIntakeOff;
+import frc.robot.Commands.IntakeCommands.intake;
+import frc.robot.Commands.IntakeCommands.intakeBackward;
+import frc.robot.Commands.IntakeCommands.intakeForward;
+import frc.robot.Commands.IntakeCommands.intakeOff;
+import frc.robot.Commands.IntakeCommands.outtake;
+import frc.robot.Commands.SensorAndLEDCommands.LEDsOrange;
+import frc.robot.Commands.SensorAndLEDCommands.LEDsWhite;
+import frc.robot.Commands.SensorAndLEDCommands.locateNoteInRobot;
+import frc.robot.Commands.ShooterAndPivotCommands.feederBackward;
+import frc.robot.Commands.ShooterAndPivotCommands.feederForward;
+import frc.robot.Commands.ShooterAndPivotCommands.feederOff;
+import frc.robot.Commands.ShooterAndPivotCommands.shoot;
+import frc.robot.Commands.ShooterAndPivotCommands.shooterFlywheelBackward;
+import frc.robot.Commands.ShooterAndPivotCommands.shooterFlywheelForward;
+import frc.robot.Commands.ShooterAndPivotCommands.shooterFlywheelOff;
+import frc.robot.Commands.ShooterAndPivotCommands.shooterPitchDown;
+import frc.robot.Commands.ShooterAndPivotCommands.shooterPitchOff;
+import frc.robot.Commands.ShooterAndPivotCommands.shooterPitchUp;
+import frc.robot.Commands.ShooterAndPivotCommands.spinUpFlywheels;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
 /**
@@ -95,6 +99,7 @@ public class RobotContainer {
   private final Elevator elevator = new Elevator();
   private final CarriageODS carriageODS = new CarriageODS();
   private final IntakeODS intakeODS = new IntakeODS();
+  private final LEDs leds = new LEDs();
 
     // private final ShooterPitch shooterPitch = new ShooterPitch();
 
@@ -137,6 +142,7 @@ public class RobotContainer {
     // NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
     NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(3));
     NamedCommands.registerCommand("Intake", new intake(intake, carriage).withTimeout(2));
+    NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
     // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
     // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
@@ -163,6 +169,8 @@ public class RobotContainer {
               -MathUtil.applyDeadband(driverController.getRightX(), ConstJoysticks.kDriveDeadband),
               DriveConstants.kFieldCentric, true, DriveConstants.rotPt),
             robotDrive));
+
+    leds.setDefaultCommand(new locateNoteInRobot(intakeODS, carriageODS, leds));
   }
 
   private void configureBindings() {
@@ -247,6 +255,8 @@ public class RobotContainer {
     // // climb wheel
     new POVButton(driverController, 0).whileTrue(new climbWheelUp(climbWheel)).whileFalse(new climbWheelOff(climbWheel));
     new POVButton(driverController, 180).whileTrue(new climbWheelDown(climbWheel)).whileFalse(new climbWheelOff(climbWheel));
+    
+
 
     // new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new FeedAndShoot(shooter, feeder));
     // new JoystickButton(gunnerController, Button.kStart.value).onFalse(new ShooterOff(shooter));

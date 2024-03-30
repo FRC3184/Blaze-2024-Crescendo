@@ -5,6 +5,6 @@ import frc.Mechanisms.LEDs.LEDStrip;
 public class LEDs extends LEDStrip {
 
     public LEDs() {
-        super(0, 150);
+        super(0, 5);
     }   
 }

@@ -2,60 +2,60 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.42,
-      "y": 5.56
+      "x": 0.8072597963377744,
+      "y": 4.421825570923869
     },
-    "rotation": 0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "StartCenter_RingNearCenter"
+            "name": "Shoot"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RingNearCenter_RingNearAmp"
+            "pathName": "StartSource_LineFar"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "NearRingAmp_ShootNearCenter"
+            "pathName": "ShootRing1MidStage"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "ShootNearCenter_RingNearStage"
+            "pathName": "ShootMidStage_RingFar2"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RingNearStage_ShootNearCenter"
+            "pathName": "RingFar2_ShootMidStage"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "ShootNearCenter_RingFar3"
+            "pathName": "ShootMidstage_RingFar3"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RingFar3_ShootNearCenter"
+            "pathName": "RingFar3_ShootMidCenter"
           }
         }
       ]
     }
   },
-  "folder": "Advanced",
+  "folder": null,
   "choreoAuto": false
 }

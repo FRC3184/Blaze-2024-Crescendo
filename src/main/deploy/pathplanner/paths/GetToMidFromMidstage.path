@@ -8,51 +8,29 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.512480010875515,
-        "y": 3.9312123694669934
+        "x": 4.917163637144175,
+        "y": 1.9656061847334974
       },
       "isLocked": false,
       "linkedName": "ShootMidStage"
     },
     {
       "anchor": {
-        "x": 7.952290834159133,
-        "y": 4.104648209296419
+        "x": 8.010102780768943,
+        "y": 0.6214784260554446
       },
       "prevControl": {
-        "x": 6.521445155566369,
-        "y": 4.162460155906228
+        "x": 7.010102780768943,
+        "y": 0.6214784260554446
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RingFar3"
+      "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.45,
-      "rotationDegrees": -60.0,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 0,
-      "rotateFast": true
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "Intake",
-      "waypointRelativePos": 0.7,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": []
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 7.22,
     "maxAcceleration": 3.0,
@@ -67,7 +45,7 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": -27.404811042469433,
+    "rotation": -26.731487250731703,
     "velocity": 0
   },
   "useDefaultConstraints": true

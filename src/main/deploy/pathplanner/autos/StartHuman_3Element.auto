@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "ShootMidStage_RingFar3"
+            "pathName": "ShootMidStage_RingFar3C"
           }
         },
         {
@@ -44,6 +44,6 @@
       ]
     }
   },
-  "folder": null,
+  "folder": "Advanced",
   "choreoAuto": false
 }
