@@ -45,6 +45,7 @@ import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Feeder;
 import frc.robot.Subsystems.ShooterPitch;
+import frc.robot.Commands.ChangeSubsystemSpeeds;
 import frc.robot.Commands.CarriageCommands.carriageBeltBackward;
 import frc.robot.Commands.CarriageCommands.carriageBeltForward;
 import frc.robot.Commands.CarriageCommands.carriageBeltOff;
@@ -171,6 +172,8 @@ public class RobotContainer {
             robotDrive));
 
     leds.setDefaultCommand(new locateNoteInRobot(intakeODS, carriageODS, leds));
+
+    new ChangeSubsystemSpeeds();
   }
 
   private void configureBindings() {

@@ -1,6 +1,7 @@
 package frc.robot.Commands.ElevatorCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.SubmoduleSubsystemConstants.ConstElevator;
 import frc.robot.Subsystems.Elevator;
 
 public class elevatorUpManual extends Command {
@@ -12,12 +13,12 @@ public class elevatorUpManual extends Command {
     }
 
     public void initialize() {
-        elevator.setSpeed(0.25);
+        elevator.setSpeed(ConstElevator.elevatorSpeed);
     }
 
     @Override
     public void execute() {
-        elevator.setSpeed(0.25);
+        elevator.setSpeed(ConstElevator.elevatorSpeed);
         elevator.run();
     }
 
