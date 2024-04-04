@@ -22,7 +22,8 @@ public class ConstElevator {
   public static final double kMinOut = -1;
   public static final double maxRPM = 5700;
 
+  //Speeds and Limits
   public static final double raisedPos = 75;
   public static final double loweredPos = 0;
-    public static double elevatorSpeed = 0.25;
+    public static double elevatorSpeed = 0.7;
 }

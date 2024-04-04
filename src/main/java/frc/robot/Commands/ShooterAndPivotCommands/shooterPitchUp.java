@@ -13,7 +13,7 @@ public class shooterPitchUp extends Command {
     }
 
     public void initialize() {
-        shooterPitch.setSpeed(ConstShooter.pivotSpeed);
+        shooterPitch.setSpeed(ConstShooter.pivotMaxSpeed);
     }
 
     @Override

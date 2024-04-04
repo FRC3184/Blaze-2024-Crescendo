@@ -49,8 +49,10 @@ public final class ConstShooter {
   public static final double pivotkMinOut = -1;
   public static final double pivotmaxRPM = 5700;
 
-  // 
+  // Speeds and Limits
   public static double defVelocity = 4000;
-  public static double pivotSpeed = 0.1;
+  public static double pivotMaxSpeed = 0.2;
 
+  public static final double lowerLimit = 0.5;
+  public static final double upperLimit = 0.215;
 }

@@ -13,12 +13,12 @@ public class shooterPitchDown extends Command {
     }
 
     public void initialize() {
-        shooterPitch.setSpeed(-ConstShooter.pivotSpeed);
+        shooterPitch.setSpeed(-ConstShooter.pivotMaxSpeed);
     }
 
     @Override
     public void execute() {
-        if (shooterPitch.getAbsAngle()<0.567 && shooterPitch.getAbsAngle()>0){
+        if (shooterPitch.getAbsAngle()<0.5 && shooterPitch.getAbsAngle()>0){
             shooterPitch.run();
         }
         else{

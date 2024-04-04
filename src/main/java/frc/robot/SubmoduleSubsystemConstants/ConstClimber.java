@@ -27,6 +27,6 @@ public class ConstClimber {
   public static final double maxExt = 40;
   public static final double minExt = 0;
 
-  //Speed of the climber
+  //Speeds and Limits
   public static double climbPower = 1;
 }

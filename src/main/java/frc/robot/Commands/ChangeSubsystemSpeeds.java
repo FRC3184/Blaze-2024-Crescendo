@@ -1,19 +1,22 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.SubmoduleSubsystemConstants.ConstElevator;
 import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
+import frc.robot.Subsystems.SpeedSS;
 import frc.robot.SubmoduleSubsystemConstants.ConstClimber;
 // import frc.robot.SubmoduleSubsystemConstants.ConstPivot;
 
 public class ChangeSubsystemSpeeds extends Command {
 
     XboxController subsystemController = new XboxController(2);
-    
-    public ChangeSubsystemSpeeds(){
 
+    SpeedSS speedChanger;
+    
+    public ChangeSubsystemSpeeds(SpeedSS speed){
+        speedChanger = speed;
+        addRequirements(speedChanger);
     }
 
 public void initialize() {
@@ -40,10 +43,10 @@ public void initialize() {
 
         //Change Pivot Speed (POV Up & Down)
         if(subsystemController.getPOV()==0){
-            ConstShooter.pivotSpeed+=0.05;
+            ConstShooter.pivotMaxSpeed+=0.05;
         }
         else if (subsystemController.getPOV()==180){
-            ConstShooter.pivotSpeed-=0.05;
+            ConstShooter.pivotMaxSpeed-=0.05;
         }
 
         //Change Shooter Speed (POV Left & Right)
@@ -69,11 +72,11 @@ public void initialize() {
             ConstClimber.climbPower = 0;
         }
 
-        if(ConstShooter.pivotSpeed>1){
-            ConstShooter.pivotSpeed = 1;
+        if(ConstShooter.pivotMaxSpeed>1){
+            ConstShooter.pivotMaxSpeed = 1;
         }
-        else if(ConstShooter.pivotSpeed<0){
-            ConstShooter.pivotSpeed = 0;
+        else if(ConstShooter.pivotMaxSpeed<0){
+            ConstShooter.pivotMaxSpeed = 0;
         }
 
         if(ConstShooter.defVelocity>5750){
@@ -82,17 +85,6 @@ public void initialize() {
         else if(ConstShooter.defVelocity<0){
             ConstShooter.defVelocity = 0;
         }
-    }
-
-    void smartDashboardOut(){
-        SmartDashboard.putNumber("Elevator Speed", ConstElevator.elevatorSpeed);
-        SmartDashboard.putNumber("Climber Speed", ConstClimber.climbPower);
-        SmartDashboard.putNumber("Pivot Speed", ConstShooter.pivotSpeed);
-        SmartDashboard.putNumber("Shooter Speed", ConstShooter.defVelocity);
-    }
-
-    @Override
-    public void end(boolean interrupted) {
     }
 
 }

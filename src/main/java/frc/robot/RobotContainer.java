@@ -45,6 +45,7 @@ import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Feeder;
 import frc.robot.Subsystems.ShooterPitch;
+import frc.robot.Subsystems.SpeedSS;
 import frc.robot.Commands.ChangeSubsystemSpeeds;
 import frc.robot.Commands.CarriageCommands.carriageBeltBackward;
 import frc.robot.Commands.CarriageCommands.carriageBeltForward;
@@ -101,6 +102,8 @@ public class RobotContainer {
   private final CarriageODS carriageODS = new CarriageODS();
   private final IntakeODS intakeODS = new IntakeODS();
   private final LEDs leds = new LEDs();
+
+  private final SpeedSS speedChanger = new SpeedSS();
 
     private final ShooterPitch shooterPitch = new ShooterPitch();
 
@@ -173,8 +176,8 @@ public class RobotContainer {
 
     leds.setDefaultCommand(new locateNoteInRobot(intakeODS, carriageODS, leds));
 
-    new ChangeSubsystemSpeeds();
-  }
+    speedChanger.setDefaultCommand(new ChangeSubsystemSpeeds(speedChanger));
+    }
 
   private void configureBindings() {
 
@@ -233,8 +236,8 @@ public class RobotContainer {
     // new POVButton(gunnerController, 0).whileFalse(new shooterFlywheelOff(shooterFlywheels));
 
     // // climber
-    new POVButton(gunnerController, 180).whileTrue(new climbUpLeft(climber));
-    new POVButton(gunnerController, 0).whileTrue(new climbDownLeft(climber));
+    // new POVButton(gunnerController, 180).whileTrue(new climbUpLeft(climber));
+    // new POVButton(gunnerController, 0).whileTrue(new climbDownLeft(climber));
     new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpRight(climber));
     new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbDownRight(climber));
 
@@ -245,10 +248,10 @@ public class RobotContainer {
     // new JoystickButton(gunnerController, Button.kA.value).whileFalse(new feederOff(feeder));
 
     // // // shooter pitch 
-    // new POVButton(gunnerController, 0).whileTrue(new shooterPitchUp(shooterPitch));
-    // new POVButton(gunnerController, 0).whileFalse(new shooterPitchOff(shooterPitch));
-    // new POVButton(gunnerController, 180).whileTrue(new shooterPitchDown(shooterPitch));
-    // new POVButton(gunnerController, 180).whileFalse(new shooterPitchOff(shooterPitch));
+    new POVButton(gunnerController, 0).whileTrue(new shooterPitchUp(shooterPitch));
+    new POVButton(gunnerController, 0).whileFalse(new shooterPitchOff(shooterPitch));
+    new POVButton(gunnerController, 180).whileTrue(new shooterPitchDown(shooterPitch));
+    new POVButton(gunnerController, 180).whileFalse(new shooterPitchOff(shooterPitch));
 
     // // elevator
     new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUpManual(elevator));
