@@ -17,7 +17,7 @@ public class shooterPitchDown extends Command {
 
     @Override
     public void execute() {
-        if (shooterPitch.getAbsAngle()<0.354 && shooterPitch.getAbsAngle()>0){
+        if (shooterPitch.getAbsAngle()<0.567 && shooterPitch.getAbsAngle()>0){
             shooterPitch.run();
         }
         else{
