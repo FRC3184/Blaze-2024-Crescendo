@@ -24,4 +24,5 @@ public class ConstElevator {
 
   public static final double raisedPos = 75;
   public static final double loweredPos = 0;
+    public static double elevatorSpeed = 0.25;
 }

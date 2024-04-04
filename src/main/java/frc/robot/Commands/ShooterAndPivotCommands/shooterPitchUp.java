@@ -1,6 +1,7 @@
 package frc.robot.Commands.ShooterAndPivotCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 import frc.robot.Subsystems.ShooterPitch;
 
 public class shooterPitchUp extends Command {
@@ -12,7 +13,7 @@ public class shooterPitchUp extends Command {
     }
 
     public void initialize() {
-        shooterPitch.setSpeed(0.1);
+        shooterPitch.setSpeed(ConstShooter.pivotSpeed);
     }
 
     @Override

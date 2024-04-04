@@ -18,10 +18,9 @@ public class elevatorDownManual extends Command {
     @Override
     public void execute() {
         if(elevator.getPosition()>ConstElevator.loweredPos){
-            elevator.setSpeed(-0.25);
-        elevator.run();
-        }
-        else {
+            elevator.setSpeed(-ConstElevator.elevatorSpeed);
+            elevator.run();
+        } else {
             elevator.stop();
         }
     }

@@ -28,5 +28,5 @@ public class ConstClimber {
   public static final double minExt = 0;
 
   //Speed of the climber
-  public static final double climbPower = 1;
+  public static double climbPower = 1;
 }
