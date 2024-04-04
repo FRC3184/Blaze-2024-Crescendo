@@ -17,9 +17,9 @@ public class ShooterLimelight extends Limelight {
     protected ShuffleboardTab sbTab;
     private GenericEntry shooterAngle;
 
-    private double offsetX = 0;
-    private double offsetY = 0;
-    private double offsetZ = 0;
+    private static double offsetX = ((2 + 1/2 + 18.11) * 5.5400554295247);
+    private static double offsetY = (8 + 1/4) * 5.5400554295247;
+    private static double offsetZ = 0;
     
     public ShooterLimelight () {
         super("limelight-shooter", "Shooter Limelight");
@@ -29,7 +29,7 @@ public class ShooterLimelight extends Limelight {
     public void periodic() {
         updateLimelight();
 
-        Optional<Double> a = calculateAngle(Math.hypot(targetpose_robotspace[0] + offsetX, targetpose_robotspace[2] + offsetZ), -targetpose_robotspace[1] -offsetY, ConstShooter.defVelocity);
+        Optional<Double> a = calculateAngle(Math.hypot(targetpose_robotspace[0] - offsetX, targetpose_robotspace[2] - offsetZ), (80.515 * 5.5400554295247) - offsetY, ConstShooter.defVelocity);
         angle = Math.toDegrees(a.orElse(1000000000.0));
 
         dashboardUpdate();
