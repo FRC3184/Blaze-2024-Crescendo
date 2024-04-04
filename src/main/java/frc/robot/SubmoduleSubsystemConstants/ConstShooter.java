@@ -55,4 +55,11 @@ public final class ConstShooter {
 
   public static final double lowerLimit = 0.53;
   public static final double upperLimit = 0.215;
+
+  public static final double motorToFlywheelGearRatio = 42/24;
+  // in meters
+  public static final double flywheelDiameter = 4 / 39.37009424;
+
+  // mult this by rpm to get expected speed for note when shot (meters/second)
+  public static final double VelocityRpmFactor = motorToFlywheelGearRatio * flywheelDiameter * Math.PI * 1 / 60;
 }
