@@ -1,7 +1,6 @@
 package frc.robot.Commands.ShooterAndPivotCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.SubmoduleSubsystemConstants.ConstCarriage;
 import frc.robot.Subsystems.ShooterPitch;
 
 public class shooterPitchUp extends Command {
@@ -18,7 +17,12 @@ public class shooterPitchUp extends Command {
 
     @Override
     public void execute() {
-        shooterPitch.run();
+        if (shooterPitch.getAbsAngle()<0.354 && shooterPitch.getAbsAngle()>0){
+            shooterPitch.run();
+        }
+        else{
+            shooterPitch.stop();
+        }
     }
 
     @Override

@@ -1,7 +1,6 @@
 package frc.robot.Commands.ShooterAndPivotCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.SubmoduleSubsystemConstants.ConstFeeder;
 import frc.robot.Subsystems.Feeder;
 
 public class feederForward extends Command {

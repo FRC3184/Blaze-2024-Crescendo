@@ -1,6 +1,5 @@
 package frc.robot.Commands.SensorAndLEDCommands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Sensors.ODS.CarriageODS;
 import frc.robot.Sensors.ODS.IntakeODS;
@@ -9,7 +8,6 @@ import frc.robot.Subsystems.LEDs;
 
 public class locateNoteInRobot extends Command {
     
-    boolean hasNote = false;
     String noteLocation = "No Note";
 
     private final IntakeODS intakeODS;
@@ -32,33 +30,37 @@ public class locateNoteInRobot extends Command {
     public void execute() {
         //Locate the note and update the location and if the robot has a note
         if((intakeODS.getSightStatus()&&carriageODS.getSightStatus())||carriageODS.getSightStatus()){
-            hasNote = true;
-            noteLocation = "Intake";
+            carriageODS.setHasNote(true);
+            carriageODS.setNoteLocation("Carriage");
+            noteLocation = carriageODS.getNoteLocation();
         } else if (intakeODS.getSightStatus()){
-            hasNote = true;
-            noteLocation = "Carriage";
+            carriageODS.setHasNote(true);
+            carriageODS.setNoteLocation("Intake");
+            noteLocation = carriageODS.getNoteLocation();
         } else {
-            hasNote = false;
-            noteLocation = "No Note";
+            carriageODS.setHasNote(false);
+            carriageODS.setNoteLocation("No Note");
+            noteLocation = carriageODS.getNoteLocation();
         }
 
         // Change the LEDs based on note posession
-        if (hasNote){
+        if (noteLocation.equals("Carriage")){
         leds.orangeWave();
         leds.setLeds();
         leds.UpdateLedMode("Orange Wave");
+        }
+        else if (noteLocation.equals("Intake")){
+        leds.setLedBufferByGroup(0, leds.getLedLength(), COLORS.GREEN);  
+        leds.setLeds();
+        leds.UpdateLedMode("Green");
         }
         else {
         leds.setLedBufferByGroup(0, leds.getLedLength(), COLORS.WHITE);  
         leds.setLeds();
         leds.UpdateLedMode("White");
         }
-        dashboartOut();
     }
 
-        void dashboartOut(){
-            SmartDashboard.putString("noteLocation", noteLocation);
-        }
 
     @Override
     public void end(boolean interrupted) {

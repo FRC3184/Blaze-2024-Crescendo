@@ -21,4 +21,7 @@ public class ConstElevator {
   public static final double kMaxOut = 1;
   public static final double kMinOut = -1;
   public static final double maxRPM = 5700;
+
+  public static final double raisedPos = 75;
+  public static final double loweredPos = 0;
 }

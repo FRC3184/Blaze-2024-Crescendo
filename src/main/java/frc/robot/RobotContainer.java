@@ -101,7 +101,7 @@ public class RobotContainer {
   private final IntakeODS intakeODS = new IntakeODS();
   private final LEDs leds = new LEDs();
 
-    // private final ShooterPitch shooterPitch = new ShooterPitch();
+    private final ShooterPitch shooterPitch = new ShooterPitch();
 
   // private final ClimbWheelSubsystem climbWheel = new ClimbWheelSubsystem();
   private final ShooterLimelight shooterLL = new ShooterLimelight();
@@ -141,7 +141,7 @@ public class RobotContainer {
     // NamedCommands.registerCommand("Intake", new Intake(intake));
     // NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
     NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(3));
-    NamedCommands.registerCommand("Intake", new intake(intake, carriage).withTimeout(2));
+    NamedCommands.registerCommand("Intake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(2));
     NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
     // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
@@ -215,7 +215,7 @@ public class RobotContainer {
 
     //GUNNER CONTROLS
     // // full intake
-    new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new intake(intake, carriage));
+    new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new intake(intake, carriage, intakeODS, carriageODS, leds));
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileFalse(new fullIntakeOff(intake, carriage));

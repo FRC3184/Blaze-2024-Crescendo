@@ -1,7 +1,6 @@
 package frc.robot.Commands.ShooterAndPivotCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Subsystems.CarriageBelt;
 import frc.robot.Subsystems.ShooterPitch;
 
 public class shooterPitchOff extends Command {
