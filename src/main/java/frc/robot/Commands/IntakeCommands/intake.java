@@ -36,37 +36,6 @@ public class intake extends Command {
     public void execute() {
         intake.runSpeed();
         carriageBelt.runSpeed();
-        if((intakeODS.getSightStatus()&&carriageODS.getSightStatus())||carriageODS.getSightStatus()){
-            carriageODS.setHasNote(true);
-            carriageODS.setNoteLocation("Carriage");
-            noteLocation = carriageODS.getNoteLocation();
-        } else if (intakeODS.getSightStatus()){
-            carriageODS.setHasNote(true);
-            carriageODS.setNoteLocation("Intake");
-            noteLocation = carriageODS.getNoteLocation();
-        } else {
-            carriageODS.setHasNote(false);
-            carriageODS.setNoteLocation("No Note");
-            noteLocation = carriageODS.getNoteLocation();
-        }
-
-        if (noteLocation.equals("Carriage")){
-        leds.orangeWave();
-        leds.setLeds();
-        leds.UpdateLedMode("Orange Wave");
-        intake.stop();
-        carriageBelt.stop();
-        }
-        else if (noteLocation.equals("Intake")){
-        leds.setLedBufferByGroup(0, leds.getLedLength(), COLORS.GREEN);  
-        leds.setLeds();
-        leds.UpdateLedMode("Green");
-        }
-        else {
-        leds.setLedBufferByGroup(0, leds.getLedLength(), COLORS.WHITE);  
-        leds.setLeds();
-        leds.UpdateLedMode("White");
-        }
     }
 
     @Override

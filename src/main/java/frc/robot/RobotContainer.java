@@ -76,6 +76,7 @@ import frc.robot.Commands.SensorAndLEDCommands.locateNoteInRobot;
 import frc.robot.Commands.ShooterAndPivotCommands.feederBackward;
 import frc.robot.Commands.ShooterAndPivotCommands.feederForward;
 import frc.robot.Commands.ShooterAndPivotCommands.feederOff;
+import frc.robot.Commands.ShooterAndPivotCommands.pitchSubwoofer;
 import frc.robot.Commands.ShooterAndPivotCommands.shoot;
 import frc.robot.Commands.ShooterAndPivotCommands.shooterFlywheelBackward;
 import frc.robot.Commands.ShooterAndPivotCommands.shooterFlywheelForward;
@@ -84,6 +85,8 @@ import frc.robot.Commands.ShooterAndPivotCommands.shooterPitchDown;
 import frc.robot.Commands.ShooterAndPivotCommands.shooterPitchOff;
 import frc.robot.Commands.ShooterAndPivotCommands.shooterPitchUp;
 import frc.robot.Commands.ShooterAndPivotCommands.spinUpFlywheels;
+import frc.robot.Commands.ShooterAndPivotCommands.MiamiValleyPivot.Pitch40;
+import frc.robot.Commands.ShooterAndPivotCommands.MiamiValleyPivot.Pitch44;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
 /**
@@ -145,11 +148,15 @@ public class RobotContainer {
     // NamedCommands.registerCommand("Intake", new Intake(intake));
     // NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
     NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(3));
-    NamedCommands.registerCommand("Intake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(2));
+    NamedCommands.registerCommand("Intake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(0.5));
     NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
     // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
     // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
+    NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.5));
+    NamedCommands.registerCommand("Pitch40", new Pitch40(shooterPitch).withTimeout(2));
+    NamedCommands.registerCommand("Pitch44", new Pitch44(shooterPitch).withTimeout(2));
+    NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(2));
 
     // TELEOP Setup
     configureBindings();
@@ -223,12 +230,12 @@ public class RobotContainer {
     // // full intake
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new intake(intake, carriage, intakeODS, carriageODS, leds));
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
-    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));
-    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
+    new POVButton(gunnerController, 90).whileTrue(new outtake(intake, carriage));
+    new POVButton(gunnerController, 90).whileFalse(new fullIntakeOff(intake, carriage));
 
     // // shooter & carriage
-    new POVButton(gunnerController, 90).whileTrue(new carriageBeltBackward(carriage));
-    new POVButton(gunnerController, 90).whileFalse(new carriageBeltOff(carriage));
+    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new carriageBeltBackward(carriage));
+    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileFalse(new carriageBeltOff(carriage));
 
     new JoystickButton(gunnerController, Button.kX.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
     // new JoystickButton(gunnerController, Button.kX.value).whileFalse(new shooterFlywheelOff(shooterFlywheels));
@@ -236,10 +243,10 @@ public class RobotContainer {
     // new POVButton(gunnerController, 0).whileFalse(new shooterFlywheelOff(shooterFlywheels));
 
     // // climber
-    // new POVButton(gunnerController, 180).whileTrue(new climbUpLeft(climber));
-    // new POVButton(gunnerController, 0).whileTrue(new climbDownLeft(climber));
-    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpRight(climber));
-    new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbDownRight(climber));
+    new POVButton(gunnerController, 180).whileTrue(new climbUpRight(climber)); //Need to reverse names. Right = Left
+    new POVButton(gunnerController, 0).whileTrue(new climbDownRight(climber)); //And Left = Right Currently
+    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpLeft(climber));
+    new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbDownLeft(climber));
 
     // // feeder
     // new JoystickButton(gunnerController, Button.kY.value).whileTrue(new feederForward(feeder));
@@ -248,10 +255,11 @@ public class RobotContainer {
     // new JoystickButton(gunnerController, Button.kA.value).whileFalse(new feederOff(feeder));
 
     // // // shooter pitch 
-    new POVButton(gunnerController, 0).whileTrue(new shooterPitchUp(shooterPitch));
-    new POVButton(gunnerController, 0).whileFalse(new shooterPitchOff(shooterPitch));
-    new POVButton(gunnerController, 180).whileTrue(new shooterPitchDown(shooterPitch));
-    new POVButton(gunnerController, 180).whileFalse(new shooterPitchOff(shooterPitch));
+    new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new shooterPitchUp(shooterPitch));
+    new JoystickButton(gunnerController, Button.kStart.value).whileFalse(new shooterPitchOff(shooterPitch));
+    new JoystickButton(gunnerController, Button.kBack.value).whileTrue(new shooterPitchDown(shooterPitch));
+    new JoystickButton(gunnerController, Button.kBack.value).whileFalse(new shooterPitchOff(shooterPitch));
+    new JoystickButton(gunnerController, Button.kB.value).onTrue(new pitchSubwoofer(shooterPitch));
 
     // // elevator
     new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUpManual(elevator));

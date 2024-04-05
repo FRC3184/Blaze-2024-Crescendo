@@ -27,10 +27,10 @@ public void initialize() {
     public void execute() {
         //Change Elevator Speed (Y & A)
         if(subsystemController.getYButtonPressed()){
-        ConstElevator.elevatorSpeed += 0.05;
+        ConstElevator.elevatorRiseSpeed += 0.05;
         }
         else if (subsystemController.getAButtonPressed()){
-            ConstElevator.elevatorSpeed -= 0.05;
+            ConstElevator.elevatorRiseSpeed -= 0.05;
         }
 
         //Change Climber Speed (X & B)
@@ -58,11 +58,11 @@ public void initialize() {
         }
 
         //Keep Speeds between 0 and 1 / 0 & 5750
-        if(ConstElevator.elevatorSpeed>1){
-            ConstElevator.elevatorSpeed = 1;
+        if(ConstElevator.elevatorRiseSpeed>1){
+            ConstElevator.elevatorRiseSpeed = 1;
         }
-        else if(ConstElevator.elevatorSpeed<0){
-        ConstElevator.elevatorSpeed = 0;
+        else if(ConstElevator.elevatorRiseSpeed<0){
+        ConstElevator.elevatorRiseSpeed = 0;
         }
 
         if(ConstClimber.climbPower>1){

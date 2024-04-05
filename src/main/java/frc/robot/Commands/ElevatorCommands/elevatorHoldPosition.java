@@ -1,6 +1,7 @@
 package frc.robot.Commands.ElevatorCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.SubmoduleSubsystemConstants.ConstElevator;
 import frc.robot.Subsystems.Elevator;
 
 public class elevatorHoldPosition extends Command {
@@ -13,7 +14,13 @@ public class elevatorHoldPosition extends Command {
     }
 
     public void initialize() {
-        holdPos = elevator.getPosition();
+        if (elevator.getPosition()>ConstElevator.raisedPos){
+            holdPos = ConstElevator.raisedPos;
+        }
+        else if(elevator.getPosition()<ConstElevator.loweredPos){
+            holdPos = ConstElevator.loweredPos;
+        } else{
+        holdPos = elevator.getPosition();}
     }
 
     @Override

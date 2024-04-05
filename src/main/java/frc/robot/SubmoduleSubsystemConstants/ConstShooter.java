@@ -53,6 +53,6 @@ public final class ConstShooter {
   public static double defVelocity = 4000;
   public static double pivotMaxSpeed = 0.2;
 
-  public static final double lowerLimit = 0.5;
+  public static final double lowerLimit = 0.53;
   public static final double upperLimit = 0.215;
 }

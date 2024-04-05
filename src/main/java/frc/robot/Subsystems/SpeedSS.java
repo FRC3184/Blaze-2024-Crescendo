@@ -27,7 +27,7 @@ public class SpeedSS extends SubsystemBase {
     }
 
     void smartDashboardOut(){
-        SmartDashboard.putNumber("Elevator Speed", ConstElevator.elevatorSpeed);
+        SmartDashboard.putNumber("Elevator Speed", ConstElevator.elevatorRiseSpeed);
         SmartDashboard.putNumber("Climber Speed", ConstClimber.climbPower);
         SmartDashboard.putNumber("Pivot Speed", ConstShooter.pivotMaxSpeed);
         SmartDashboard.putNumber("Shooter Speed", ConstShooter.defVelocity);

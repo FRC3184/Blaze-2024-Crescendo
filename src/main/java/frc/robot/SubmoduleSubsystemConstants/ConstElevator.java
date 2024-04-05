@@ -23,7 +23,11 @@ public class ConstElevator {
   public static final double maxRPM = 5700;
 
   //Speeds and Limits
-  public static final double raisedPos = 75;
+  public static final double raisedPos = 80; //80(waiting to fix spool)
   public static final double loweredPos = 0;
-    public static double elevatorSpeed = 0.7;
+  public static double elevatorRiseSpeed = 0.7;
+  public static final double elevatorFinishSpeed = 0.4;
+  public static final double elevatorFallSpeed = 0.4;
+  public static final double elevatorSlowZoneUp = 65;
+  public static final double elevatorSlowZoneDown = 15;
 }
