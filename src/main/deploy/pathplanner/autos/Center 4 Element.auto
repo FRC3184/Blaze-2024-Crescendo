@@ -123,12 +123,6 @@
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "ShootSourceNote"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [

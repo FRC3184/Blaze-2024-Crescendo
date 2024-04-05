@@ -26,6 +26,8 @@ import frc.robot.Subsystems.RevMaxSwerve.Commands.SetNormalMode;
 import frc.robot.Subsystems.RevMaxSwerve.Commands.SetSlowMode;
 import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
+import frc.robot.Sensors.LimitSwitches.LeftArmDownSwitch;
+import frc.robot.Sensors.LimitSwitches.RightArmDownSwitch;
 import frc.robot.Sensors.ODS.CarriageODS;
 import frc.robot.Sensors.ODS.IntakeODS;
 import frc.robot.Subsystems.RevMaxSwerve.Commands.AutoIntakeNote;
@@ -105,6 +107,8 @@ public class RobotContainer {
   private final CarriageODS carriageODS = new CarriageODS();
   private final IntakeODS intakeODS = new IntakeODS();
   private final LEDs leds = new LEDs();
+  private final LeftArmDownSwitch leftDownSwitch = new LeftArmDownSwitch() ;
+  private final RightArmDownSwitch rightDownSwitch = new RightArmDownSwitch();
 
   private final SpeedSS speedChanger = new SpeedSS();
 
@@ -147,16 +151,16 @@ public class RobotContainer {
     //Register named autonomous commands
     // NamedCommands.registerCommand("Intake", new Intake(intake));
     // NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
-    NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(3));
-    NamedCommands.registerCommand("Intake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(0.5));
+    NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(2));
+    NamedCommands.registerCommand("Intake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(0.4));
     NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
     // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
     // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
     NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.5));
-    NamedCommands.registerCommand("Pitch40", new Pitch40(shooterPitch).withTimeout(2));
-    NamedCommands.registerCommand("Pitch44", new Pitch44(shooterPitch).withTimeout(2));
-    NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(2));
+    NamedCommands.registerCommand("Pitch40", new Pitch40(shooterPitch).withTimeout(1));
+    NamedCommands.registerCommand("Pitch44", new Pitch44(shooterPitch).withTimeout(1));
+    NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(1));
 
     // TELEOP Setup
     configureBindings();
@@ -221,9 +225,11 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kRightStick.value).whileTrue(new RunCommand(() -> robotDrive.setRotPoint(0, 0)));
 
     // Field Centric vs. Robot Centric
-    // new POVButton(driverController, 90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
-    // new POVButton(driverController, 270).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(true)));
+    new POVButton(driverController, 90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
+    new POVButton(driverController, 270).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(true)));
 
+    new POVButton(driverController, 0).whileTrue(new carriageBeltBackward(carriage));
+    // new POVButton(driverController, 0).whileFalse(new carriageBeltOff(carriage));
 
 
     //GUNNER CONTROLS
@@ -235,7 +241,7 @@ public class RobotContainer {
 
     // // shooter & carriage
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new carriageBeltBackward(carriage));
-    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileFalse(new carriageBeltOff(carriage));
+    // new JoystickButton(gunnerController, Button.kLeftBumper.value).whileFalse(new carriageBeltOff(carriage));
 
     new JoystickButton(gunnerController, Button.kX.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
     // new JoystickButton(gunnerController, Button.kX.value).whileFalse(new shooterFlywheelOff(shooterFlywheels));
@@ -243,9 +249,9 @@ public class RobotContainer {
     // new POVButton(gunnerController, 0).whileFalse(new shooterFlywheelOff(shooterFlywheels));
 
     // // climber
-    new POVButton(gunnerController, 180).whileTrue(new climbUpRight(climber)); //Need to reverse names. Right = Left
+    new POVButton(gunnerController, 180).whileTrue(new climbUpRight(climber, rightDownSwitch)); //Need to reverse names. Right = Left
     new POVButton(gunnerController, 0).whileTrue(new climbDownRight(climber)); //And Left = Right Currently
-    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpLeft(climber));
+    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpLeft(climber, leftDownSwitch));
     new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbDownLeft(climber));
 
     // // feeder
@@ -267,8 +273,8 @@ public class RobotContainer {
     new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDownManual(elevator));
     new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorHoldPosition(elevator));
     // // climb wheel
-    new POVButton(driverController, 0).whileTrue(new climbWheelUp(climbWheel)).whileFalse(new climbWheelOff(climbWheel));
-    new POVButton(driverController, 180).whileTrue(new climbWheelDown(climbWheel)).whileFalse(new climbWheelOff(climbWheel));
+    // new POVButton(driverController, 0).whileTrue(new climbWheelUp(climbWheel)).whileFalse(new climbWheelOff(climbWheel));
+    // new POVButton(driverController, 180).whileTrue(new climbWheelDown(climbWheel)).whileFalse(new climbWheelOff(climbWheel));
     
 
 

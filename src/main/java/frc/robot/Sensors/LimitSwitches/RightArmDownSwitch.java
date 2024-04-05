@@ -5,7 +5,7 @@ import frc.Mechanisms.sensorTypes.LimitSwitch;
 public class RightArmDownSwitch extends LimitSwitch {
 
     public RightArmDownSwitch() {
-        super(2, "RightArmDown");
+        super(0, "RightArmDown");
     }
     
 }
