@@ -89,7 +89,7 @@
       "name": "Intake",
       "waypointRelativePos": 1.0,
       "command": {
-        "type": "parallel",
+        "type": "sequential",
         "data": {
           "commands": [
             {
@@ -106,7 +106,7 @@
       "name": "IntakeOffSpinUpShooter",
       "waypointRelativePos": 2.35,
       "command": {
-        "type": "parallel",
+        "type": "sequential",
         "data": {
           "commands": [
             {

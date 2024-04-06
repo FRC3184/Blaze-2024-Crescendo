@@ -158,7 +158,7 @@ public class RobotContainer {
 
     NamedCommands.registerCommand("Intake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(0.3)); //originally 0.4
     NamedCommands.registerCommand("LongIntake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(2));
-    NamedCommands.registerCommand("IntakeNoTimeout", new intake(intake, carriage, intakeODS, carriageODS, leds));
+    NamedCommands.registerCommand("IntakeNoTimeout", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(10));
 
 
     NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
@@ -166,9 +166,9 @@ public class RobotContainer {
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
     // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
     NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.35)); //originally 0.5
-    NamedCommands.registerCommand("Pitch40", new Pitch40(shooterPitch).withTimeout(1));
-    NamedCommands.registerCommand("Pitch44", new Pitch44(shooterPitch).withTimeout(1));
-    NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(1));
+    NamedCommands.registerCommand("Pitch40", new Pitch40(shooterPitch).withTimeout(2));
+    NamedCommands.registerCommand("Pitch44", new Pitch44(shooterPitch).withTimeout(2));
+    NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(2));
 
     NamedCommands.registerCommand("pitchLowest", new pitchLowest(shooterPitch).withTimeout(1));
     NamedCommands.registerCommand("BloopShot", new shooterBloop(shooterFlywheels, feeder));
@@ -199,6 +199,8 @@ public class RobotContainer {
     leds.setDefaultCommand(new locateNoteInRobot(intakeODS, carriageODS, leds));
 
     speedChanger.setDefaultCommand(new ChangeSubsystemSpeeds(speedChanger));
+
+    shooterPitch.setDefaultCommand(new pitchSubwoofer(shooterPitch));
     }
 
   private void configureBindings() {
