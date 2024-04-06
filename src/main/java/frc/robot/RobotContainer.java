@@ -150,14 +150,18 @@ public class RobotContainer {
   public RobotContainer() {
     //Register named autonomous commands
     // NamedCommands.registerCommand("Intake", new Intake(intake));
-    // NamedCommands.registerCommand("IntakeOff", new IntakeOff(intake));
+    NamedCommands.registerCommand("IntakeOff", new fullIntakeOff(intake, carriage).withTimeout(0.0000000001));
     NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(2));
-    NamedCommands.registerCommand("Intake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(0.4));
+        NamedCommands.registerCommand("ShootQuick", new shoot(shooterFlywheels, feeder, carriage).withTimeout(.75));
+
+    NamedCommands.registerCommand("Intake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(0.4)); //try 0.35
+    NamedCommands.registerCommand("LongIntake", new intake(intake, carriage, intakeODS, carriageODS, leds).withTimeout(2)); //try 0.35
+
     NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
     // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
     // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
-    NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.5));
+    NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.5)); //try 0.35
     NamedCommands.registerCommand("Pitch40", new Pitch40(shooterPitch).withTimeout(1));
     NamedCommands.registerCommand("Pitch44", new Pitch44(shooterPitch).withTimeout(1));
     NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(1));

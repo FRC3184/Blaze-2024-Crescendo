@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.5868974814872714,
-        "y": 5.549946874541637
+        "x": 0.765872873427322,
+        "y": 6.681985456994171
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2050697410876046,
-        "y": 6.10924384639467
+        "x": 1.7351279067495533,
+        "y": 6.476385904471273
       },
       "isLocked": false,
-      "linkedName": "CenterNote"
+      "linkedName": "StartAmp"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 6.872899327194004
       },
       "prevControl": {
-        "x": 2.263812470379861,
-        "y": 6.681985456994171
+        "x": 1.86729904765713,
+        "y": 6.579185680732721
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,22 +32,16 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake&Shoot",
-      "waypointRelativePos": 0.7,
+      "name": "Intake",
+      "waypointRelativePos": 0.8,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
               "type": "named",
               "data": {
                 "name": "Intake"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "CarriageBackwards"
               }
             }
           ]
@@ -63,13 +57,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 26.56505117707807,
-    "rotateFast": false
+    "rotation": 25.0,
+    "rotateFast": true
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 58.73626830562253,
     "velocity": 0
   },
   "useDefaultConstraints": true

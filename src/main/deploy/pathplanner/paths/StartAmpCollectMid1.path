@@ -3,37 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.542840434518079,
-        "y": 4.288219238334721
+        "x": 0.765872873427322,
+        "y": 6.681985456994171
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.410669293610502,
-        "y": 4.3029049206577845
+        "x": 1.765872873427322,
+        "y": 6.681985456994171
       },
       "isLocked": false,
-      "linkedName": "SourceNoteReal"
+      "linkedName": "StartAmp"
     },
     {
       "anchor": {
-        "x": 2.171096173178262,
-        "y": 4.350348982388106
+        "x": 7.995649794116489,
+        "y": 7.45
       },
       "prevControl": {
-        "x": 2.271096173178262,
-        "y": 4.350348982388106
+        "x": 6.995649794116489,
+        "y": 7.45
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ShootSourceNote"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot",
-      "waypointRelativePos": 0.35,
+      "name": "Intake",
+      "waypointRelativePos": 0.85,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,13 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Pitch44"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "Shoot"
+                "name": "LongIntake"
               }
             }
           ]
@@ -63,13 +57,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -28.17859010995919,
+    "rotation": 0,
     "rotateFast": true
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": -29.981639368849358,
+    "rotation": 60.0,
     "velocity": 0
   },
   "useDefaultConstraints": true
