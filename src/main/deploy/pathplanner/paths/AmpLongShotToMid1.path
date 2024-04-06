@@ -1,0 +1,149 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.792458494007897,
+        "y": 7.295079317431362
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.908259634701087,
+        "y": 7.061860669175885
+      },
+      "isLocked": false,
+      "linkedName": "AmpLongShot"
+    },
+    {
+      "anchor": {
+        "x": 8.0,
+        "y": 7.453667998245088
+      },
+      "prevControl": {
+        "x": 7.000105093860336,
+        "y": 7.46816546960887
+      },
+      "nextControl": {
+        "x": 8.643406377721846,
+        "y": 7.444339252314869
+      },
+      "isLocked": false,
+      "linkedName": "Mid1"
+    },
+    {
+      "anchor": {
+        "x": 5.313044080633615,
+        "y": 6.3248897406885725
+      },
+      "prevControl": {
+        "x": 5.827619509888805,
+        "y": 6.54709276695786
+      },
+      "nextControl": {
+        "x": 4.4921144387743315,
+        "y": 5.970397395340244
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.25,
+        "y": 5.55
+      },
+      "prevControl": {
+        "x": 4.445903664534602,
+        "y": 5.783218648255479
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "ShootNearStage"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0,
+      "rotationDegrees": 0,
+      "rotateFast": true
+    },
+    {
+      "waypointRelativePos": 2.0,
+      "rotationDegrees": 15.255118703057692,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "Intake",
+      "waypointRelativePos": 0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakeNoTimeout"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "IntakeOffSpinUpShooter",
+      "waypointRelativePos": 1.3,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "sequential",
+              "data": {
+                "commands": [
+                  {
+                    "type": "named",
+                    "data": {
+                      "name": "IntakeOff"
+                    }
+                  },
+                  {
+                    "type": "named",
+                    "data": {
+                      "name": "CarriageBackwards"
+                    }
+                  },
+                  {
+                    "type": "named",
+                    "data": {
+                      "name": "SpinUpShooter"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 7.22,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0,
+    "rotateFast": true
+  },
+  "reversed": false,
+  "folder": null,
+  "previewStartingState": {
+    "rotation": 27.5,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

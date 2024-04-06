@@ -3,52 +3,48 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.862095611515167,
-        "y": 2.4441314337174136
+        "x": 4.72533308702981,
+        "y": 4.608400489528252
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.512480010875515,
-        "y": 3.9312123694669934
+        "x": 5.714180155633038,
+        "y": 4.085990717435981
       },
       "isLocked": false,
-      "linkedName": "ShootMidStage"
+      "linkedName": "ShootUnderStage"
     },
     {
       "anchor": {
-        "x": 7.952290834159133,
-        "y": 4.104648209296419
+        "x": 8.0,
+        "y": 4.1
       },
       "prevControl": {
-        "x": 6.521445155566369,
-        "y": 4.162460155906228
+        "x": 7.514628120165331,
+        "y": 4.076661971505762
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RingFar3"
+      "linkedName": "Mid3"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.45,
-      "rotationDegrees": -60.0,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 0,
-      "rotateFast": true
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "Intake",
-      "waypointRelativePos": 0.7,
+      "waypointRelativePos": 0.75,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "LongIntake"
+              }
+            }
+          ]
         }
       }
     }
@@ -62,12 +58,12 @@
   "goalEndState": {
     "velocity": 0,
     "rotation": 0,
-    "rotateFast": false
+    "rotateFast": true
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": -27.404811042469433,
+    "rotation": -17.5,
     "velocity": 0
   },
   "useDefaultConstraints": true

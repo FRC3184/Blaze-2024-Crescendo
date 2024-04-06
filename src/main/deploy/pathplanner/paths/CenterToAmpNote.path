@@ -32,7 +32,7 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake&Shoot",
+      "name": "Intake",
       "waypointRelativePos": 0.7,
       "command": {
         "type": "sequential",
@@ -41,13 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Intake"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "CarriageBackwards"
+                "name": "LongIntake"
               }
             }
           ]
@@ -63,7 +57,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 26.56505117707807,
+    "rotation": 25.0,
     "rotateFast": false
   },
   "reversed": false,

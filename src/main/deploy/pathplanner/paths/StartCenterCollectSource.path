@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.862095611515167,
-        "y": 2.4441314337174136
+        "x": 1.35,
+        "y": 5.55
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.423018169980002,
-        "y": 0.9394441324093927
+        "x": 1.9826817835453852,
+        "y": 4.804304154062854
       },
       "isLocked": false,
-      "linkedName": "ShootMidStage"
+      "linkedName": "StartCenter"
     },
     {
       "anchor": {
-        "x": 8.010102780768943,
-        "y": 2.4441314337174136
+        "x": 2.542840434518079,
+        "y": 4.288219238334721
       },
       "prevControl": {
-        "x": 7.026117171312449,
-        "y": 2.4714607175693226
+        "x": 2.019996767266262,
+        "y": 4.52444177615628
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RingFar2"
+      "linkedName": "SourceNoteReal"
     }
   ],
   "rotationTargets": [],
@@ -33,11 +33,18 @@
   "eventMarkers": [
     {
       "name": "Intake",
-      "waypointRelativePos": 0.65,
+      "waypointRelativePos": 0.6,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "LongIntake"
+              }
+            }
+          ]
         }
       }
     }
@@ -50,13 +57,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": -25.0,
     "rotateFast": true
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": -30.381322261731903,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

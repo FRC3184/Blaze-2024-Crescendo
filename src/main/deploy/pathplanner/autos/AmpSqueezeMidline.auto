@@ -2,55 +2,55 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8072597963377744,
-      "y": 4.421825570923869
+      "x": 1.38,
+      "y": 7.3
     },
-    "rotation": -60.0
+    "rotation": 90.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "StartAmpCornerShoot"
+          }
+        },
+        {
           "type": "named",
           "data": {
-            "name": "Shoot"
+            "name": "ShootQuick"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "StartSource_LineFar"
+            "pathName": "AmpLongShotToMid1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShootQuick"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "ShootRing1MidStage"
+            "pathName": "AmpLongShotMid2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShootQuick"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "ShootMidStage_RingFar2"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "RingFar2_ShootMidStage"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "ShootMidStage_RingFar3"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "RingFar3_ShootNearCenter"
+            "pathName": "AmpLongShotToMid3"
           }
         }
       ]

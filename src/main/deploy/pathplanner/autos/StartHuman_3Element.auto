@@ -20,13 +20,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "ShootMidStage_RingFar2"
+            "pathName": null
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RingFar2_ShootMidStage"
+            "pathName": null
           }
         },
         {
@@ -38,7 +38,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RingFar3_ShootMidCenter"
+            "pathName": null
           }
         }
       ]

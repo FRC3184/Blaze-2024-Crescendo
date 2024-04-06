@@ -45,26 +45,7 @@
                   {
                     "type": "named",
                     "data": {
-                      "name": "Pitch40"
-                    }
-                  },
-                  {
-                    "type": "sequential",
-                    "data": {
-                      "commands": [
-                        {
-                          "type": "named",
-                          "data": {
-                            "name": "Intake"
-                          }
-                        },
-                        {
-                          "type": "named",
-                          "data": {
-                            "name": "CarriageBackwards"
-                          }
-                        }
-                      ]
+                      "name": "LongIntake"
                     }
                   }
                 ]

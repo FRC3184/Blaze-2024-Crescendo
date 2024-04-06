@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.8072597963377744,
-        "y": 4.421825570923869
+        "x": 1.35,
+        "y": 5.55
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.9998600932429045,
-        "y": 1.1451831847421472
+        "x": 1.8443888939219049,
+        "y": 6.156396729049701
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "StartCenter"
     },
     {
       "anchor": {
-        "x": 8.010102780768943,
-        "y": 0.7515553059275135
+        "x": 2.5868974814872714,
+        "y": 6.872899327194004
       },
       "prevControl": {
-        "x": 4.194645695309317,
-        "y": 0.7702127977879509
+        "x": 2.206571685870644,
+        "y": 6.670053340106681
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RingFar1"
+      "linkedName": "AmpNoteReal"
     }
   ],
   "rotationTargets": [],
@@ -33,11 +33,18 @@
   "eventMarkers": [
     {
       "name": "Intake",
-      "waypointRelativePos": 0.85,
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "parallel",
         "data": {
-          "commands": []
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "LongIntake"
+              }
+            }
+          ]
         }
       }
     }
@@ -50,13 +57,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -1.1233027140753793,
+    "rotation": 25.0,
     "rotateFast": true
   },
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": -60.572543596810256,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true
