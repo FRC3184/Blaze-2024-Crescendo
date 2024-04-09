@@ -27,10 +27,10 @@ public class shooterAim extends Command {
     @Override
     public void execute() {
         // convert to revolutions
-        Pair<Double, Double> r = shooterPitch.inputAngleFromRockerAngle(shooterLimelight.angle / (2 * Math.PI));
+        Pair<Double, Double> r = shooterPitch.inputAngleFromRockerAngle(shooterLimelight.angle);
 
         // subsystem doesn't clamp value, so we have to clamp it ourselves to not wreck the bot.
-        double revolutions1 = MathUtil.clamp(r.getFirst(), ConstShooter.upperLimit, ConstShooter.lowerLimit);
+        double revolutions1 = MathUtil.clamp(r.getFirst(), ConstShooter.upperLimit, ConstShooter.lowerLimit) / (2 * Math.PI);
         target_pitch = revolutions1;
 
         shooterPitch.seekPosition(target_pitch);
