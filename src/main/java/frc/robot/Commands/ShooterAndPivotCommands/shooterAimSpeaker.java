@@ -27,7 +27,7 @@ public class shooterAimSpeaker extends Command {
     @Override
     public void execute() {
         // convert to input angle
-        Pair<Double, Double> r = shooterPitch.inputAngleFromRockerAngle(shooterLimelight.angle);
+        Pair<Double, Double> r = shooterPitch.inputAngleFromRockerAngle(Math.PI - shooterLimelight.angle);
 
         // subsystem doesn't clamp value, so we have to clamp it ourselves to not wreck the bot.
         // also convert to revolutions
