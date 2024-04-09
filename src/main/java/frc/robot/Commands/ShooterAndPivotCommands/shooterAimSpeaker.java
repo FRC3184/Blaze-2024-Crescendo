@@ -7,13 +7,13 @@ import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 import frc.robot.Subsystems.ShooterPitch;
 
-public class shooterAim extends Command {
+public class shooterAimSpeaker extends Command {
     private final ShooterPitch shooterPitch;
     private final ShooterLimelight shooterLimelight;
 
     private double target_pitch;
 
-    public shooterAim(ShooterPitch pitchSubsystem, ShooterLimelight limelightSubsystem) {
+    public shooterAimSpeaker(ShooterPitch pitchSubsystem, ShooterLimelight limelightSubsystem) {
         shooterPitch = pitchSubsystem;
         shooterLimelight = limelightSubsystem;
         target_pitch = 0;
