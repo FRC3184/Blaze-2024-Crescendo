@@ -17,6 +17,11 @@ public class ShooterPitch extends pivotOneMotorRevNeoAbsEncoder {
     super(ConstShooter.kPivot, ConstShooter.invertedPivot, ConstShooter.velFactorPivot, "Shot Pitch", 1, 0, 0);
   }
 
+
+  // in radians
+  public static final double outputOffset = 0; // offset from original output to final. ADDED to angles BEFORE the angles are sign inverted
+  public static final boolean invertOutput = true;
+
   // used this source to help derive this
   // https://www.softintegration.com/chhtml/toolkit/mechanism/fourbar/fourbarpos.html
   // output is in revolutions
@@ -28,6 +33,13 @@ public class ShooterPitch extends pivotOneMotorRevNeoAbsEncoder {
     double acosPart = Math.acos(((x*x)+(y*y)+(r2*r2)-(r3*r3))/(2*r2*Math.sqrt((x*x)+(y*y))));
     double theta1 = Math.atan2(y, x) + acosPart;
     double theta2 = Math.atan2(y, x) - acosPart;
+
+    theta1 += outputOffset;
+    theta2 += outputOffset;
+    
+    // fancy ternary stuff, gives -theta if true, theta if false.
+    theta1 = invertOutput ? -theta1 : theta1;
+    theta2 = invertOutput ? -theta2 : theta2;
 
     return Pair.of(theta1, theta2);
   }
