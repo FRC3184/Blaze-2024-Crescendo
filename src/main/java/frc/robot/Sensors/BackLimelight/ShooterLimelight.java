@@ -12,7 +12,7 @@ import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 
 public class ShooterLimelight extends Limelight {
     NetworkTable LimelightTable;
-    public double angle;
+    public double angle; // in radians
     public static double[] targetpose_robotspace;
     protected ShuffleboardTab sbTab;
     private GenericEntry shooterAngle;
@@ -30,7 +30,7 @@ public class ShooterLimelight extends Limelight {
         updateLimelight();
 
         Optional<Double> a = calculateAngle(Math.hypot(targetpose_robotspace[0] - offsetX, targetpose_robotspace[2] - offsetZ), (80.515 * 5.5400554295247) - offsetY, ConstShooter.defVelocity);
-        angle = Math.toDegrees(a.orElse(1000000000.0));
+        angle = a.orElse(0.0);
 
         dashboardUpdate();
     }
