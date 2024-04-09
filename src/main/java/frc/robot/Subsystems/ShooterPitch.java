@@ -5,6 +5,8 @@ import frc.Mechanisms.pivot.*;
 import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 
 public class ShooterPitch extends pivotOneMotorRevNeoAbsEncoder {
+  // corresponds to the values theta1, and r1 through r4 on this diagram
+  // http://www.softintegration.com/chhtml/toolkit/mechanism/fig/fourbar/fourbarvel_trans.gif
   static final double t1 = 0;
   static final double r1 = 1;
   static final double r2 = 1;
