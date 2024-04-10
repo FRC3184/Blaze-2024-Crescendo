@@ -20,6 +20,10 @@ public class elevatorDownManual extends Command {
         if(elevator.getPosition()>ConstElevator.loweredPos){
             elevator.setSpeed(-ConstElevator.elevatorFallSpeed);
             elevator.run();
+        // }
+        // else if(elevator.getPosition()<ConstElevator.loweredPos+20 && elevator.getPosition()>ConstElevator.loweredPos){
+        //     elevator.setSpeed(-ConstElevator.elevatorFinishSpeed);
+        //     elevator.run();
         } else {
             elevator.stop();
         }

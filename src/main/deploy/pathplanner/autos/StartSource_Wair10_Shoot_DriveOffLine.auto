@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8072597963377744,
-      "y": 4.421825570923869
+      "x": 0.72,
+      "y": 4.39
     },
-    "rotation": -60.80251395393547
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
@@ -26,7 +26,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartSource_Line"
+            "pathName": "SourceWaitPath"
           }
         }
       ]

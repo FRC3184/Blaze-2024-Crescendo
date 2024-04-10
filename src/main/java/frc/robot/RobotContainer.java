@@ -75,6 +75,7 @@ import frc.robot.Commands.IntakeCommands.outtake;
 import frc.robot.Commands.SensorAndLEDCommands.LEDsOrange;
 import frc.robot.Commands.SensorAndLEDCommands.LEDsWhite;
 import frc.robot.Commands.SensorAndLEDCommands.locateNoteInRobot;
+import frc.robot.Commands.ShooterAndPivotCommands.FullPassthrough;
 import frc.robot.Commands.ShooterAndPivotCommands.feederBackward;
 import frc.robot.Commands.ShooterAndPivotCommands.feederForward;
 import frc.robot.Commands.ShooterAndPivotCommands.feederOff;
@@ -173,6 +174,10 @@ public class RobotContainer {
     NamedCommands.registerCommand("pitchLowest", new pitchLowest(shooterPitch).withTimeout(1));
     NamedCommands.registerCommand("BloopShot", new shooterBloop(shooterFlywheels, feeder));
 
+    NamedCommands.registerCommand("FullPassthrough", new FullPassthrough(shooterFlywheels, feeder, carriage, intake));
+        NamedCommands.registerCommand("FullPassthroughTimeout", new FullPassthrough(shooterFlywheels, feeder, carriage, intake).withTimeout(0.25));
+
+
     // TELEOP Setup
     configureBindings();
 
@@ -196,11 +201,11 @@ public class RobotContainer {
               DriveConstants.kFieldCentric, true, DriveConstants.rotPt),
             robotDrive));
 
-    leds.setDefaultCommand(new locateNoteInRobot(intakeODS, carriageODS, leds));
+    carriageODS.setDefaultCommand(new locateNoteInRobot(intakeODS, carriageODS, shooterLL, intakeLL));
 
     speedChanger.setDefaultCommand(new ChangeSubsystemSpeeds(speedChanger));
 
-    shooterPitch.setDefaultCommand(new pitchSubwoofer(shooterPitch));
+    shooterPitch.setDefaultCommand(new Pitch40(shooterPitch));
     }
 
   private void configureBindings() {

@@ -26,7 +26,7 @@ public class ConstElevator {
   public static final double raisedPos = 75; //80 is true max
   public static final double loweredPos = 0;
   public static double elevatorRiseSpeed = 0.7;
-  public static final double elevatorFinishSpeed = 0.4;
+  public static final double elevatorFinishSpeed = 0.2;
   public static final double elevatorFallSpeed = 0.4;
   public static final double elevatorSlowZoneUp = 65;
   public static final double elevatorSlowZoneDown = 15;

@@ -20,6 +20,10 @@ public class elevatorUpManual extends Command {
         if(elevator.getPosition()<ConstElevator.raisedPos){
             elevator.setSpeed(ConstElevator.elevatorRiseSpeed);
         elevator.run();
+        // }
+        // else if(elevator.getPosition()>ConstElevator.raisedPos-20 && elevator.getPosition()<ConstElevator.raisedPos){
+        //     elevator.setSpeed(ConstElevator.elevatorFinishSpeed);
+        // elevator.run();
         } else {
             elevator.stop();
         }

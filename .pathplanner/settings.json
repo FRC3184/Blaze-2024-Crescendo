@@ -3,15 +3,9 @@
   "robotLength": 0.89,
   "holonomicMode": true,
   "pathFolders": [
-    "AmpFourElementPaths",
-    "CenterFourElementPaths",
-    "Midline",
-    "SourceFourElementPaths",
-    "OldPaths"
+    "WaitPaths"
   ],
   "autoFolders": [
-    "BasicAutos",
-    "Advanced",
     "WaitAutos"
   ],
   "defaultMaxVel": 7.22,

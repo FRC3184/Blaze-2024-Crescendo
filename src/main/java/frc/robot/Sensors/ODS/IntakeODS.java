@@ -5,6 +5,6 @@ import frc.Mechanisms.sensorTypes.OpticalDistanceSensor;
 public class IntakeODS extends OpticalDistanceSensor {
 
     public IntakeODS() {
-        super(0, "Intake");
+        super(2, "Intake");
     }
 }
