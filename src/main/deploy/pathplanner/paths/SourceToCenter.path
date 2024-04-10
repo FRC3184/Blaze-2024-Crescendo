@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "intake",
-      "waypointRelativePos": 0.8,
+      "name": "FullPassthrough",
+      "waypointRelativePos": 0.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -41,7 +41,13 @@
             {
               "type": "named",
               "data": {
-                "name": "LongIntake"
+                "name": "FullPassthrough"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "Pitch40"
               }
             }
           ]
@@ -61,7 +67,7 @@
     "rotateFast": true
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Close 4 Element Paths",
   "previewStartingState": {
     "rotation": -25.0,
     "velocity": 0

@@ -167,15 +167,15 @@ public class RobotContainer {
     // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
     // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
     NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.35)); //originally 0.5
-    NamedCommands.registerCommand("Pitch40", new Pitch40(shooterPitch).withTimeout(2));
-    NamedCommands.registerCommand("Pitch44", new Pitch44(shooterPitch).withTimeout(2));
-    NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(2));
+    NamedCommands.registerCommand("Pitch40", new Pitch40(shooterPitch));
+    NamedCommands.registerCommand("Pitch44", new Pitch44(shooterPitch));
+    NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(2)); 
 
     NamedCommands.registerCommand("pitchLowest", new pitchLowest(shooterPitch).withTimeout(1));
     NamedCommands.registerCommand("BloopShot", new shooterBloop(shooterFlywheels, feeder));
 
     NamedCommands.registerCommand("FullPassthrough", new FullPassthrough(shooterFlywheels, feeder, carriage, intake));
-        NamedCommands.registerCommand("FullPassthroughTimeout", new FullPassthrough(shooterFlywheels, feeder, carriage, intake).withTimeout(0.25));
+    NamedCommands.registerCommand("FullPassthroughTimeout", new FullPassthrough(shooterFlywheels, feeder, carriage, intake).withTimeout(0.25));
 
 
     // TELEOP Setup

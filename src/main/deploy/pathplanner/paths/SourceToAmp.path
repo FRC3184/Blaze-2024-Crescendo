@@ -3,45 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.72533308702981,
-        "y": 4.608400489528252
+        "x": 2.542840434518079,
+        "y": 4.288219238334721
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.714180155633038,
-        "y": 4.085990717435981
+        "x": 2.3300790263552362,
+        "y": 5.10190428831562
       },
       "isLocked": false,
-      "linkedName": "ShootUnderStage"
+      "linkedName": "SourceNoteReal"
     },
     {
       "anchor": {
-        "x": 8.0,
-        "y": 4.1
+        "x": 2.5868974814872714,
+        "y": 6.872899327194004
       },
       "prevControl": {
-        "x": 7.514628120165331,
-        "y": 4.076661971505762
+        "x": 1.8188283018644062,
+        "y": 6.514742786743034
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Mid3"
+      "linkedName": "AmpNoteReal"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Intake",
-      "waypointRelativePos": 0.75,
+      "name": "FullPassthrough",
+      "waypointRelativePos": 0,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
               "type": "named",
               "data": {
-                "name": "LongIntake"
+                "name": "FullPassthrough"
               }
             }
           ]
@@ -57,13 +57,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 25.0,
     "rotateFast": true
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Close 4 Element Paths",
   "previewStartingState": {
-    "rotation": -17.5,
+    "rotation": -25.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

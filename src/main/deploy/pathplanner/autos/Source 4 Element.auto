@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.77,
-      "y": 6.68
+      "x": 0.72,
+      "y": 4.39
     },
-    "rotation": 60.0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
@@ -33,19 +33,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartAmpCollectAmp"
+            "pathName": "StartSourceCollectSource"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "AmpToCenter"
+            "pathName": "SourceToCenter"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "CenterToSource"
+            "pathName": "CenterToAmpNote"
           }
         },
         {
