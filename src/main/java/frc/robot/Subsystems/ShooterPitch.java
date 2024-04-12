@@ -7,11 +7,11 @@ import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 public class ShooterPitch extends pivotOneMotorRevNeoAbsEncoder {
   // corresponds to the values theta1, and r1 through r4 on this diagram
   // http://www.softintegration.com/chhtml/toolkit/mechanism/fig/fourbar/fourbarvel_trans.gif
-  static final double t1 = 0;
-  static final double r1 = 1;
-  static final double r2 = 1;
-  static final double r3 = 1;
-  static final double r4 = 1;
+  static final double t1 = Math.toRadians(28.4);
+  static final double r1 = 4.981;
+  static final double r2 = 2.000;
+  static final double r3 = 7.500;
+  static final double r4 = 7.148;
 
   public ShooterPitch() {
     super(ConstShooter.kPivot, ConstShooter.invertedPivot, ConstShooter.velFactorPivot, "Shot Pitch", 1, 0, 0);
