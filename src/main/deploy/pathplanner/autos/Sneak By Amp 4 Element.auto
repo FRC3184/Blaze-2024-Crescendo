@@ -18,6 +18,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "FullPassthroughTimeout"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Mid1 after shoot"

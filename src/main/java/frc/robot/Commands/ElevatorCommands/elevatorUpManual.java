@@ -1,15 +1,18 @@
 package frc.robot.Commands.ElevatorCommands;
 
+import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
 import frc.robot.SubmoduleSubsystemConstants.ConstElevator;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Elevator;
 
 public class elevatorUpManual extends Command {
     private final Elevator elevator;
+    private final IntakeLimelight intakeLL;
 
-    public elevatorUpManual(Elevator subsystem){
-        elevator = subsystem;
-        addRequirements(subsystem); 
+    public elevatorUpManual(Elevator elevator, IntakeLimelight intakeLL){
+        this.elevator = elevator;
+        this.intakeLL = intakeLL;
+        addRequirements(elevator); 
     }
 
     public void initialize() {
@@ -25,6 +28,12 @@ public class elevatorUpManual extends Command {
         elevator.run();
         } else {
             elevator.stop();
+        }
+
+        if(elevator.getPosition()>30){
+            intakeLL.setPipeline(1);
+        } else {
+            intakeLL.setPipeline(0);
         }
     }
 

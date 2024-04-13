@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.Mechanisms.sensorTypes.Limelight;
 import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
+import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.CardinalConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 import frc.robot.Subsystems.CarriageBelt;
@@ -31,8 +32,8 @@ public class AutoShoot extends Command {
     private double thetaPower;
     private PIDController thetaController;
     private double target = Limelight.alignmentConstants.Aligned;
-    private double pitchTolerance = 0.75;
-    private double thetaTolerance = 0.75;
+    private double pitchTolerance = 0.02;
+    private double thetaTolerance = 5;
 
 
     public AutoShoot(ShooterPitch shooterPitch, ShooterFlywheels shooterFlywheels, Feeder feederSS, CarriageBelt belt, ShooterLimelight LLShooter, DriveSubsystemSwerve driveSS){
@@ -54,18 +55,25 @@ public class AutoShoot extends Command {
 
     public void execute(){
         pitchError = shooterLL.getPredictedPivot()-pitch.getAbsPosition();
-        thetaError = shooterLL.getCamXInches()-target;
+        thetaError = target-shooterLL.getCamXInches();
         flywheels.setTargetVelocity(ConstShooter.defVelocity);
         flywheels.runVelocity();
-        pitch.seekPosition(shooterLL.getPredictedPivot());
 
         thetaPower = thetaController.calculate(shooterLL.getCamXMeters());
-    robotDrive.drive(-MathUtil.applyDeadband(driverController.getLeftY(), 
+
+        if(shooterLL.getV()==1){
+        robotDrive.drive(-MathUtil.applyDeadband(driverController.getLeftY(), 
           ConstJoysticks.kDriveDeadband),
           -MathUtil.applyDeadband(driverController.getLeftX(), ConstJoysticks.kDriveDeadband),
           thetaPower, true, true);
+          pitch.seekPosition(shooterLL.getPredictedPivot());
+          } else {
+            robotDrive.drive(-MathUtil.applyDeadband(driverController.getLeftY(), ConstJoysticks.kDriveDeadband), -MathUtil.applyDeadband(driverController.getLeftX(), ConstJoysticks.kDriveDeadband), -MathUtil.applyDeadband(driverController.getRightX(), ConstJoysticks.kDriveDeadband), ConstMaxSwerveDrive.DriveConstants.kFieldCentric, true);
+            pitch.seekPosition(ConstShooter.upperLimit);
+          }
+    
 
-          if(Math.abs(pitchError)<pitchTolerance && Math.abs(thetaError)<thetaTolerance && flywheels.atSpeed()){
+        if(Math.abs(pitchError)<pitchTolerance && Math.abs(thetaError)<thetaTolerance && flywheels.atSpeed()){
             feeder.setSpeed(-0.5);
             feeder.runSpeed();
             carriage.setSpeed(0.5);

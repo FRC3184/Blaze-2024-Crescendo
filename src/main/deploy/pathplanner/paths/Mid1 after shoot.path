@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.1456675025983865,
-        "y": 7.3
+        "x": 4.451979136516414,
+        "y": 7.151927291332221
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.244094488188977,
-        "y": 7.414382152707968
+        "x": 5.550406122107004,
+        "y": 7.266309444040189
       },
       "isLocked": false,
       "linkedName": "BeforeMid1"
@@ -59,14 +59,7 @@
       "command": {
         "type": "parallel",
         "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Shoot"
-              }
-            }
-          ]
+          "commands": []
         }
       }
     },
@@ -99,14 +92,7 @@
       "command": {
         "type": "parallel",
         "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Shoot"
-              }
-            }
-          ]
+          "commands": []
         }
       }
     },
@@ -143,7 +129,7 @@
   "folder": null,
   "previewStartingState": {
     "rotation": 22.5,
-    "velocity": 0.5
+    "velocity": 0.0
   },
   "useDefaultConstraints": true
 }

@@ -71,8 +71,8 @@ import frc.robot.Commands.ElevatorCommands.elevatorUpPID;
 import frc.robot.Commands.IntakeCommands.fullIntakeOff;
 import frc.robot.Commands.IntakeCommands.AutonomousNoteTrackingIntake;
 import frc.robot.Commands.IntakeCommands.ODSIntake;
-import frc.robot.Commands.IntakeCommands.OldLLIntake;
-import frc.robot.Commands.IntakeCommands.PartialLLIntake;
+import frc.robot.Commands.IntakeCommands.RotatingLLIntake;
+import frc.robot.Commands.IntakeCommands.StrafingLLIntake;
 import frc.robot.Commands.IntakeCommands.intakeBackward;
 import frc.robot.Commands.IntakeCommands.intakeForward;
 import frc.robot.Commands.IntakeCommands.intakeManual;
@@ -164,6 +164,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(2));
     NamedCommands.registerCommand("ShootQuick", new shoot(shooterFlywheels, feeder, carriage).withTimeout(.25));
 
+    NamedCommands.registerCommand("AutoShoot", new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
+    NamedCommands.registerCommand("AutoShootTimeout", new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive).withTimeout(0.25));
+
     NamedCommands.registerCommand("Intake", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL).withTimeout(0.3)); //originally 0.4
     NamedCommands.registerCommand("LongIntake", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL).withTimeout(2));
     NamedCommands.registerCommand("IntakeNoTimeout", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL).withTimeout(10));
@@ -220,8 +223,10 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-    // DRIVER CONTROLS
+    // ***DRIVER CONTROLS***
+    // Reset heading
     new JoystickButton(driverController, Button.kBack.value).whileTrue(new RunCommand(() -> robotDrive.zeroHeading()));
+    // Set drivetrain into brakeing configuration
     new JoystickButton(driverController, Button.kStart.value).whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
     // Cardinal Direction Buttons
     new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
@@ -238,45 +243,33 @@ public class RobotContainer {
     // Carriage Belt Backwards
     new POVButton(driverController, 0).whileTrue(new carriageBeltBackward(carriage));
     // Ring alignment
-    new JoystickButton(driverController, Button.kLeftStick.value).whileTrue(new PartialLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    new JoystickButton(driverController, Button.kLeftStick.value).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    new JoystickButton(driverController, driverRTPressed()).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    new JoystickButton(driverController, driverRTPressed()).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
 
 
 
-    //GUNNER CONTROLS
+    // ***GUNNER CONTROLS***
     // // full intake & outtake
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL));
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
     new POVButton(gunnerController, 90).whileTrue(new intakeManual(intake, carriage));
-    // new POVButton(gunnerController, 90).whileFalse(new fullIntakeOff(intake, carriage));
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));
-
     // // shooter & carriage
     new JoystickButton(gunnerController, Button.kX.value).whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
     new POVButton(gunnerController, 270).whileTrue(new spinUpFlywheels(shooterFlywheels));
     new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
-
+    new JoystickButton(gunnerController, Button.kB.value).onTrue(new pitchSubwoofer(shooterPitch));
+    new JoystickButton(gunnerController, Button.kBack.value).onTrue(new pitchLowest(shooterPitch));
     // // climber
     new POVButton(gunnerController, 180).whileTrue(new climbUpRight(climber, rightDownSwitch)); //Need to reverse names. Right = Left
     new POVButton(gunnerController, 0).whileTrue(new climbDownRight(climber)); //And Left = Right Currently
     new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpLeft(climber, leftDownSwitch));
     new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbDownLeft(climber));
-    // shooter pitch 
-    new JoystickButton(testingController, Button.kBack.value).whileTrue(new shooterPitchUp(shooterPitch));
-    new JoystickButton(testingController, Button.kBack.value).whileFalse(new shooterPitchOff(shooterPitch));
-    new JoystickButton(testingController, Button.kBack.value).whileFalse(new PitchHoldPosition(shooterPitch));
-
-    new JoystickButton(testingController, Button.kStart.value).whileTrue(new shooterPitchDown(shooterPitch));
-    new JoystickButton(testingController, Button.kStart.value).whileFalse(new shooterPitchOff(shooterPitch));
-    new JoystickButton(testingController, Button.kStart.value).whileFalse(new PitchHoldPosition(shooterPitch));
-
-    new JoystickButton(gunnerController, Button.kB.value).onTrue(new pitchSubwoofer(shooterPitch));
-    new JoystickButton(gunnerController, Button.kBack.value).onTrue(new pitchLowest(shooterPitch));
-
-
     // // elevator
-    new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUpManual(elevator));
+    new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUpManual(elevator, intakeLL));
     new JoystickButton(gunnerController, Button.kLeftStick.value).whileFalse(new elevatorHoldPosition(elevator, intakeLL));
-    new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDownManual(elevator));
+    new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDownManual(elevator, intakeLL));
     new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorHoldPosition(elevator, intakeLL));
 
 
@@ -288,15 +281,21 @@ public class RobotContainer {
 
     // new JoystickButton(gunnerController, Button.kX.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(0), intakeLL));
     // new JoystickButton(gunnerController, Button.kY.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(1), intakeLL));
+    
+    // *** TESTING CONTROLS ***
+    // shooter pitch 
+    new JoystickButton(testingController, Button.kBack.value).whileTrue(new shooterPitchUp(shooterPitch));
+    new JoystickButton(testingController, Button.kBack.value).whileFalse(new shooterPitchOff(shooterPitch));
+    new JoystickButton(testingController, Button.kBack.value).whileFalse(new PitchHoldPosition(shooterPitch));
+
+    new JoystickButton(testingController, Button.kStart.value).whileTrue(new shooterPitchDown(shooterPitch));
+    new JoystickButton(testingController, Button.kStart.value).whileFalse(new shooterPitchOff(shooterPitch));
+    new JoystickButton(testingController, Button.kStart.value).whileFalse(new PitchHoldPosition(shooterPitch));
 
     new JoystickButton(testingController, Button.kX.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
-    new JoystickButton(testingController, Button.kRightBumper.value).whileTrue(new PartialLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    new JoystickButton(testingController, Button.kRightBumper.value).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
     new JoystickButton(testingController, Button.kY.value).whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
-    new JoystickButton(testingController, Button.kLeftBumper.value).whileTrue(new OldLLIntake(robotDrive, intakeLL, intake, carriage));
-
-    new JoystickButton(driverController, driverRTPressed()).whileTrue(new PartialLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-    new JoystickButton(driverController, driverRTPressed()).whileTrue(new PartialLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-
+    new JoystickButton(testingController, Button.kLeftBumper.value).whileTrue(new RotatingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
   }
 
 

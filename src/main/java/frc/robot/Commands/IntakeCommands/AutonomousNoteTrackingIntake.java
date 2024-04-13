@@ -35,6 +35,7 @@ public class AutonomousNoteTrackingIntake extends Command {
   private double xTolerance = 10;
   private double xError;
   private String noteLocation = "No Note";
+  boolean notePassedIntake = false;
 
   /**
    * Add subsystem and configure PID controller.
@@ -56,6 +57,7 @@ public class AutonomousNoteTrackingIntake extends Command {
 
   @Override
   public void initialize() {
+    notePassedIntake = false;
     intake.setSpeed(0.5);
     carriageBelt.setSpeed(0.5);
     XController.setSetpoint(xTarget);
@@ -88,6 +90,7 @@ public class AutonomousNoteTrackingIntake extends Command {
         carriageODS.setNoteLocation("Carriage");
         noteLocation = carriageODS.getNoteLocation();
     } else if (intakeODS.getSightStatus()){
+        notePassedIntake = true;
         carriageODS.setHasNote(true);
         carriageODS.setNoteLocation("Intake");
         noteLocation = carriageODS.getNoteLocation();
@@ -97,7 +100,7 @@ public class AutonomousNoteTrackingIntake extends Command {
         noteLocation = carriageODS.getNoteLocation();
     }
 
-    if (noteLocation.equals("Carriage")){
+    if (noteLocation.equals("Carriage") && notePassedIntake){
     shooterLL.setLedMode(2);
     intakeLL.setLedMode(2);
     intake.stop();

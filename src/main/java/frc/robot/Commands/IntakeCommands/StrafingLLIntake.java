@@ -15,9 +15,10 @@ import frc.robot.Subsystems.CarriageBelt;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.RevMaxSwerve.DriveSubsystemSwerve;
 
-public class PartialLLIntake extends Command {
+public class StrafingLLIntake extends Command {
 
     String noteLocation = "No Note";
+    boolean notePassedIntake = false;
 
     private final Intake intake;
     private final CarriageBelt carriageBelt;
@@ -35,7 +36,7 @@ public class PartialLLIntake extends Command {
 
     private final Timer timer = new Timer();
 
-    public PartialLLIntake(Intake intakeSS, CarriageBelt carriageSS, IntakeODS iODS, CarriageODS cODS, ShooterLimelight LLShooter, IntakeLimelight LLIntake, DriveSubsystemSwerve driveSS){
+    public StrafingLLIntake(Intake intakeSS, CarriageBelt carriageSS, IntakeODS iODS, CarriageODS cODS, ShooterLimelight LLShooter, IntakeLimelight LLIntake, DriveSubsystemSwerve driveSS){
         intake = intakeSS;
         carriageBelt = carriageSS;
         intakeODS = iODS;
@@ -51,6 +52,7 @@ public class PartialLLIntake extends Command {
     }
 
     public void initialize() {
+        notePassedIntake = false;
         // intake.setSpeed(0.5);
         // carriageBelt.setSpeed(0.5);
         timer.reset();
@@ -68,6 +70,7 @@ public class PartialLLIntake extends Command {
             carriageODS.setNoteLocation("Carriage");
             noteLocation = carriageODS.getNoteLocation();
         } else if (intakeODS.getSightStatus()){
+            notePassedIntake = true;
             carriageODS.setHasNote(true);
             carriageODS.setNoteLocation("Intake");
             noteLocation = carriageODS.getNoteLocation();
@@ -77,7 +80,7 @@ public class PartialLLIntake extends Command {
             noteLocation = carriageODS.getNoteLocation();
         }
 
-        if (noteLocation.equals("Carriage")){
+        if (noteLocation.equals("Carriage") && notePassedIntake){
         shooterLL.setLedMode(2);
         intakeLL.setLedMode(2);
         intake.stop();
@@ -92,11 +95,9 @@ public class PartialLLIntake extends Command {
         shooterLL.setLedMode(1);
         intakeLL.setLedMode(1);
         intake.runSpeed();
-        carriageBelt.setSpeed(0.5);
-        carriageBelt.runSpeed();
         }
 
-        if(timer.get()>0.1){
+        if(timer.get()>0.25){
         timer.stop();
         carriageBelt.stop();
         }
