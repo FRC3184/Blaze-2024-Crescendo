@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 2.5868974814872714,
-        "y": 5.549946874541637
+        "x": 2.85,
+        "y": 5.55
       },
       "prevControl": {
-        "x": 2.4868974814872713,
-        "y": 5.549946874541637
+        "x": 2.75,
+        "y": 5.55
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "ShootCenterCloseNote"
+      "linkedName": "CenterNote"
     }
   ],
   "rotationTargets": [],

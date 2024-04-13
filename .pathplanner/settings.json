@@ -4,6 +4,7 @@
   "holonomicMode": true,
   "pathFolders": [
     "Close 4 Element Paths",
+    "Disruption Test",
     "WaitPaths"
   ],
   "autoFolders": [

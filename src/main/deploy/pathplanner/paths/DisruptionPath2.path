@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.7351279067495533,
+        "y": 7.225355702947542
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.7351279067495533,
+        "y": 6.62306366064212
+      },
+      "isLocked": false,
+      "linkedName": "disruption1"
+    },
+    {
+      "anchor": {
+        "x": 1.7351279067495533,
+        "y": 5.55
+      },
+      "prevControl": {
+        "x": 1.7351279067495533,
+        "y": 6.094756150329973
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "disruption2"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 7.22,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Disruption Test",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

@@ -37,9 +37,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "FullPassthroughTimeout"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "CenterToAmpNote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FullPassthroughTimeout"
           }
         },
         {

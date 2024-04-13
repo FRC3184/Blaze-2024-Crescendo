@@ -37,15 +37,33 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "FullPassthroughTimeout"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "CenterToSource"
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "FullPassthroughTimeout"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "SourceToAmp"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FullPassthroughTimeout"
           }
         }
       ]

@@ -6,6 +6,6 @@ import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 public class ShooterPitch extends pivotOneMotorRevNeoAbsEncoder {
 
   public ShooterPitch() {
-    super(ConstShooter.kPivot, ConstShooter.invertedPivot, ConstShooter.velFactorPivot, "Shot Pitch", 2.5, 0, 0.1);
+    super(ConstShooter.kPivot, ConstShooter.invertedPivot, ConstShooter.velFactorPivot, "Shot Pitch", 2.25, 0.1, 0);
   }
 }

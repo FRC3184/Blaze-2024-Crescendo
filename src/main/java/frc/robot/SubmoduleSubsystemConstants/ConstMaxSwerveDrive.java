@@ -92,7 +92,7 @@ public final class ConstMaxSwerveDrive {
     // The MAXSwerve module can be configured with one of three pinion gears: 12T, 13T, or 14T.
     // This changes the drive speed of the module (a pinion gear with more teeth will result in a
     // robot that drives faster).
-    public static final int kDrivingMotorPinionTeeth = 15;
+    public static final int kDrivingMotorPinionTeeth = 16;
     public static final int kDrivingSpurGearTeeth = 20;
 
     // Invert the turning encoder, since the output shaft rotates in the opposite direction of
@@ -103,8 +103,8 @@ public final class ConstMaxSwerveDrive {
     public static final double kDrivingMotorFreeSpeedRps = NeoMotorConstants.kFreeSpeedRpm / 60;
     public static final double kWheelDiameterMeters = 0.0762; //0.0762 - DEFAULT (3in)
     public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
-    // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 15 teeth on the bevel pinion
-    public static final double kDrivingMotorReduction = (45.0 * kDrivingSpurGearTeeth) / (kDrivingMotorPinionTeeth * 15);
+    // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 16 teeth on the bevel pinion
+    public static final double kDrivingMotorReduction = (45.0 * kDrivingSpurGearTeeth) / (kDrivingMotorPinionTeeth * 16);
     public static final double kDriveWheelFreeSpeedRps = (kDrivingMotorFreeSpeedRps * kWheelCircumferenceMeters)
         / kDrivingMotorReduction;
 
@@ -164,6 +164,12 @@ public final class ConstMaxSwerveDrive {
     public static final double CardinalP = 1/75.0;
     public static final double CardinalI = 0;
     public static final double CardinalD = 0;
+  }
+
+  public static final class GamePieceAlignmentConstants {
+    public static final double P = 0.01;
+    public static final double I = 0;
+    public static final double D = 0.0005;
   }
 
   public static final class NeoMotorConstants {

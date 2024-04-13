@@ -17,13 +17,12 @@ public class elevatorUpManual extends Command {
 
     @Override
     public void execute() {
-        if(elevator.getPosition()<ConstElevator.raisedPos){
+        if(elevator.getPosition()>ConstElevator.elevatorSlowZoneUp && elevator.getPosition()<ConstElevator.raisedPos){
+            elevator.setSpeed(ConstElevator.elevatorFinishSpeed);
+        elevator.run();
+        } else if(elevator.getPosition()<ConstElevator.raisedPos){
             elevator.setSpeed(ConstElevator.elevatorRiseSpeed);
         elevator.run();
-        // }
-        // else if(elevator.getPosition()>ConstElevator.raisedPos-20 && elevator.getPosition()<ConstElevator.raisedPos){
-        //     elevator.setSpeed(ConstElevator.elevatorFinishSpeed);
-        // elevator.run();
         } else {
             elevator.stop();
         }

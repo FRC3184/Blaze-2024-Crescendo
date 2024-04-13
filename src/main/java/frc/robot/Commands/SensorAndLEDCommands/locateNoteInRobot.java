@@ -1,5 +1,6 @@
 package frc.robot.Commands.SensorAndLEDCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
@@ -15,6 +16,8 @@ public class locateNoteInRobot extends Command {
     private final ShooterLimelight shooterLL;
     private final IntakeLimelight intakeLL;
 
+    private final Timer timer = new Timer();
+
     public locateNoteInRobot(IntakeODS intakeSensor, CarriageODS carriageSensor, ShooterLimelight shooterLL, IntakeLimelight intakeLL){
         intakeODS = intakeSensor;
         carriageODS = carriageSensor;
@@ -24,7 +27,7 @@ public class locateNoteInRobot extends Command {
     }
 
     public void initialize() {
-        
+        timer.reset();
     }
 
     @Override
@@ -48,6 +51,7 @@ public class locateNoteInRobot extends Command {
         if (noteLocation.equals("Carriage")){
         shooterLL.setLedMode(2);
         intakeLL.setLedMode(2);
+        timer.start();
         }
         else if (noteLocation.equals("Intake")){
         shooterLL.setLedMode(3);
@@ -56,6 +60,11 @@ public class locateNoteInRobot extends Command {
         else {
         shooterLL.setLedMode(1);
         intakeLL.setLedMode(1);
+        }
+
+        if(timer.get()>1){
+            shooterLL.setLedMode(1);
+            intakeLL.setLedMode(1);
         }
     }
 

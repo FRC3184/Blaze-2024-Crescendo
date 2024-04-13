@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.5868974814872714,
-        "y": 5.549946874541637
+        "x": 2.85,
+        "y": 5.55
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2050697410876046,
-        "y": 6.10924384639467
+        "x": 2.4681722596003333,
+        "y": 6.109296971853033
       },
       "isLocked": false,
       "linkedName": "CenterNote"
     },
     {
       "anchor": {
-        "x": 2.5868974814872714,
-        "y": 6.872899327194004
+        "x": 2.4987833875488867,
+        "y": 6.814156597901747
       },
       "prevControl": {
-        "x": 2.263812470379861,
-        "y": 6.681985456994171
+        "x": 1.8178138491735476,
+        "y": 6.499862964805438
       },
       "nextControl": null,
       "isLocked": false,
@@ -64,7 +64,7 @@
   "goalEndState": {
     "velocity": 0,
     "rotation": 25.0,
-    "rotateFast": false
+    "rotateFast": true
   },
   "reversed": false,
   "folder": "Close 4 Element Paths",

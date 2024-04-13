@@ -17,13 +17,13 @@ public class elevatorDownManual extends Command {
 
     @Override
     public void execute() {
-        if(elevator.getPosition()>ConstElevator.loweredPos){
+        
+        if(elevator.getPosition()<ConstElevator.elevatorSlowZoneDown && elevator.getPosition()>ConstElevator.loweredPos){
+            elevator.setSpeed(-ConstElevator.elevatorFinishSpeed);
+            elevator.run();
+        } else if(elevator.getPosition()>ConstElevator.loweredPos){
             elevator.setSpeed(-ConstElevator.elevatorFallSpeed);
             elevator.run();
-        // }
-        // else if(elevator.getPosition()<ConstElevator.loweredPos+20 && elevator.getPosition()>ConstElevator.loweredPos){
-        //     elevator.setSpeed(-ConstElevator.elevatorFinishSpeed);
-        //     elevator.run();
         } else {
             elevator.stop();
         }

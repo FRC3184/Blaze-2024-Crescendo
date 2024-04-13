@@ -3,12 +3,12 @@ package frc.robot.Commands.ShooterAndPivotCommands.MiamiValleyPivot;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.ShooterPitch;
 
-public class Pitch44 extends Command {
+public class PitchCenter extends Command {
     
     ShooterPitch pitch;
 
 
-    public Pitch44(ShooterPitch shooterPitch){
+    public PitchCenter(ShooterPitch shooterPitch){
         pitch = shooterPitch;
 
         addRequirements(pitch);
@@ -19,7 +19,7 @@ public class Pitch44 extends Command {
     }
 
     public void execute(){
-        pitch.seekPosition(0.44);
+        pitch.seekPosition(0.4);
     }
 
     public void end(boolean interrupted){

@@ -1,14 +1,15 @@
 package frc.robot.Commands.IntakeCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Sensors.BackLimelight.ShooterLimelight;
+import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
 import frc.robot.Sensors.ODS.CarriageODS;
 import frc.robot.Sensors.ODS.IntakeODS;
-import frc.robot.SubmoduleSubsystemConstants.ConstLEDs.COLORS;
 import frc.robot.Subsystems.CarriageBelt;
 import frc.robot.Subsystems.Intake;
-import frc.robot.Subsystems.LEDs;
 
-public class intakeWithODS extends Command {
+public class ODSIntake extends Command {
 
     String noteLocation = "No Note";
 
@@ -16,20 +17,25 @@ public class intakeWithODS extends Command {
     private final CarriageBelt carriageBelt;
     private final IntakeODS intakeODS;
     private final CarriageODS carriageODS;
-    private final LEDs leds;
+    private final ShooterLimelight shooterLL;
+    private final IntakeLimelight intakeLL;
 
-    public intakeWithODS(Intake intakeSS, CarriageBelt carriageSS, IntakeODS iODS, CarriageODS cODS, LEDs ledStrip){
+    private final Timer timer = new Timer();
+
+    public ODSIntake(Intake intakeSS, CarriageBelt carriageSS, IntakeODS iODS, CarriageODS cODS, ShooterLimelight LLShooter, IntakeLimelight LLIntake){
         intake = intakeSS;
         carriageBelt = carriageSS;
         intakeODS = iODS;
         carriageODS = cODS;
-        leds = ledStrip;
-        addRequirements(intake, carriageBelt, intakeODS, carriageODS, leds); 
+        shooterLL = LLShooter;
+        intakeLL = LLIntake;
+        addRequirements(intake, carriageBelt, intakeODS, carriageODS); 
     }
 
     public void initialize() {
         intake.setSpeed(0.5);
         carriageBelt.setSpeed(0.5);
+        timer.reset();
     }
 
     @Override
@@ -51,21 +57,27 @@ public class intakeWithODS extends Command {
         }
 
         if (noteLocation.equals("Carriage")){
-        leds.orangeWave();
-        leds.setLeds();
-        leds.UpdateLedMode("Orange Wave");
+        shooterLL.setLedMode(2);
+        intakeLL.setLedMode(2);
         intake.stop();
-        carriageBelt.stop();
+        carriageBelt.setSpeed(-0.5);
+        timer.start();
         }
         else if (noteLocation.equals("Intake")){
-        leds.setLedBufferByGroup(0, leds.getLedLength(), COLORS.GREEN);  
-        leds.setLeds();
-        leds.UpdateLedMode("Green");
+        shooterLL.setLedMode(3);
+        intakeLL.setLedMode(3);
         }
         else {
-        leds.setLedBufferByGroup(0, leds.getLedLength(), COLORS.WHITE);  
-        leds.setLeds();
-        leds.UpdateLedMode("White");
+        shooterLL.setLedMode(1);
+        intakeLL.setLedMode(1);
+        intake.runSpeed();
+        carriageBelt.setSpeed(0.5);
+        carriageBelt.runSpeed();
+        }
+
+        if(timer.get()>0.1){
+        timer.stop();
+        carriageBelt.stop();
         }
     }
 

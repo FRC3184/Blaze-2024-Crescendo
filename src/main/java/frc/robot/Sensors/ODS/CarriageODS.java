@@ -5,6 +5,6 @@ import frc.Mechanisms.sensorTypes.OpticalDistanceSensor;
 public class CarriageODS extends OpticalDistanceSensor {
 
     public CarriageODS() {
-        super(3, "Carriage");
+        super(3, 300, "Carriage");
     }
 }
