@@ -3,13 +3,14 @@
   "robotLength": 0.89,
   "holonomicMode": true,
   "pathFolders": [
-    "Close 4 Element Paths",
-    "Disruption Test",
-    "WaitPaths"
+    "Close 4 Note",
+    "Midline",
+    "WaitPaths",
+    "Path Disruption"
   ],
   "autoFolders": [
-    "Close 4 Element",
-    "WaitAutos"
+    "Close 4 Note",
+    "Wait Autos"
   ],
   "defaultMaxVel": 7.22,
   "defaultMaxAccel": 3.0,

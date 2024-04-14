@@ -16,4 +16,7 @@ public class ConstAuto {
   public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
       kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
+  //Testing path skipping
+  public static boolean skipNextPath = false;
+
 }

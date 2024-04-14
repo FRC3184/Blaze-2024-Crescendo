@@ -77,7 +77,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Midline",
   "previewStartingState": {
     "rotation": -12.5,
     "velocity": 0

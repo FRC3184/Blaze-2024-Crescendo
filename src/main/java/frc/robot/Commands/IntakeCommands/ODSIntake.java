@@ -7,6 +7,7 @@ import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
 import frc.robot.Sensors.ODS.CarriageODS;
 import frc.robot.Sensors.ODS.IntakeODS;
 import frc.robot.Subsystems.CarriageBelt;
+import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Intake;
 
 public class ODSIntake extends Command {
@@ -20,16 +21,18 @@ public class ODSIntake extends Command {
     private final CarriageODS carriageODS;
     private final ShooterLimelight shooterLL;
     private final IntakeLimelight intakeLL;
+    private final Elevator elevator;
 
     private final Timer timer = new Timer();
 
-    public ODSIntake(Intake intakeSS, CarriageBelt carriageSS, IntakeODS iODS, CarriageODS cODS, ShooterLimelight LLShooter, IntakeLimelight LLIntake){
+    public ODSIntake(Intake intakeSS, CarriageBelt carriageSS, IntakeODS iODS, CarriageODS cODS, ShooterLimelight LLShooter, IntakeLimelight LLIntake, Elevator elevatorSS){
         intake = intakeSS;
         carriageBelt = carriageSS;
         intakeODS = iODS;
         carriageODS = cODS;
         shooterLL = LLShooter;
         intakeLL = LLIntake;
+        elevator = elevatorSS;
         addRequirements(intake, carriageBelt, intakeODS, carriageODS); 
     }
 
@@ -77,9 +80,25 @@ public class ODSIntake extends Command {
         }
 
         if(timer.get()>0.25){
-        timer.stop();
+        // timer.stop();
         carriageBelt.stop();
         }
+
+        if(timer.get()<0.5){
+        shooterLL.setLedMode(2);
+        intakeLL.setLedMode(2);
+        }
+        else{
+        shooterLL.setLedMode(1);
+        intakeLL.setLedMode(1);
+        timer.stop();
+        }
+
+        if(elevator.getPosition()>30){
+        intake.stop();
+        carriageBelt.stop();
+        }
+        
     }
 
     @Override

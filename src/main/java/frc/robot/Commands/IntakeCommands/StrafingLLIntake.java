@@ -98,8 +98,18 @@ public class StrafingLLIntake extends Command {
         }
 
         if(timer.get()>0.25){
-        timer.stop();
+        // timer.stop();
         carriageBelt.stop();
+        }
+
+        if(timer.get()<0.5){
+        shooterLL.setLedMode(2);
+        intakeLL.setLedMode(2);
+        }
+        else{
+        shooterLL.setLedMode(1);
+        intakeLL.setLedMode(1);
+        timer.stop();
         }
 
         if (intakeLL.getV()==1){

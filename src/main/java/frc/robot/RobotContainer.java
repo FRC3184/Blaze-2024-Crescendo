@@ -50,6 +50,7 @@ import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Feeder;
 import frc.robot.Subsystems.ShooterPitch;
+import frc.robot.Commands.GetSkipPath;
 import frc.robot.Commands.TunePitch;
 import frc.robot.Commands.CarriageCommands.carriageBeltBackward;
 import frc.robot.Commands.CarriageCommands.carriageBeltForward;
@@ -159,35 +160,36 @@ public class RobotContainer {
    */
   public RobotContainer() {
     //Register named autonomous commands
-    // NamedCommands.registerCommand("Intake", new Intake(intake));
-    NamedCommands.registerCommand("IntakeOff", new fullIntakeOff(intake, carriage).withTimeout(0.0000000001));
+    NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
     NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(2));
     NamedCommands.registerCommand("ShootQuick", new shoot(shooterFlywheels, feeder, carriage).withTimeout(.25));
 
     NamedCommands.registerCommand("AutoShoot", new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
     NamedCommands.registerCommand("AutoShootTimeout", new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive).withTimeout(0.25));
 
-    NamedCommands.registerCommand("Intake", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL).withTimeout(0.3)); //originally 0.4
-    NamedCommands.registerCommand("LongIntake", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL).withTimeout(2));
-    NamedCommands.registerCommand("IntakeNoTimeout", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL).withTimeout(10));
-
-
-    NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
-    // NamedCommands.registerCommand("ShooterOff", new ShooterOff(shooter));
-    // NamedCommands.registerCommand("Feed", new FeedForward(feeder));
-    // NamedCommands.registerCommand("FeederOff", new FeederOff(feeder));
-    NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.35)); //originally 0.5
-    NamedCommands.registerCommand("Pitch40", new PitchCenter(shooterPitch));
-    NamedCommands.registerCommand("Pitch44", new PitchAmpSource(shooterPitch));
-    NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(2)); 
-
-    NamedCommands.registerCommand("pitchLowest", new pitchLowest(shooterPitch).withTimeout(1));
-    NamedCommands.registerCommand("BloopShot", new shooterBloop(shooterFlywheels, feeder));
-
     NamedCommands.registerCommand("FullPassthrough", new FullPassthrough(shooterFlywheels, feeder, carriage, intake));
     NamedCommands.registerCommand("FullPassthroughTimeout", new FullPassthrough(shooterFlywheels, feeder, carriage, intake).withTimeout(0.5));
 
     NamedCommands.registerCommand("FullLimelightIntake", new AutonomousNoteTrackingIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive).withTimeout(3));
+
+    NamedCommands.registerCommand("IntakeOff", new fullIntakeOff(intake, carriage).withTimeout(0.0000000001));
+    NamedCommands.registerCommand("Intake", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator).withTimeout(0.3)); //originally 0.4
+    NamedCommands.registerCommand("LongIntake", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator).withTimeout(2));
+    NamedCommands.registerCommand("IntakeNoTimeout", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
+
+    NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(2)); 
+    NamedCommands.registerCommand("pitchLowest", new pitchLowest(shooterPitch).withTimeout(1));
+    NamedCommands.registerCommand("Pitch40", new PitchCenter(shooterPitch));
+    NamedCommands.registerCommand("Pitch44", new PitchAmpSource(shooterPitch));
+
+    NamedCommands.registerCommand("GetSkipPath", new GetSkipPath());
+
+    //Unused
+    NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.35)); //originally 0.5
+    NamedCommands.registerCommand("BloopShot", new shooterBloop(shooterFlywheels, feeder));
+
+
+
 
 
     // TELEOP Setup
@@ -251,7 +253,7 @@ public class RobotContainer {
 
     // ***GUNNER CONTROLS***
     // // full intake & outtake
-    new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL));
+    new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
     new POVButton(gunnerController, 90).whileTrue(new intakeManual(intake, carriage));
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));

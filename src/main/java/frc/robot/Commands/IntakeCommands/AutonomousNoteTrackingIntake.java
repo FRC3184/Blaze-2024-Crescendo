@@ -10,6 +10,7 @@ import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
 import frc.robot.Sensors.ODS.CarriageODS;
 import frc.robot.Sensors.ODS.IntakeODS;
+import frc.robot.SubmoduleSubsystemConstants.ConstAuto;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.GamePieceAlignmentConstants;
 
 /**
@@ -57,6 +58,7 @@ public class AutonomousNoteTrackingIntake extends Command {
 
   @Override
   public void initialize() {
+    ConstAuto.skipNextPath = false;
     notePassedIntake = false;
     intake.setSpeed(0.5);
     carriageBelt.setSpeed(0.5);
@@ -75,13 +77,16 @@ public class AutonomousNoteTrackingIntake extends Command {
     xError = xTarget - NoteX;
 
     if(intakeLL.getV()==1 && Math.abs(xError)<xTolerance){
+    ConstAuto.skipNextPath = false;
     intake.runSpeed();
     carriageBelt.runSpeed();
     robotDrive.drive(XPower, YPower, 0, false, true);
     } else if(intakeLL.getV()==1){
+    ConstAuto.skipNextPath = false;
     robotDrive.drive(XPower, 0, 0, false, true);
     }
     else {
+      ConstAuto.skipNextPath = true;
       end(true);
     }
 
@@ -119,9 +124,18 @@ public class AutonomousNoteTrackingIntake extends Command {
     carriageBelt.runSpeed();
     }
 
-    if(timer.get()>0.1){
-    timer.stop();
-    carriageBelt.stop();
+    if(timer.get()>0.25){
+      // timer.stop();
+      carriageBelt.stop();
+    }
+
+    if(timer.get()<0.5){
+      shooterLL.setLedMode(2);
+      intakeLL.setLedMode(2);
+    } else {
+      shooterLL.setLedMode(1);
+      intakeLL.setLedMode(1);
+      timer.stop();
     }
 
   }

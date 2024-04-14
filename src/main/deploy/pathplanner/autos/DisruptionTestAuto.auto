@@ -12,9 +12,16 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "DisruptionPath1"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "DisruptionPath1"
+                }
+              }
+            ]
           }
         },
         {
@@ -24,9 +31,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "DisruptionPath2"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "DisruptionPath2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "GetSkipPath"
+                }
+              }
+            ]
           }
         },
         {
@@ -36,9 +56,54 @@
           }
         },
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "DisruptionPath3"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "DisruptionPath3"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FullLimelightIntake"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "DisruptionPath4"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FullLimelightIntake"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "DisruptionPath5"
+                }
+              }
+            ]
           }
         }
       ]

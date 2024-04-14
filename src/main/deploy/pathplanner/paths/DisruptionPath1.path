@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5588997188727838,
-        "y": 6.461700222148208
+        "x": 1.702819405638812,
+        "y": 6.406183098080483
       },
       "isLocked": false,
       "linkedName": "StartCenter"
     },
     {
       "anchor": {
-        "x": 1.7351279067495533,
-        "y": 7.225355702947542
+        "x": 1.8933923582132883,
+        "y": 7.007220871584601
       },
       "prevControl": {
-        "x": 1.602956765841976,
-        "y": 6.667299774671107
+        "x": 1.7614572372001893,
+        "y": 6.596756050654959
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Disruption Test",
+  "folder": "Path Disruption",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0
