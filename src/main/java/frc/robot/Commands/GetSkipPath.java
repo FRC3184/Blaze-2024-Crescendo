@@ -24,7 +24,7 @@ public class GetSkipPath extends Command{
 
     @Override
     public void end(boolean interrupted){
-
+        ConstAuto.skipNextPath = false;
     }
 
     private void doNothing(){
