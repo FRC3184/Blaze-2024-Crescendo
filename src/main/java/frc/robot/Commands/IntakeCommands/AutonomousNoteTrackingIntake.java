@@ -25,6 +25,7 @@ public class AutonomousNoteTrackingIntake extends Command {
   private final IntakeLimelight intakeLL;
   private final DriveSubsystemSwerve robotDrive;
   private final Timer timer = new Timer();
+  private final Timer endTimer = new Timer();
   private double XPower;
   private double YPower;
   private PIDController XController;
@@ -60,10 +61,17 @@ public class AutonomousNoteTrackingIntake extends Command {
   public void initialize() {
     ConstAuto.skipNextPath = false;
     notePassedIntake = false;
+    timer.reset();
+    endTimer.reset();
     intake.setSpeed(0.5);
     carriageBelt.setSpeed(0.5);
     XController.setSetpoint(xTarget);
     YController.setSetpoint(yTarget);
+
+    if(intakeLL.getV()!=1){
+      ConstAuto.skipNextPath = true;
+      end(true);
+    }
   }
 
   @Override
@@ -86,8 +94,7 @@ public class AutonomousNoteTrackingIntake extends Command {
     robotDrive.drive(XPower, 0, 0, false, true);
     }
     else {
-      ConstAuto.skipNextPath = true;
-      end(true);
+      endTimer.start();
     }
 
     if((intakeODS.getSightStatus()&&carriageODS.getSightStatus())||carriageODS.getSightStatus()){
@@ -136,6 +143,14 @@ public class AutonomousNoteTrackingIntake extends Command {
       shooterLL.setLedMode(1);
       intakeLL.setLedMode(1);
       timer.stop();
+    }
+
+    if(endTimer.get()>0.75){
+      endTimer.stop();
+      endTimer.reset();
+      intake.stop();
+      carriageBelt.stop();
+      end(true);
     }
 
   }
