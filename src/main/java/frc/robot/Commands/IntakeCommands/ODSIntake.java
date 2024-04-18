@@ -1,5 +1,6 @@
 package frc.robot.Commands.IntakeCommands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Sensors.BackLimelight.ShooterLimelight;
@@ -81,7 +82,9 @@ public class ODSIntake extends Command {
 
         if(timer.get()>0.25){
         // timer.stop();
+        DriverStation.reportWarning("timer stop carriage", true);
         carriageBelt.stop();
+        intake.stop();
         }
 
         if(timer.get()<0.5){
@@ -103,6 +106,9 @@ public class ODSIntake extends Command {
 
     @Override
     public void end(boolean interrupted) {
+        if (interrupted) {
+            DriverStation.reportWarning("odsintake interrupted", true);
+        }
         intake.stop();
         carriageBelt.stop();
     }

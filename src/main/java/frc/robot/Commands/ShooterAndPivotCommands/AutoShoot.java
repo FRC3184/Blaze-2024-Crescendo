@@ -73,7 +73,7 @@ public class AutoShoot extends Command {
           }
     
 
-        if(Math.abs(pitchError)<pitchTolerance && Math.abs(thetaError)<thetaTolerance && flywheels.atSpeed()){
+        if(shooterLL.getV() == 1 && Math.abs(pitchError)<pitchTolerance && Math.abs(thetaError)<thetaTolerance && flywheels.atSpeed()){
             feeder.setSpeed(-0.5);
             feeder.runSpeed();
             carriage.setSpeed(0.5);

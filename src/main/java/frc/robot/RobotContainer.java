@@ -257,7 +257,7 @@ public class RobotContainer {
     // // full intake & outtake
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
     new JoystickButton(gunnerController, Button.kRightBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
-    new POVButton(gunnerController, 90).whileTrue(new intakeManual(intake, carriage));
+    new POVButton(gunnerController, 90).whileTrue(new intakeManual(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL));
     new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));
     // // shooter & carriage
     new JoystickButton(gunnerController, Button.kX.value).whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
