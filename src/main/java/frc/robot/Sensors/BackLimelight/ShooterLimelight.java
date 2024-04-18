@@ -8,10 +8,12 @@ public class ShooterLimelight extends Limelight {
 
     public ShooterLimelight () {
         super("limelight-shooter", "Shooter Limelight");
-        if(DriverStation.getAlliance().get() == Alliance.Red){
+
+        Alliance currentAlliance = DriverStation.getAlliance().orElse(Alliance.Red);
+        if(currentAlliance == Alliance.Red) {
             setPriorityID(4);
         }
-        else if(DriverStation.getAlliance().get() == Alliance.Blue){
+        else {
             setPriorityID(7);
         }
     }
