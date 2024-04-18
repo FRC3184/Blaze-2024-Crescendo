@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.102308542645255,
-        "y": 6.681985456994171
+        "x": 4.686950053685439,
+        "y": 6.549814316086593
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.056205661707098,
-        "y": 5.419869994669567
+        "x": 5.640847172747282,
+        "y": 5.28769885376199
       },
       "isLocked": false,
       "linkedName": "ShootMid1"
@@ -122,7 +122,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 7.22,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 180.0
   },

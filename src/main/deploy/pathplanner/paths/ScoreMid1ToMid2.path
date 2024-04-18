@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.102308542645255,
-        "y": 6.681985456994171
+        "x": 4.686950053685439,
+        "y": 6.549814316086593
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.926128781835028,
-        "y": 5.853459594243133
+        "x": 7.580029471329069,
+        "y": 6.520442951440464
       },
       "isLocked": false,
       "linkedName": "ShootMid1"
@@ -54,25 +54,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "FullPassthrough",
-      "waypointRelativePos": 0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "FullPassthrough"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
       "name": "Intake & Spin Up",
-      "waypointRelativePos": 0.45,
+      "waypointRelativePos": 0.6,
       "command": {
         "type": "parallel",
         "data": {
@@ -92,11 +75,34 @@
           ]
         }
       }
+    },
+    {
+      "name": "IntOff",
+      "waypointRelativePos": 1.45,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "IntakeOff"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "SpinUpShooter"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 7.22,
-    "maxAcceleration": 3.0,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 360.0,
     "maxAngularAcceleration": 180.0
   },

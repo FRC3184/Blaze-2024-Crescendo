@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.fasterxml.jackson.databind.util.Named;
 // General Imports
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -82,6 +83,7 @@ import frc.robot.Commands.IntakeCommands.outtake;
 import frc.robot.Commands.SensorAndLEDCommands.LEDsOrange;
 import frc.robot.Commands.SensorAndLEDCommands.LEDsWhite;
 import frc.robot.Commands.SensorAndLEDCommands.locateNoteInRobot;
+import frc.robot.Commands.ShooterAndPivotCommands.AutoPivotOnly;
 import frc.robot.Commands.ShooterAndPivotCommands.AutoShoot;
 import frc.robot.Commands.ShooterAndPivotCommands.FullPassthrough;
 import frc.robot.Commands.ShooterAndPivotCommands.PitchHoldPosition;
@@ -181,6 +183,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("pitchLowest", new pitchLowest(shooterPitch).withTimeout(1));
     NamedCommands.registerCommand("Pitch40", new PitchCenter(shooterPitch));
     NamedCommands.registerCommand("Pitch44", new PitchAmpSource(shooterPitch));
+    NamedCommands.registerCommand("AutoShootPitchOnly", new AutoPivotOnly(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL));
+    NamedCommands.registerCommand("AutoShootPitchOnlyTimeout", new AutoPivotOnly(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL).withTimeout(0.4));
+
 
     NamedCommands.registerCommand("GetSkipPath", new GetSkipPath());
 
@@ -218,9 +223,6 @@ public class RobotContainer {
     carriageODS.setDefaultCommand(new locateNoteInRobot(intakeODS, carriageODS, shooterLL, intakeLL));
 
     shooterPitch.setDefaultCommand(new pitchSubwoofer(shooterPitch));
-
-    // shooterPitch.setDefaultCommand(new TunePitch(shooterPitch));
-    // shooterPitch.setDefaultCommand(new PitchCenter(shooterPitch));
     }
 
   private void configureBindings() {

@@ -11,10 +11,10 @@ import frc.robot.Subsystems.ShooterPitch;
 public class AutoPivotOnly extends Command {
     
     ShooterPitch pitch;
-    ShooterLimelight shooterLL;
     ShooterFlywheels flywheels;
     Feeder feeder;
     CarriageBelt carriage;
+    ShooterLimelight shooterLL;
     double pitchError;
 
 

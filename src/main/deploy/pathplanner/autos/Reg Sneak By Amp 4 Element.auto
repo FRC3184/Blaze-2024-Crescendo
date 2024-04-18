@@ -20,7 +20,7 @@
         {
           "type": "named",
           "data": {
-            "name": "FullPassthroughTimeout"
+            "name": "AutoShootPitchOnlyTimeout"
           }
         },
         {
@@ -30,21 +30,33 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "AutoShootPitchOnlyTimeout"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "GetMid2"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "GetMid3"
+            "name": "AutoShootPitchOnlyTimeout"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "GetMid4"
+            "pathName": "ScoreMid1ToMid2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShootPitchOnlyTimeout"
           }
         }
       ]

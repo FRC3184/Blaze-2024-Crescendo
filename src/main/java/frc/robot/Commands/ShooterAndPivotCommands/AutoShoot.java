@@ -33,7 +33,7 @@ public class AutoShoot extends Command {
     private PIDController thetaController;
     private double target = Limelight.alignmentConstants.Aligned;
     private double pitchTolerance = 0.02;
-    private double thetaTolerance = 5;
+    private double thetaTolerance = 7.5;
 
 
     public AutoShoot(ShooterPitch shooterPitch, ShooterFlywheels shooterFlywheels, Feeder feederSS, CarriageBelt belt, ShooterLimelight LLShooter, DriveSubsystemSwerve driveSS){
