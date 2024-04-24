@@ -16,11 +16,11 @@
     },
     {
       "anchor": {
-        "x": 2.4987833875488867,
+        "x": 2.55,
         "y": 6.814156597901747
       },
       "prevControl": {
-        "x": 1.7791849537187454,
+        "x": 1.8304015661698585,
         "y": 6.520442951440464
       },
       "nextControl": null,
@@ -67,7 +67,7 @@
     "rotateFast": true
   },
   "reversed": false,
-  "folder": "Close 4 Note",
+  "folder": "Close 4 Note & 5 Note",
   "previewStartingState": {
     "rotation": 58.73626830562253,
     "velocity": 0

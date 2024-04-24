@@ -2,6 +2,7 @@ package frc.robot.Commands.ShooterAndPivotCommands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.Mechanisms.sensorTypes.Limelight;
@@ -35,6 +36,8 @@ public class AutoShoot extends Command {
     private double pitchTolerance = 0.02;
     private double thetaTolerance = 7.5;
 
+    private final Timer feederTimer = new Timer();
+
 
     public AutoShoot(ShooterPitch shooterPitch, ShooterFlywheels shooterFlywheels, Feeder feederSS, CarriageBelt belt, ShooterLimelight LLShooter, DriveSubsystemSwerve driveSS){
         pitch = shooterPitch;
@@ -51,6 +54,8 @@ public class AutoShoot extends Command {
 
     public void initialize(){
         thetaController.setSetpoint(target);
+        feederTimer.reset();
+        ConstShooter.NoteInRobot = false;
     }
 
     public void execute(){
@@ -67,7 +72,10 @@ public class AutoShoot extends Command {
           -MathUtil.applyDeadband(driverController.getLeftX(), ConstJoysticks.kDriveDeadband),
           thetaPower, true, true);
           pitch.seekPosition(shooterLL.getPredictedPivot());
+          feederTimer.start();
           } else {
+            feederTimer.stop();
+            feederTimer.reset();
             robotDrive.drive(-MathUtil.applyDeadband(driverController.getLeftY(), ConstJoysticks.kDriveDeadband), -MathUtil.applyDeadband(driverController.getLeftX(), ConstJoysticks.kDriveDeadband), -MathUtil.applyDeadband(driverController.getRightX(), ConstJoysticks.kDriveDeadband), ConstMaxSwerveDrive.DriveConstants.kFieldCentric, true);
             pitch.seekPosition(ConstShooter.upperLimit);
           }
@@ -81,6 +89,13 @@ public class AutoShoot extends Command {
         } else {
             feeder.stop();
             carriage.stop();
+        }
+
+        if(feederTimer.get()>3){
+            feeder.setSpeed(-0.5);
+            feeder.runSpeed();
+            carriage.setSpeed(0.5);
+            carriage.runSpeed();
         }
     }
 

@@ -2,6 +2,7 @@ package frc.robot.Commands.ElevatorCommands;
 
 import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
 import frc.robot.SubmoduleSubsystemConstants.ConstElevator;
+import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Elevator;
 
@@ -16,6 +17,7 @@ public class elevatorUpManual extends Command {
     }
 
     public void initialize() {
+        ConstShooter.NoteInRobot = false;
     }
 
     @Override

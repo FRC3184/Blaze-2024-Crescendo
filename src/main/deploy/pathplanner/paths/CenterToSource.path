@@ -16,11 +16,11 @@
     },
     {
       "anchor": {
-        "x": 2.4987833875488867,
+        "x": 2.55,
         "y": 4.3029049206577845
       },
       "prevControl": {
-        "x": 1.852613365334066,
+        "x": 1.903829977785179,
         "y": 4.581932884796002
       },
       "nextControl": null,
@@ -47,7 +47,7 @@
             {
               "type": "named",
               "data": {
-                "name": "Pitch44"
+                "name": "PitchAmp"
               }
             }
           ]
@@ -67,7 +67,7 @@
     "rotateFast": true
   },
   "reversed": false,
-  "folder": "Close 4 Note",
+  "folder": "Close 4 Note & 5 Note",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

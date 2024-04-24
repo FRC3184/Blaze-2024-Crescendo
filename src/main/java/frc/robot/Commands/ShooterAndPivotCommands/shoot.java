@@ -31,6 +31,7 @@ public class shoot extends Command {
 
     @Override
     public void execute() {
+        ConstShooter.NoteInRobot = false;
         flywheels.setTargetVelocity(ConstShooter.defVelocity);
         flywheels.runVelocity();
         if(flywheels.atSpeed()){

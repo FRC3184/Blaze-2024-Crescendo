@@ -49,20 +49,20 @@ public class locateNoteInRobot extends Command {
 
         // Change the LEDs based on note posession
         if (noteLocation.equals("Carriage")){
-        shooterLL.setLedMode(2);
-        intakeLL.setLedMode(2);
+        // shooterLL.setLedMode(2);
+        // intakeLL.setLedMode(2);
         timer.start();
         }
         else if (noteLocation.equals("Intake")){
-        shooterLL.setLedMode(3);
-        intakeLL.setLedMode(3);
+        // shooterLL.setLedMode(3);
+        // intakeLL.setLedMode(3);
         }
         else {
-        shooterLL.setLedMode(1);
-        intakeLL.setLedMode(1);
+        // shooterLL.setLedMode(1);
+        // intakeLL.setLedMode(1);
         }
 
-        if(timer.get()>1){
+        if(timer.get()>0.5){
             shooterLL.setLedMode(1);
             intakeLL.setLedMode(1);
         }

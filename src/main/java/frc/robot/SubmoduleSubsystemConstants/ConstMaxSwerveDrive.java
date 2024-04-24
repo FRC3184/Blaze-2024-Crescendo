@@ -24,14 +24,14 @@ public final class ConstMaxSwerveDrive {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 6.77;
+    public static final double kMaxSpeedMetersPerSecond = 7.22;
     public static final double kMaxDefaultMPS = 4.8;
     public static final double kMaxSlowMPS = 2;
     public static final double kMaxGrannyMPS = 0.4;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
-    public static final double kDirectionSlewRate = 3.0; // radians per second
-    public static final double kMagnitudeSlewRate = 4.0; // percent per second (1 = 100%)
+    public static final double kDirectionSlewRate = 3 * Math.PI; // radians per second
+    public static final double kMagnitudeSlewRate = 8; // percent per second (1 = 100%)
     public static final double kRotationalSlewRate = 12.0; // percent per second (1 = 100%)
 
     // Chassis configuration

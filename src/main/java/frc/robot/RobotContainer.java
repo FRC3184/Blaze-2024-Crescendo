@@ -74,7 +74,7 @@ import frc.robot.Commands.IntakeCommands.fullIntakeOff;
 import frc.robot.Commands.IntakeCommands.AutonomousNoteTrackingIntake;
 import frc.robot.Commands.IntakeCommands.ODSIntake;
 import frc.robot.Commands.IntakeCommands.RotatingLLIntake;
-import frc.robot.Commands.IntakeCommands.StrafingLLIntake;
+import frc.robot.Commands.IntakeCommands.StrafingNoteAlignment;
 import frc.robot.Commands.IntakeCommands.intakeBackward;
 import frc.robot.Commands.IntakeCommands.intakeForward;
 import frc.robot.Commands.IntakeCommands.intakeManual;
@@ -87,6 +87,7 @@ import frc.robot.Commands.ShooterAndPivotCommands.AutoPivotOnly;
 import frc.robot.Commands.ShooterAndPivotCommands.AutoShoot;
 import frc.robot.Commands.ShooterAndPivotCommands.FullPassthrough;
 import frc.robot.Commands.ShooterAndPivotCommands.PitchHoldPosition;
+import frc.robot.Commands.ShooterAndPivotCommands.ShooterIdle;
 import frc.robot.Commands.ShooterAndPivotCommands.feederBackward;
 import frc.robot.Commands.ShooterAndPivotCommands.feederForward;
 import frc.robot.Commands.ShooterAndPivotCommands.feederOff;
@@ -101,8 +102,9 @@ import frc.robot.Commands.ShooterAndPivotCommands.shooterPitchDown;
 import frc.robot.Commands.ShooterAndPivotCommands.shooterPitchOff;
 import frc.robot.Commands.ShooterAndPivotCommands.shooterPitchUp;
 import frc.robot.Commands.ShooterAndPivotCommands.spinUpFlywheels;
+import frc.robot.Commands.ShooterAndPivotCommands.MiamiValleyPivot.PitchAmp;
 import frc.robot.Commands.ShooterAndPivotCommands.MiamiValleyPivot.PitchCenter;
-import frc.robot.Commands.ShooterAndPivotCommands.MiamiValleyPivot.PitchAmpSource;
+import frc.robot.Commands.ShooterAndPivotCommands.MiamiValleyPivot.PitchSource;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstProperties;
 /**
@@ -130,9 +132,9 @@ public class RobotContainer {
   private final ShooterLimelight shooterLL = new ShooterLimelight();
   private final IntakeLimelight intakeLL = new IntakeLimelight();
   // Joystick Controller (I/O)
-  XboxController driverController = new XboxController(ConstJoysticks.kDriverControllerPort);
-  XboxController gunnerController = new XboxController(ConstJoysticks.kGunnerControllerPort);
-  XboxController testingController = new XboxController(2);
+  CommandXboxController driverController = new CommandXboxController(ConstJoysticks.kDriverControllerPort);
+  CommandXboxController gunnerController = new CommandXboxController(ConstJoysticks.kGunnerControllerPort);
+  // XboxController testingController = new XboxController(2);
 
   // Autonomous Chooser
   private ShuffleboardTab sbCompTab = Shuffleboard.getTab(ConstProperties.CompDashboard.COMPDASHNAME_STRING);
@@ -175,14 +177,16 @@ public class RobotContainer {
     NamedCommands.registerCommand("FullLimelightIntake", new AutonomousNoteTrackingIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive).withTimeout(3));
 
     NamedCommands.registerCommand("IntakeOff", new fullIntakeOff(intake, carriage).withTimeout(0.0000000001));
-    NamedCommands.registerCommand("Intake", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator).withTimeout(0.3)); //originally 0.4
+    NamedCommands.registerCommand("Intake", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
     NamedCommands.registerCommand("LongIntake", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator).withTimeout(2));
     NamedCommands.registerCommand("IntakeNoTimeout", new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
+    NamedCommands.registerCommand("ManualIntake", new intakeManual(intake, carriage));
 
     NamedCommands.registerCommand("PitchSubwoofer", new pitchSubwoofer(shooterPitch).withTimeout(2)); 
     NamedCommands.registerCommand("pitchLowest", new pitchLowest(shooterPitch).withTimeout(1));
     NamedCommands.registerCommand("Pitch40", new PitchCenter(shooterPitch));
-    NamedCommands.registerCommand("Pitch44", new PitchAmpSource(shooterPitch));
+    NamedCommands.registerCommand("Pitch44", new PitchSource(shooterPitch));
+    NamedCommands.registerCommand("PitchAmp", new PitchAmp(shooterPitch));
     NamedCommands.registerCommand("AutoShootPitchOnly", new AutoPivotOnly(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL));
     NamedCommands.registerCommand("AutoShootPitchOnlyTimeout", new AutoPivotOnly(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL).withTimeout(0.4));
 
@@ -191,7 +195,7 @@ public class RobotContainer {
 
     //Unused
     NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.35)); //originally 0.5
-    NamedCommands.registerCommand("BloopShot", new shooterBloop(shooterFlywheels, feeder));
+    NamedCommands.registerCommand("BloopShot", new shooterBloop(shooterFlywheels, shooterPitch, feeder, carriage));
 
 
 
@@ -223,60 +227,91 @@ public class RobotContainer {
     carriageODS.setDefaultCommand(new locateNoteInRobot(intakeODS, carriageODS, shooterLL, intakeLL));
 
     shooterPitch.setDefaultCommand(new pitchSubwoofer(shooterPitch));
+
+    shooterFlywheels.setDefaultCommand(new ShooterIdle(shooterFlywheels));
     }
 
   private void configureBindings() {
 
     // ***DRIVER CONTROLS***
     // Reset heading
-    new JoystickButton(driverController, Button.kBack.value).whileTrue(new RunCommand(() -> robotDrive.zeroHeading()));
+    driverController.back().whileTrue(new RunCommand(() -> robotDrive.zeroHeading()));
     // Set drivetrain into brakeing configuration
-    new JoystickButton(driverController, Button.kStart.value).whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
+    driverController.start().whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
     // Cardinal Direction Buttons
-    new JoystickButton(driverController, Button.kY.value).whileTrue(new FaceForward(robotDrive));
-    new JoystickButton(driverController, Button.kX.value).whileTrue(new FaceLeft(robotDrive));
-    new JoystickButton(driverController, Button.kB.value).whileTrue(new FaceRight(robotDrive));
-    new JoystickButton(driverController, Button.kA.value).whileTrue(new FaceBackwards(robotDrive)); 
+    driverController.y().whileTrue(new FaceForward(robotDrive));
+    driverController.x().whileTrue(new FaceLeft(robotDrive));
+    driverController.b().whileTrue(new FaceRight(robotDrive));
+    driverController.a().whileTrue(new FaceBackwards(robotDrive)); 
     // Set speed modes
-    new JoystickButton(driverController, Button.kLeftBumper.value).onTrue(new SetSlowMode(robotDrive));
-    new JoystickButton(driverController, Button.kRightBumper.value).onFalse(new SetNormalMode(robotDrive));
-    new JoystickButton(driverController, Button.kRightBumper.value).onTrue(new SetFastMode(robotDrive));
-    new JoystickButton(driverController, Button.kLeftBumper.value).onFalse(new SetNormalMode(robotDrive));
+    driverController.leftBumper().onTrue(new SetSlowMode(robotDrive));
+    driverController.rightBumper().onFalse(new SetNormalMode(robotDrive));
+    driverController.rightBumper().onTrue(new SetFastMode(robotDrive));
+    driverController.leftBumper().onFalse(new SetNormalMode(robotDrive));
     // Field Centric vs. Robot Centric
-    new POVButton(driverController, 90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
+    driverController.pov(90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
     // Carriage Belt Backwards
-    new POVButton(driverController, 0).whileTrue(new carriageBeltBackward(carriage));
+    driverController.pov(0).whileTrue(new carriageBeltBackward(carriage));
     // Ring alignment
-    new JoystickButton(driverController, Button.kLeftStick.value).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-    new JoystickButton(driverController, driverRTPressed()).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-    new JoystickButton(driverController, driverRTPressed()).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    // driverController.leftTrigger().whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    // new JoystickButton(driverController, driverLTPressed()).whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
+    // new JoystickButton(driverController, Button.kLeftStick.value).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    // new JoystickButton(driverController, driverRTPressed()).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    // new JoystickButton(driverController, driverRTPressed()).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    // Bloop Shot
+    driverController.leftTrigger().whileTrue(new shooterBloop(shooterFlywheels, shooterPitch, feeder, carriage));
+    driverController.rightTrigger().onTrue(new pitchLowest(shooterPitch));
 
 
 
     // ***GUNNER CONTROLS***
-    // // full intake & outtake
-    new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
-    new JoystickButton(gunnerController, Button.kRightBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
-    new POVButton(gunnerController, 90).whileTrue(new intakeManual(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL));
-    new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));
+     // full intake & outtake
+    gunnerController.rightBumper().whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
+    gunnerController.rightBumper().whileFalse(new fullIntakeOff(intake, carriage));
+    gunnerController.pov(90).whileTrue(new intakeManual(intake, carriage));
+    gunnerController.leftBumper().whileTrue(new outtake(intake, carriage));
     // // shooter & carriage
-    new JoystickButton(gunnerController, Button.kX.value).whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
-    new POVButton(gunnerController, 270).whileTrue(new spinUpFlywheels(shooterFlywheels));
-    new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
-    new JoystickButton(gunnerController, Button.kB.value).onTrue(new pitchSubwoofer(shooterPitch));
-    new JoystickButton(gunnerController, Button.kBack.value).onTrue(new pitchLowest(shooterPitch));
+    gunnerController.x().whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
+    gunnerController.pov(270).whileTrue(new spinUpFlywheels(shooterFlywheels));
+    gunnerController.b().whileTrue(new shoot(shooterFlywheels, feeder, carriage));
+    gunnerController.start().onTrue(new pitchSubwoofer(shooterPitch));
+    gunnerController.back().onTrue(new pitchLowest(shooterPitch));
     // // climber
-    new POVButton(gunnerController, 180).whileTrue(new climbUpRight(climber, rightDownSwitch)); //Need to reverse names. Right = Left
-    new POVButton(gunnerController, 0).whileTrue(new climbDownRight(climber)); //And Left = Right Currently
-    new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpLeft(climber, leftDownSwitch));
-    new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbDownLeft(climber));
+    gunnerController.pov(180).whileTrue(new climbUpRight(climber, rightDownSwitch)); //Need to reverse names. Right = Left
+    gunnerController.pov(0).whileTrue(new climbDownRight(climber)); //And Left = Right Currently
+    gunnerController.a().whileTrue(new climbUpLeft(climber, leftDownSwitch));
+    gunnerController.y().whileTrue(new climbDownLeft(climber));
     // // elevator
-    new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUpManual(elevator, intakeLL));
-    new JoystickButton(gunnerController, Button.kLeftStick.value).whileFalse(new elevatorHoldPosition(elevator, intakeLL));
-    new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDownManual(elevator, intakeLL));
-    new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorHoldPosition(elevator, intakeLL));
+    gunnerController.leftStick().whileTrue(new elevatorUpManual(elevator, intakeLL));
+    gunnerController.leftStick().whileFalse(new elevatorHoldPosition(elevator, intakeLL));
+    gunnerController.rightStick().whileTrue(new elevatorDownManual(elevator, intakeLL));
+    gunnerController.rightStick().whileFalse(new elevatorHoldPosition(elevator, intakeLL));
 
 
+    // CHAMPS
+    // // full intake & outtake
+    // new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
+    // new JoystickButton(gunnerController, Button.kRightBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
+    // new POVButton(gunnerController, 90).whileTrue(new intakeManual(intake, carriage));
+    // new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));
+    // // // shooter & carriage
+    // new JoystickButton(gunnerController, Button.kX.value).whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
+    // new POVButton(gunnerController, 270).whileTrue(new spinUpFlywheels(shooterFlywheels));
+    // new JoystickButton(gunnerController, Button.kB.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
+    // new JoystickButton(gunnerController, Button.kStart.value).onTrue(new pitchSubwoofer(shooterPitch));
+    // new JoystickButton(gunnerController, Button.kBack.value).onTrue(new pitchLowest(shooterPitch));
+    // // // climber
+    // new POVButton(gunnerController, 180).whileTrue(new climbUpRight(climber, rightDownSwitch)); //Need to reverse names. Right = Left
+    // new POVButton(gunnerController, 0).whileTrue(new climbDownRight(climber)); //And Left = Right Currently
+    // new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpLeft(climber, leftDownSwitch));
+    // new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbDownLeft(climber));
+    // // // elevator
+    // new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUpManual(elevator, intakeLL));
+    // new JoystickButton(gunnerController, Button.kLeftStick.value).whileFalse(new elevatorHoldPosition(elevator, intakeLL));
+    // new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDownManual(elevator, intakeLL));
+    // new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorHoldPosition(elevator, intakeLL));
+
+    // NOT USED AT CHAMPS
     // new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new FeedAndShoot(shooter, feeder));
     // new JoystickButton(gunnerController, Button.kStart.value).onFalse(new ShooterOff(shooter));
 
@@ -288,27 +323,18 @@ public class RobotContainer {
     
     // *** TESTING CONTROLS ***
     // shooter pitch 
-    new JoystickButton(testingController, Button.kBack.value).whileTrue(new shooterPitchUp(shooterPitch));
-    new JoystickButton(testingController, Button.kBack.value).whileFalse(new shooterPitchOff(shooterPitch));
-    new JoystickButton(testingController, Button.kBack.value).whileFalse(new PitchHoldPosition(shooterPitch));
+    // new JoystickButton(testingController, Button.kBack.value).whileTrue(new shooterPitchUp(shooterPitch));
+    // new JoystickButton(testingController, Button.kBack.value).whileFalse(new shooterPitchOff(shooterPitch));
+    // new JoystickButton(testingController, Button.kBack.value).whileFalse(new PitchHoldPosition(shooterPitch));
 
-    new JoystickButton(testingController, Button.kStart.value).whileTrue(new shooterPitchDown(shooterPitch));
-    new JoystickButton(testingController, Button.kStart.value).whileFalse(new shooterPitchOff(shooterPitch));
-    new JoystickButton(testingController, Button.kStart.value).whileFalse(new PitchHoldPosition(shooterPitch));
+    // new JoystickButton(testingController, Button.kStart.value).whileTrue(new shooterPitchDown(shooterPitch));
+    // new JoystickButton(testingController, Button.kStart.value).whileFalse(new shooterPitchOff(shooterPitch));
+    // new JoystickButton(testingController, Button.kStart.value).whileFalse(new PitchHoldPosition(shooterPitch));
 
-    new JoystickButton(testingController, Button.kX.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
-    new JoystickButton(testingController, Button.kRightBumper.value).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-    new JoystickButton(testingController, Button.kY.value).whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
-    new JoystickButton(testingController, Button.kLeftBumper.value).whileTrue(new RotatingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-  }
-
-
-  public int driverLTPressed() {
-    return (Math.abs(driverController.getLeftTriggerAxis()) > 0.3) ? 1 : 0;
-  }
-
-  public int driverRTPressed() {
-    return (Math.abs(driverController.getRawAxis(2)) > 0.3) ? 1 : 0;
+    // new JoystickButton(testingController, Button.kX.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
+    // new JoystickButton(testingController, Button.kRightBumper.value).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
+    // new JoystickButton(testingController, Button.kY.value).whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
+    // new JoystickButton(testingController, Button.kLeftBumper.value).whileTrue(new RotatingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
   }
 
   /**
@@ -321,6 +347,7 @@ public class RobotContainer {
     return autoChooserPathPlan.getSelected();
   }
   void smartDashboardOut(){
-    SmartDashboard.putNumber("Driver RT", driverRTPressed());
+    SmartDashboard.putNumber("getRightTriggerAxis", driverController.getRightTriggerAxis());
+    SmartDashboard.putNumber("raw Driver RT", driverController.getRawAxis(2)); 
   }
 }

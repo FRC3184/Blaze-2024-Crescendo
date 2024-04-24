@@ -33,6 +33,7 @@ public class AutoPivotOnly extends Command {
         flywheels.setTargetVelocity(ConstShooter.defVelocity);
         feeder.setSpeed(-0.5);
         carriage.setSpeed(0.5);
+        ConstShooter.NoteInRobot = false;
     }
 
     public void execute(){
