@@ -14,36 +14,36 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Sneak By Amp Shoot"
+            "pathName": "AmpCornerStatic1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Mid1 after shoot"
+            "pathName": "AmpStatic2"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "GetMid2"
+            "pathName": "AmpCornerStatic3"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "GetMid3"
+            "pathName": "AmpStatic4"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "GetMid4"
+            "pathName": "AmpStatic5"
           }
         }
       ]
     }
   },
-  "folder": "Non-Dynamic",
+  "folder": "Advanced Static",
   "choreoAuto": false
 }

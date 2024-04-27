@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.77,
-      "y": 6.68
+      "x": 1.4120428956421427,
+      "y": 1.6301107378601165
     },
-    "rotation": 60.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -14,18 +14,24 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartAmpScoreMid1"
+            "pathName": "StartCloseToSourceToMid5"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "ScoreMid1ToMid2"
+            "pathName": "Mid5Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ShootMid5Mid4"
           }
         }
       ]
     }
   },
-  "folder": "Non-Dynamic",
+  "folder": "Dynamic",
   "choreoAuto": false
 }

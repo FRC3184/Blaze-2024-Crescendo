@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.35,
-        "y": 5.55
+        "x": 7.991228576374863,
+        "y": 7.357526843855119
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.35,
-        "y": 5.55
+        "x": 7.749949021024803,
+        "y": 6.836262686609881
       },
       "isLocked": false,
-      "linkedName": "disruption4"
+      "linkedName": "AmpStatic1"
     },
     {
       "anchor": {
-        "x": 2.4064733843753405,
-        "y": 4.104648209296419
+        "x": 7.981196807464037,
+        "y": 5.96908348746275
       },
       "prevControl": {
-        "x": 1.4064733843753405,
-        "y": 4.104648209296419
+        "x": 7.474310969719055,
+        "y": 6.261734162333223
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "AmpStatic2"
     }
   ],
   "rotationTargets": [],
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
-    "rotateFast": false
+    "rotation": -30.0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": "Path Disruption",
+  "folder": "Amp Corner Static Paths",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 15.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

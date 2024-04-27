@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.35,
-        "y": 5.55
+        "x": 7.55,
+        "y": 0.7636554807993345
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.35,
-        "y": 5.55
+        "x": 6.228946697607171,
+        "y": 1.5126252792756034
       },
       "isLocked": false,
-      "linkedName": "disruption4"
+      "linkedName": "LookForMid5"
     },
     {
       "anchor": {
-        "x": 2.4064733843753405,
-        "y": 4.104648209296419
+        "x": 3.8058091143015926,
+        "y": 2.951822146935887
       },
       "prevControl": {
-        "x": 1.4064733843753405,
-        "y": 4.104648209296419
+        "x": 4.848492559239144,
+        "y": 2.32033780704413
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "shoot5"
     }
   ],
   "rotationTargets": [],
@@ -39,11 +39,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
-    "rotateFast": false
+    "rotation": -30.0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": "Path Disruption",
+  "folder": "Source Corner Dynamic Paths",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

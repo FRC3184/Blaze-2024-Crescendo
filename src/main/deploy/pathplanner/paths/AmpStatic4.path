@@ -1,0 +1,74 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.599197930790228,
+        "y": 6.272596207164246
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.960522597101533,
+        "y": 6.417126073688768
+      },
+      "isLocked": false,
+      "linkedName": "AmpStatic3"
+    },
+    {
+      "anchor": {
+        "x": 5.986684649425636,
+        "y": 6.937433593177046
+      },
+      "prevControl": {
+        "x": 5.480830116589811,
+        "y": 6.605014900170646
+      },
+      "nextControl": {
+        "x": 6.590365039464854,
+        "y": 7.334137849488531
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.021078464692141,
+        "y": 6.5616559402132895
+      },
+      "prevControl": {
+        "x": 4.360723651024768,
+        "y": 6.684506326759133
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "ampStatic4"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0,
+      "rotationDegrees": 15.0,
+      "rotateFast": true
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 7.22,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 360.0,
+    "maxAngularAcceleration": 180.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 15.0,
+    "rotateFast": true
+  },
+  "reversed": false,
+  "folder": "Amp Corner Static Paths",
+  "previewStartingState": {
+    "rotation": 8.75,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

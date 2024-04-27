@@ -3,18 +3,22 @@
   "robotLength": 0.89,
   "holonomicMode": true,
   "pathFolders": [
+    "Amp Corner Static Paths",
     "Close 4 Note & 5 Note",
     "Midline",
     "Path Disruption",
+    "Source Corner Dynamic Paths",
     "WaitPaths"
   ],
   "autoFolders": [
-    "Close 4 Note",
+    "Dynamic",
+    "Advanced Static",
+    "Non-Dynamic",
     "Wait Autos"
   ],
   "defaultMaxVel": 7.22,
-  "defaultMaxAccel": 2.5,
+  "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 360.0,
   "defaultMaxAngAccel": 180.0,
-  "maxModuleSpeed": 7.22
+  "maxModuleSpeed": 6.9
 }

@@ -59,4 +59,6 @@ public final class ConstShooter {
   public static final double passPitch = 0.38;
 
   public static boolean NoteInRobot = false;
+
+  public static boolean stayReady = false;
 }

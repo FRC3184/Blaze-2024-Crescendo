@@ -113,36 +113,21 @@ public class AutonomousNoteTrackingIntake extends Command {
     }
 
     if (noteLocation.equals("Carriage") && notePassedIntake){
-    shooterLL.setLedMode(2);
-    intakeLL.setLedMode(2);
     intake.stop();
     carriageBelt.setSpeed(-0.5);
     timer.start();
     }
     else if (noteLocation.equals("Intake")){
-    shooterLL.setLedMode(3);
-    intakeLL.setLedMode(3);
     }
     else {
-    shooterLL.setLedMode(1);
-    intakeLL.setLedMode(1);
     intake.runSpeed();
     carriageBelt.setSpeed(0.5);
     carriageBelt.runSpeed();
     }
 
     if(timer.get()>0.25){
-      // timer.stop();
-      carriageBelt.stop();
-    }
-
-    if(timer.get()<0.5){
-      shooterLL.setLedMode(2);
-      intakeLL.setLedMode(2);
-    } else {
-      shooterLL.setLedMode(1);
-      intakeLL.setLedMode(1);
       timer.stop();
+      carriageBelt.stop();
     }
 
     if(endTimer.get()>0.75){
@@ -152,6 +137,14 @@ public class AutonomousNoteTrackingIntake extends Command {
       carriageBelt.stop();
       end(true);
     }
+
+    if(carriageBelt.getVelocity()>100||carriageBelt.getVelocity()<-100){
+      shooterLL.setLedMode(3);
+      intakeLL.setLedMode(3);
+  } else {
+      shooterLL.setLedMode(1);
+      intakeLL.setLedMode(1);
+  }
 
   }
 

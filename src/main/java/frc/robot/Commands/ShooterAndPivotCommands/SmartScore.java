@@ -12,18 +12,20 @@ import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive.CardinalConstants;
 import frc.robot.SubmoduleSubsystemConstants.ConstShooter;
 import frc.robot.Subsystems.CarriageBelt;
+import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Feeder;
 import frc.robot.Subsystems.ShooterFlywheels;
 import frc.robot.Subsystems.ShooterPitch;
 import frc.robot.Subsystems.RevMaxSwerve.DriveSubsystemSwerve;
 
-public class AutoShoot extends Command {
+public class SmartScore extends Command {
     
     ShooterPitch pitch;
     ShooterLimelight shooterLL;
     ShooterFlywheels flywheels;
     Feeder feeder;
     CarriageBelt carriage;
+    Elevator elevator;
     double pitchError;
     double thetaError;
 
@@ -39,13 +41,14 @@ public class AutoShoot extends Command {
     private final Timer feederTimer = new Timer();
 
 
-    public AutoShoot(ShooterPitch shooterPitch, ShooterFlywheels shooterFlywheels, Feeder feederSS, CarriageBelt belt, ShooterLimelight LLShooter, DriveSubsystemSwerve driveSS){
+    public SmartScore(ShooterPitch shooterPitch, ShooterFlywheels shooterFlywheels, Feeder feederSS, CarriageBelt belt, ShooterLimelight LLShooter, DriveSubsystemSwerve driveSS, Elevator elevator){
         pitch = shooterPitch;
         shooterLL = LLShooter;
         robotDrive = driveSS;
         flywheels = shooterFlywheels;
         feeder = feederSS;
         carriage = belt;
+        this.elevator = elevator;
 
         thetaController = new PIDController(0.25, CardinalConstants.CardinalI, CardinalConstants.CardinalD);
 
@@ -59,6 +62,7 @@ public class AutoShoot extends Command {
     }
 
     public void execute(){
+        if(elevator.getPosition()<30){
         pitchError = shooterLL.getPredictedPivot()-pitch.getAbsPosition();
         thetaError = target-shooterLL.getCamXInches();
         flywheels.setTargetVelocity(ConstShooter.defVelocity);
@@ -91,12 +95,17 @@ public class AutoShoot extends Command {
             carriage.stop();
         }
 
-        if(feederTimer.get()>2){
+        if(feederTimer.get()>0){
             feeder.setSpeed(-0.5);
             feeder.runSpeed();
             carriage.setSpeed(0.5);
             carriage.runSpeed();
         }
+    }
+    else{
+        carriage.setSpeed(-0.5);
+        carriage.runSpeed();
+    }
     }
 
     public void end(boolean interrupted){

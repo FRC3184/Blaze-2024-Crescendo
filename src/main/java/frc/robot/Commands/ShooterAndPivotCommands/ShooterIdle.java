@@ -21,7 +21,10 @@ public class ShooterIdle extends Command {
 
     @Override
     public void execute(){
-        if(ConstShooter.NoteInRobot){
+        if(ConstShooter.stayReady){
+        shooterFlywheels.setTargetVelocity(4000);
+        shooterFlywheels.runVelocity();
+        } else if(ConstShooter.NoteInRobot){
         shooterFlywheels.setTargetVelocity(2250);
         shooterFlywheels.runVelocity();
         } else {

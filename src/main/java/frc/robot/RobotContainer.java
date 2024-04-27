@@ -28,6 +28,9 @@ import frc.robot.Subsystems.RevMaxSwerve.DriveSubsystemSwerve;
 import frc.robot.Subsystems.RevMaxSwerve.Commands.SetFastMode;
 import frc.robot.Subsystems.RevMaxSwerve.Commands.SetNormalMode;
 import frc.robot.Subsystems.RevMaxSwerve.Commands.SetSlowMode;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.CrescendoCardinal.Smart90Lock;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.CrescendoCardinal.SmartPassAngle;
+import frc.robot.Subsystems.RevMaxSwerve.Commands.CrescendoCardinal.SmartStageLock;
 import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.Sensors.FrontLimelight.IntakeLimelight;
 import frc.robot.Sensors.LimitSwitches.LeftArmDownSwitch;
@@ -51,6 +54,7 @@ import frc.robot.Subsystems.Climber;
 import frc.robot.Subsystems.Elevator;
 import frc.robot.Subsystems.Feeder;
 import frc.robot.Subsystems.ShooterPitch;
+import frc.robot.Commands.GetRunSkippingPath;
 import frc.robot.Commands.GetSkipPath;
 import frc.robot.Commands.TunePitch;
 import frc.robot.Commands.CarriageCommands.carriageBeltBackward;
@@ -83,11 +87,14 @@ import frc.robot.Commands.IntakeCommands.outtake;
 import frc.robot.Commands.SensorAndLEDCommands.LEDsOrange;
 import frc.robot.Commands.SensorAndLEDCommands.LEDsWhite;
 import frc.robot.Commands.SensorAndLEDCommands.locateNoteInRobot;
+import frc.robot.Commands.ShooterAndPivotCommands.AutoAlignOnly;
 import frc.robot.Commands.ShooterAndPivotCommands.AutoPivotOnly;
 import frc.robot.Commands.ShooterAndPivotCommands.AutoShoot;
 import frc.robot.Commands.ShooterAndPivotCommands.FullPassthrough;
 import frc.robot.Commands.ShooterAndPivotCommands.PitchHoldPosition;
 import frc.robot.Commands.ShooterAndPivotCommands.ShooterIdle;
+import frc.robot.Commands.ShooterAndPivotCommands.SmartScore;
+import frc.robot.Commands.ShooterAndPivotCommands.StayReady;
 import frc.robot.Commands.ShooterAndPivotCommands.feederBackward;
 import frc.robot.Commands.ShooterAndPivotCommands.feederForward;
 import frc.robot.Commands.ShooterAndPivotCommands.feederOff;
@@ -192,6 +199,7 @@ public class RobotContainer {
 
 
     NamedCommands.registerCommand("GetSkipPath", new GetSkipPath());
+    NamedCommands.registerCommand("RunSkippingPath", new GetRunSkippingPath());
 
     //Unused
     NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.35)); //originally 0.5
@@ -239,10 +247,10 @@ public class RobotContainer {
     // Set drivetrain into brakeing configuration
     driverController.start().whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
     // Cardinal Direction Buttons
-    driverController.y().whileTrue(new FaceForward(robotDrive));
-    driverController.x().whileTrue(new FaceLeft(robotDrive));
-    driverController.b().whileTrue(new FaceRight(robotDrive));
-    driverController.a().whileTrue(new FaceBackwards(robotDrive)); 
+    // driverController.y().whileTrue(new FaceForward(robotDrive));
+    driverController.x().whileTrue(new Smart90Lock(robotDrive));
+    driverController.b().whileTrue(new SmartPassAngle(robotDrive));
+    driverController.a().whileTrue(new SmartStageLock(robotDrive)); 
     // Set speed modes
     driverController.leftBumper().onTrue(new SetSlowMode(robotDrive));
     driverController.rightBumper().onFalse(new SetNormalMode(robotDrive));
@@ -250,19 +258,10 @@ public class RobotContainer {
     driverController.leftBumper().onFalse(new SetNormalMode(robotDrive));
     // Field Centric vs. Robot Centric
     driverController.pov(90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
-    // Carriage Belt Backwards
-    driverController.pov(0).whileTrue(new carriageBeltBackward(carriage));
-    // Ring alignment
-    // driverController.leftTrigger().whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-    // new JoystickButton(driverController, driverLTPressed()).whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
-    // new JoystickButton(driverController, Button.kLeftStick.value).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-    // new JoystickButton(driverController, driverRTPressed()).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-    // new JoystickButton(driverController, driverRTPressed()).whileTrue(new StrafingLLIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive));
-    // Bloop Shot
-    driverController.leftTrigger().whileTrue(new shooterBloop(shooterFlywheels, shooterPitch, feeder, carriage));
-    driverController.rightTrigger().onTrue(new pitchLowest(shooterPitch));
-
-
+    // Scoring and Passing
+    driverController.leftTrigger().whileTrue(new SmartScore(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive, elevator));
+    driverController.rightTrigger().whileTrue(new shooterBloop(shooterFlywheels, shooterPitch, feeder, carriage));
+    driverController.pov(270).toggleOnTrue(new StayReady());
 
     // ***GUNNER CONTROLS***
      // full intake & outtake
@@ -271,8 +270,8 @@ public class RobotContainer {
     gunnerController.pov(90).whileTrue(new intakeManual(intake, carriage));
     gunnerController.leftBumper().whileTrue(new outtake(intake, carriage));
     // // shooter & carriage
-    gunnerController.x().whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
-    gunnerController.pov(270).whileTrue(new spinUpFlywheels(shooterFlywheels));
+    gunnerController.leftTrigger().whileTrue(new AutoAlignOnly(shooterPitch, shooterFlywheels, shooterLL, robotDrive));
+    gunnerController.rightTrigger().whileTrue(new spinUpFlywheels(shooterFlywheels));
     gunnerController.b().whileTrue(new shoot(shooterFlywheels, feeder, carriage));
     gunnerController.start().onTrue(new pitchSubwoofer(shooterPitch));
     gunnerController.back().onTrue(new pitchLowest(shooterPitch));

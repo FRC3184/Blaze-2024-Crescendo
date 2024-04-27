@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.35,
-        "y": 5.55
+        "x": 1.4120428956421427,
+        "y": 1.6301107378601165
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.35,
-        "y": 5.55
+        "x": 2.412042895642146,
+        "y": 1.6301107378601165
       },
       "isLocked": false,
-      "linkedName": "disruption4"
+      "linkedName": "StartNextToSource"
     },
     {
       "anchor": {
-        "x": 2.4064733843753405,
-        "y": 4.104648209296419
+        "x": 7.55,
+        "y": 0.7636554807993345
       },
       "prevControl": {
-        "x": 1.4064733843753405,
-        "y": 4.104648209296419
+        "x": 6.55,
+        "y": 0.7636554807993345
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "LookForMid5"
     }
   ],
   "rotationTargets": [],
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Path Disruption",
+  "folder": "Source Corner Dynamic Paths",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0
