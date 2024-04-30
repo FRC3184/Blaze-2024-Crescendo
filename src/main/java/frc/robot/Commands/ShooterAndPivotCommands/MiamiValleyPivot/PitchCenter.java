@@ -19,7 +19,7 @@ public class PitchCenter extends Command {
     }
 
     public void execute(){
-        pitch.seekPosition(0.395); //0.4
+        pitch.seekPosition(0.405); //0.4
     }
 
     public void end(boolean interrupted){

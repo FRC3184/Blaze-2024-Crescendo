@@ -77,7 +77,7 @@ import frc.robot.Commands.ElevatorCommands.elevatorUpPID;
 import frc.robot.Commands.IntakeCommands.fullIntakeOff;
 import frc.robot.Commands.IntakeCommands.AutonomousNoteTrackingIntake;
 import frc.robot.Commands.IntakeCommands.ODSIntake;
-import frc.robot.Commands.IntakeCommands.RotatingLLIntake;
+import frc.robot.Commands.IntakeCommands.RotatingNoteAlignment;
 import frc.robot.Commands.IntakeCommands.StrafingNoteAlignment;
 import frc.robot.Commands.IntakeCommands.intakeBackward;
 import frc.robot.Commands.IntakeCommands.intakeForward;
@@ -90,10 +90,13 @@ import frc.robot.Commands.SensorAndLEDCommands.locateNoteInRobot;
 import frc.robot.Commands.ShooterAndPivotCommands.AutoAlignOnly;
 import frc.robot.Commands.ShooterAndPivotCommands.AutoPivotOnly;
 import frc.robot.Commands.ShooterAndPivotCommands.AutoShoot;
+import frc.robot.Commands.ShooterAndPivotCommands.DefaultPitch;
 import frc.robot.Commands.ShooterAndPivotCommands.FullPassthrough;
+import frc.robot.Commands.ShooterAndPivotCommands.FullPassthroughBloop;
 import frc.robot.Commands.ShooterAndPivotCommands.PitchHoldPosition;
 import frc.robot.Commands.ShooterAndPivotCommands.ShooterIdle;
 import frc.robot.Commands.ShooterAndPivotCommands.SmartScore;
+import frc.robot.Commands.ShooterAndPivotCommands.SpinUpWithPivot;
 import frc.robot.Commands.ShooterAndPivotCommands.StayReady;
 import frc.robot.Commands.ShooterAndPivotCommands.feederBackward;
 import frc.robot.Commands.ShooterAndPivotCommands.feederForward;
@@ -101,7 +104,7 @@ import frc.robot.Commands.ShooterAndPivotCommands.feederOff;
 import frc.robot.Commands.ShooterAndPivotCommands.pitchLowest;
 import frc.robot.Commands.ShooterAndPivotCommands.pitchSubwoofer;
 import frc.robot.Commands.ShooterAndPivotCommands.shoot;
-import frc.robot.Commands.ShooterAndPivotCommands.shooterBloop;
+import frc.robot.Commands.ShooterAndPivotCommands.Pass;
 import frc.robot.Commands.ShooterAndPivotCommands.shooterFlywheelBackward;
 import frc.robot.Commands.ShooterAndPivotCommands.shooterFlywheelForward;
 import frc.robot.Commands.ShooterAndPivotCommands.shooterFlywheelOff;
@@ -172,14 +175,21 @@ public class RobotContainer {
   public RobotContainer() {
     //Register named autonomous commands
     NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
+    NamedCommands.registerCommand("SpinUpTimeout", new spinUpFlywheels(shooterFlywheels).withTimeout(0.4));
     NamedCommands.registerCommand("Shoot", new shoot(shooterFlywheels, feeder, carriage).withTimeout(2));
     NamedCommands.registerCommand("ShootQuick", new shoot(shooterFlywheels, feeder, carriage).withTimeout(.25));
 
-    NamedCommands.registerCommand("AutoShoot", new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
-    NamedCommands.registerCommand("AutoShootTimeout", new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive).withTimeout(0.25));
+    NamedCommands.registerCommand("AutoShoot", new SmartScore(shooterPitch, shooterFlywheels, feeder, carriage, intake, shooterLL, robotDrive, elevator));
+    NamedCommands.registerCommand("AutoShootTimeout", new SmartScore(shooterPitch, shooterFlywheels, feeder, carriage, intake, shooterLL, robotDrive, elevator).withTimeout(0.75));
+
+    NamedCommands.registerCommand("SpinUpWithPivot", new SpinUpWithPivot(shooterPitch, shooterFlywheels, shooterLL));
 
     NamedCommands.registerCommand("FullPassthrough", new FullPassthrough(shooterFlywheels, feeder, carriage, intake));
     NamedCommands.registerCommand("FullPassthroughTimeout", new FullPassthrough(shooterFlywheels, feeder, carriage, intake).withTimeout(0.5));
+
+    NamedCommands.registerCommand("FullPassthroughBloop", new FullPassthroughBloop(shooterFlywheels, shooterPitch, feeder, carriage, intake, intakeLL, shooterLL));
+    NamedCommands.registerCommand("FullPassthroughBloopTimeout", new FullPassthroughBloop(shooterFlywheels, shooterPitch, feeder, carriage, intake, intakeLL, shooterLL).withTimeout(0.25));
+
 
     NamedCommands.registerCommand("FullLimelightIntake", new AutonomousNoteTrackingIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, robotDrive).withTimeout(3));
 
@@ -203,7 +213,7 @@ public class RobotContainer {
 
     //Unused
     NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.35)); //originally 0.5
-    NamedCommands.registerCommand("BloopShot", new shooterBloop(shooterFlywheels, shooterPitch, feeder, carriage));
+    NamedCommands.registerCommand("BloopShot", new Pass(shooterFlywheels, shooterPitch, feeder, carriage));
 
 
 
@@ -234,12 +244,18 @@ public class RobotContainer {
 
     carriageODS.setDefaultCommand(new locateNoteInRobot(intakeODS, carriageODS, shooterLL, intakeLL));
 
-    shooterPitch.setDefaultCommand(new pitchSubwoofer(shooterPitch));
+    shooterPitch.setDefaultCommand(new DefaultPitch(shooterPitch));
 
     shooterFlywheels.setDefaultCommand(new ShooterIdle(shooterFlywheels));
+
+    // shooterPitch.setDefaultCommand(new TunePitch(shooterPitch));
     }
 
   private void configureBindings() {
+
+    // ***TESTING BUTTONS*** - KEEP COMMENTED UNLESS IN USE
+    // driverController.pov(0).whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
+    // driverController.y().whileTrue(new shoot(shooterFlywheels, feeder, carriage));
 
     // ***DRIVER CONTROLS***
     // Reset heading
@@ -248,6 +264,7 @@ public class RobotContainer {
     driverController.start().whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
     // Cardinal Direction Buttons
     // driverController.y().whileTrue(new FaceForward(robotDrive));
+    driverController.y().whileTrue(new RotatingNoteAlignment(intakeLL, robotDrive));
     driverController.x().whileTrue(new Smart90Lock(robotDrive));
     driverController.b().whileTrue(new SmartPassAngle(robotDrive));
     driverController.a().whileTrue(new SmartStageLock(robotDrive)); 
@@ -259,8 +276,8 @@ public class RobotContainer {
     // Field Centric vs. Robot Centric
     driverController.pov(90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
     // Scoring and Passing
-    driverController.leftTrigger().whileTrue(new SmartScore(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive, elevator));
-    driverController.rightTrigger().whileTrue(new shooterBloop(shooterFlywheels, shooterPitch, feeder, carriage));
+    driverController.leftTrigger().whileTrue(new SmartScore(shooterPitch, shooterFlywheels, feeder, carriage, intake, shooterLL, robotDrive, elevator).withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming));
+    driverController.rightTrigger().whileTrue(new Pass(shooterFlywheels, shooterPitch, feeder, carriage));
     driverController.pov(270).toggleOnTrue(new StayReady());
 
     // ***GUNNER CONTROLS***
@@ -285,6 +302,9 @@ public class RobotContainer {
     gunnerController.leftStick().whileFalse(new elevatorHoldPosition(elevator, intakeLL));
     gunnerController.rightStick().whileTrue(new elevatorDownManual(elevator, intakeLL));
     gunnerController.rightStick().whileFalse(new elevatorHoldPosition(elevator, intakeLL));
+
+    // // Stay Ready
+    gunnerController.pov(270).toggleOnTrue(new StayReady());
 
 
     // CHAMPS

@@ -18,6 +18,24 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "AutoShootTimeout"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "AmpStatic1-pt2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FullPassthroughBloopTimeout"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "AmpStatic2"
@@ -30,15 +48,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "AutoShootTimeout"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "AmpStatic4"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "AmpStatic5"
+            "name": "AutoShootTimeout"
           }
         }
       ]

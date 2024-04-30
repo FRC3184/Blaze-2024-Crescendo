@@ -19,7 +19,7 @@ public class PitchAmp extends Command {
     }
 
     public void execute(){
-        pitch.seekPosition(0.385); //0.39
+        pitch.seekPosition(0.4); //0.39
     }
 
     public void end(boolean interrupted){

@@ -20,15 +20,15 @@ public class TunePitch extends Command {
     }
 
 public void initialize() {
-    pitch.seekPosition(defaultPos);
+    // pitch.seekPosition(defaultPos);
     }
 
     @Override
     public void execute() {
         if(subsystemController.getAButtonPressed()){
-            Pose += 0.01;
+            Pose += 0.001;
         } else if(subsystemController.getYButtonPressed()){
-            Pose -= 0.01;
+            Pose -= 0.001;
         }
 
         if(Pose<ConstShooter.upperLimit){
@@ -36,7 +36,7 @@ public void initialize() {
         } else if(Pose>ConstShooter.lowerLimit){
             Pose = ConstShooter.lowerLimit;
         }
-        pitch.seekPositionLimitedReverseEnc(Pose, 0.1, -0.1, ConstShooter.upperLimit, ConstShooter.lowerLimit);
+        pitch.seekPosition(Pose);
     }
 
 }

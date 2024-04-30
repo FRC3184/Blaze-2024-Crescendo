@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 5.986684649425636,
-        "y": 6.937433593177046
+        "x": 6.261291395822228,
+        "y": 6.9085276198721415
       },
       "prevControl": {
-        "x": 5.480830116589811,
-        "y": 6.605014900170646
+        "x": 5.755436862986403,
+        "y": 6.576108926865742
       },
       "nextControl": {
-        "x": 6.590365039464854,
-        "y": 7.334137849488531
+        "x": 6.864971785861446,
+        "y": 7.305231876183627
       },
       "isLocked": false,
       "linkedName": null
@@ -52,7 +52,31 @@
     }
   ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Intake",
+      "waypointRelativePos": 0.3,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "SpinUpWithPivot"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 7.22,
     "maxAcceleration": 3.0,

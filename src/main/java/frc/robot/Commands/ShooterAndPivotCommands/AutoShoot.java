@@ -49,7 +49,7 @@ public class AutoShoot extends Command {
 
         thetaController = new PIDController(0.25, CardinalConstants.CardinalI, CardinalConstants.CardinalD);
 
-        addRequirements(pitch, flywheels, feeder, carriage, shooterLL, robotDrive);
+        // addRequirements(pitch, flywheels, feeder, carriage, shooterLL, robotDrive);
     }
 
     public void initialize(){

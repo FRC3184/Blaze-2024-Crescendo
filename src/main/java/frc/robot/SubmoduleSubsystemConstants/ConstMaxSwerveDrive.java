@@ -26,7 +26,7 @@ public final class ConstMaxSwerveDrive {
     // the robot, rather the allowed maximum speeds
     public static final double kMaxSpeedMetersPerSecond = 7.22;
     public static final double kMaxDefaultMPS = 4.8;
-    public static final double kMaxSlowMPS = 2;
+    public static final double kMaxSlowMPS = 2; // CHANGE BACK TO 2 //2;
     public static final double kMaxGrannyMPS = 0.4;
     public static final double kMaxAngularSpeed = 10; // radians per second
 
@@ -101,7 +101,7 @@ public final class ConstMaxSwerveDrive {
 
     // Calculations required for driving motor conversion factors and feed forward
     public static final double kDrivingMotorFreeSpeedRps = NeoMotorConstants.kFreeSpeedRpm / 60;
-    public static final double kWheelDiameterMeters = 0.0762; //0.0762 - DEFAULT (3in)
+    public static final double kWheelDiameterMeters = 0.071; //0.071M //0.0762 - DEFAULT (3in)
     public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
     // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 16 teeth on the bevel pinion
     public static final double kDrivingMotorReduction = (45.0 * kDrivingSpurGearTeeth) / (kDrivingMotorPinionTeeth * 16);

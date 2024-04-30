@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.77,
-      "y": 6.68
+      "x": 1.35,
+      "y": 5.55
     },
-    "rotation": 60.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -14,18 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StartAmpScoreMid1"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "ScoreMid1ToMid2"
+            "pathName": "OdemetryTest"
           }
         }
       ]
     }
   },
-  "folder": "Non-Dynamic",
+  "folder": null,
   "choreoAuto": false
 }

@@ -8,14 +8,14 @@ import frc.robot.Subsystems.ShooterFlywheels;
 // import frc.robot.Subsystems.ShooterPitch;
 import frc.robot.Subsystems.ShooterPitch;
 
-public class shooterBloop extends Command {
+public class Pass extends Command {
 
     private final ShooterFlywheels flywheels; 
     private final ShooterPitch pitch;
     private final Feeder feeder;
     private final CarriageBelt carriage;
 
-    public shooterBloop(ShooterFlywheels flywheel, ShooterPitch pitch, Feeder feeder, CarriageBelt carriage){
+    public Pass(ShooterFlywheels flywheel, ShooterPitch pitch, Feeder feeder, CarriageBelt carriage){
         this.flywheels = flywheel;
         this.pitch = pitch;
         this.feeder = feeder;
@@ -55,5 +55,6 @@ public class shooterBloop extends Command {
         flywheels.stop();
         feeder.stop();
         carriage.stop();
+        ConstShooter.NoteInRobot = false;
     }
 }

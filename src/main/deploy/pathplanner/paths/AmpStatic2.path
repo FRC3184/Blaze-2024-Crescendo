@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.991228576374863,
-        "y": 7.357526843855119
+        "x": 7.981196807464037,
+        "y": 7.4
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.749949021024803,
-        "y": 6.836262686609881
+        "x": 7.739917252113977,
+        "y": 6.878735842754762
       },
       "isLocked": false,
       "linkedName": "AmpStatic1"
@@ -17,11 +17,11 @@
     {
       "anchor": {
         "x": 7.981196807464037,
-        "y": 5.96908348746275
+        "y": 6.03
       },
       "prevControl": {
         "x": 7.474310969719055,
-        "y": 6.261734162333223
+        "y": 6.322650674870474
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,7 +30,48 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Bloop",
+      "waypointRelativePos": 0.0,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "FullPassthroughBloopTimeout"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Intake",
+      "waypointRelativePos": 0.4,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "SpinUpShooter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 7.22,
     "maxAcceleration": 3.0,
