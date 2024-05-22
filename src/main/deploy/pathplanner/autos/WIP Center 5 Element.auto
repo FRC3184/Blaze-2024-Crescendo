@@ -85,10 +85,60 @@
               }
             ]
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CenterToSource"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Pitch44"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "FullPassthroughTimeout"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SourceToAmp"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "PitchAmp"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "FullPassthroughTimeout"
+                }
+              }
+            ]
+          }
         }
       ]
     }
   },
-  "folder": "Non-Dynamic",
+  "folder": null,
   "choreoAuto": false
 }

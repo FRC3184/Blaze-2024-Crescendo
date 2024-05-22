@@ -26,7 +26,7 @@ public final class ConstMaxSwerveDrive {
     // the robot, rather the allowed maximum speeds
     public static final double kMaxSpeedMetersPerSecond = 7.22;
     public static final double kMaxDefaultMPS = 4.8;
-    public static final double kMaxSlowMPS = 2; // CHANGE BACK TO 2 //2;
+    public static final double kMaxSlowMPS = 2;
     public static final double kMaxGrannyMPS = 0.4;
     public static final double kMaxAngularSpeed = 10; // radians per second
 

@@ -2,10 +2,14 @@ package frc.robot.Commands.ShooterAndPivotCommands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.util.datalog.DataLog;
+import edu.wpi.first.util.datalog.DoubleLogEntry;
+import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.Mechanisms.sensorTypes.Limelight;
 import frc.robot.Sensors.BackLimelight.ShooterLimelight;
 import frc.robot.SubmoduleSubsystemConstants.ConstJoysticks;
 import frc.robot.SubmoduleSubsystemConstants.ConstMaxSwerveDrive;
@@ -31,18 +35,24 @@ public class SmartScore extends Command {
     double pitchError;
     double thetaError;
 
+    // private DataLog log;
+    // private DoubleLogEntry limelightLog;
+    // private int shotNum = 0; 
+
     private final DriveSubsystemSwerve robotDrive;
     int driverControllerPort = ConstJoysticks.kDriverControllerPort;
     private final XboxController driverController = new XboxController(driverControllerPort);
     private double thetaPower;
     private PIDController thetaController;
-    private double target = -0.15;
+    private double target = Limelight.alignmentConstants.AlignedSpeaker;
 
     private double pitchTolerance = 0.02;
-    private double thetaTolerance = 0.2;
+    private double thetaTolerance = Limelight.alignmentConstants.SpeakerTolerance;
 
     private boolean pitchInRange;
     private boolean thetaInRange;
+
+    private boolean JustStarted;
 
     private final Timer feederOverrideTimer = new Timer();
 
@@ -65,6 +75,9 @@ public class SmartScore extends Command {
         thetaController.setSetpoint(target);
         ConstShooter.NoteInRobot = false;
         feederOverrideTimer.reset();
+        JustStarted = true;
+        // DataLogManager.start();
+        // limelightLog = new DoubleLogEntry(log, "LimelightLog");
     }
 
     public void execute(){
@@ -97,6 +110,7 @@ public class SmartScore extends Command {
             thetaPower = thetaController.calculate(shooterLL.getCamXMeters());
 
             if(shooterLL.getV()==1){
+                JustStarted = false;
                 robotDrive.drive(-MathUtil.applyDeadband(driverController.getLeftY(), 
                 ConstJoysticks.kDriveDeadband),
                 -MathUtil.applyDeadband(driverController.getLeftX(), ConstJoysticks.kDriveDeadband),
@@ -107,7 +121,7 @@ public class SmartScore extends Command {
                 feederOverrideTimer.stop();
                 feederOverrideTimer.reset();
                 robotDrive.drive(-MathUtil.applyDeadband(driverController.getLeftY(), ConstJoysticks.kDriveDeadband), -MathUtil.applyDeadband(driverController.getLeftX(), ConstJoysticks.kDriveDeadband), -MathUtil.applyDeadband(driverController.getRightX(), ConstJoysticks.kDriveDeadband), ConstMaxSwerveDrive.DriveConstants.kFieldCentric, true);
-                pitch.seekPosition(ConstShooter.upperLimit);
+                pitch.seekPosition(shooterLL.getPredictedPivot());
             }
         
 
@@ -129,16 +143,24 @@ public class SmartScore extends Command {
                 intake.stop();
             }
 
+            if(JustStarted){
+                pitch.seekPosition(ConstShooter.upperLimit);
+            }
+
             // if(feederOverrideTimer.get()>2){
             //     feeder.setSpeed(-0.5);
             //     feeder.runSpeed();
             //     carriage.setSpeed(0.5);
             //     carriage.runSpeed();
             // }
+            // limelightLog.append(shotNum);
+            // limelightLog.append(shooterLL.getCamZInches());
+            // limelightLog.append(shooterLL.getRealDistanceInches());
         } else {
             carriage.setSpeed(-0.5);
             carriage.runSpeed();
         }
+       
     }
 
     public void end(boolean interrupted){
@@ -147,5 +169,6 @@ public class SmartScore extends Command {
         feeder.stop();
         carriage.stop();
         intake.stop();
+       // shotNum++;
     }
 }

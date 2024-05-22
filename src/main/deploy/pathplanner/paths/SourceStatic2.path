@@ -3,58 +3,53 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4,
-        "y": 7.3
+        "x": 2.6603258931025917,
+        "y": 3.230850111074105
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.86729904765713,
-        "y": 7.651240490316401
+        "x": 4.378550724901093,
+        "y": 2.2322237131057445
       },
       "isLocked": false,
-      "linkedName": "StartWhiteAmpLine"
+      "linkedName": "SourceStatic1"
     },
     {
       "anchor": {
-        "x": 2.8659254456254897,
-        "y": 7.665926172639466
+        "x": 7.917800164759543,
+        "y": 0.8077125277685265
       },
       "prevControl": {
-        "x": 1.8659254456254897,
-        "y": 7.665926172639466
-      },
-      "nextControl": {
-        "x": 3.8659254456254897,
-        "y": 7.665926172639466
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 4.099522760762874,
-        "y": 7.063813197393838
-      },
-      "prevControl": {
-        "x": 3.8939232082399773,
-        "y": 7.313469796885927
+        "x": 7.22757309557553,
+        "y": 0.9251979863530396
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "PastAmp"
+      "linkedName": "SourceStatic2"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 1.0,
-      "rotationDegrees": 90.0,
-      "rotateFast": true
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "spinup",
+      "name": "Bloop",
+      "waypointRelativePos": 0.3,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "FullPassthroughBloop"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "AutoPitch",
       "waypointRelativePos": 0,
       "command": {
         "type": "parallel",
@@ -63,7 +58,7 @@
             {
               "type": "named",
               "data": {
-                "name": "SpinUpWithPivot"
+                "name": "AutoShootPitchOnly"
               }
             }
           ]
@@ -79,13 +74,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 23.0,
+    "rotation": -5.0,
     "rotateFast": true
   },
   "reversed": false,
-  "folder": "Amp Corner Static Paths",
+  "folder": "Source Static Paths",
   "previewStartingState": {
-    "rotation": 90.0,
+    "rotation": -45.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

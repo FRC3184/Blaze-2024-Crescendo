@@ -32,9 +32,12 @@ public class AutoShoot extends Command {
     private final XboxController driverController = new XboxController(driverControllerPort);
     private double thetaPower;
     private PIDController thetaController;
-    private double target = Limelight.alignmentConstants.Aligned;
+    private double target = Limelight.alignmentConstants.AlignedSpeaker;
     private double pitchTolerance = 0.02;
-    private double thetaTolerance = 7.5;
+    private double thetaTolerance = Limelight.alignmentConstants.SpeakerTolerance;
+
+    private boolean JustStarted;
+
 
     private final Timer feederTimer = new Timer();
 
@@ -56,6 +59,7 @@ public class AutoShoot extends Command {
         thetaController.setSetpoint(target);
         feederTimer.reset();
         ConstShooter.NoteInRobot = false;
+        JustStarted = true;
     }
 
     public void execute(){
@@ -67,6 +71,7 @@ public class AutoShoot extends Command {
         thetaPower = thetaController.calculate(shooterLL.getCamXMeters());
 
         if(shooterLL.getV()==1){
+            JustStarted = false;
         robotDrive.drive(-MathUtil.applyDeadband(driverController.getLeftY(), 
           ConstJoysticks.kDriveDeadband),
           -MathUtil.applyDeadband(driverController.getLeftX(), ConstJoysticks.kDriveDeadband),
@@ -77,7 +82,7 @@ public class AutoShoot extends Command {
             feederTimer.stop();
             feederTimer.reset();
             robotDrive.drive(-MathUtil.applyDeadband(driverController.getLeftY(), ConstJoysticks.kDriveDeadband), -MathUtil.applyDeadband(driverController.getLeftX(), ConstJoysticks.kDriveDeadband), -MathUtil.applyDeadband(driverController.getRightX(), ConstJoysticks.kDriveDeadband), ConstMaxSwerveDrive.DriveConstants.kFieldCentric, true);
-            pitch.seekPosition(ConstShooter.upperLimit);
+            pitch.seekPosition(shooterLL.getPredictedPivot());
           }
     
 
@@ -96,6 +101,10 @@ public class AutoShoot extends Command {
             feeder.runSpeed();
             carriage.setSpeed(0.5);
             carriage.runSpeed();
+        }
+
+        if(JustStarted){
+            pitch.seekPosition(ConstShooter.upperLimit);
         }
     }
 

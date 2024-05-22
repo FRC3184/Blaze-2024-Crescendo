@@ -29,7 +29,7 @@ public class AutoAlignOnly extends Command {
     private final XboxController driverController = new XboxController(driverControllerPort);
     private double thetaPower;
     private PIDController thetaController;
-    private double target = 0.05;
+    private double target = Limelight.alignmentConstants.AlignedSpeaker;
 
     public AutoAlignOnly(ShooterPitch shooterPitch, ShooterFlywheels shooterFlywheels, ShooterLimelight LLShooter, DriveSubsystemSwerve driveSS){
         pitch = shooterPitch;
