@@ -4,9 +4,10 @@
   "holonomicMode": true,
   "pathFolders": [
     "Amp Corner Static Paths",
+    "Center 5 Note",
     "Close 4 Note & 5 Note",
     "Midline",
-    "Center 5 Note",
+    "Source Static Paths",
     "Path Disruption",
     "Source Corner Dynamic Paths",
     "WaitPaths"
