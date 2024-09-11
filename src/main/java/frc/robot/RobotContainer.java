@@ -1,15 +1,20 @@
 package frc.robot;
 
+import com.choreo.lib.Choreo;
 import com.fasterxml.jackson.databind.util.Named;
 // General Imports
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+
+import com.choreo.lib.Choreo;
+import com.choreo.lib.ChoreoTrajectory;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -146,6 +151,11 @@ public class RobotContainer {
   CommandXboxController gunnerController = new CommandXboxController(ConstJoysticks.kGunnerControllerPort);
   // XboxController testingController = new XboxController(2);
 
+  //Choreo
+  Field2d m_field = new Field2d();
+
+  ChoreoTrajectory traj;
+
   // Autonomous Chooser
   private ShuffleboardTab sbCompTab = Shuffleboard.getTab(ConstProperties.CompDashboard.COMPDASHNAME_STRING);
   SendableChooser<Command> autoChooserPathPlan = new SendableChooser<>();
@@ -173,6 +183,18 @@ public class RobotContainer {
    * Constructor for RobotContainer class.
    */
   public RobotContainer() {
+
+    traj = Choreo.getTrajectory("Trajectory");
+
+    m_field.getObject("traj").setPoses(
+      traj.getInitialPose(), traj.getFinalPose()
+    );
+    m_field.getObject("trajPoses").setPoses(
+      traj.getPoses()
+    );
+
+    // sbCompTab.add(m_field).withSize(2, 1).withPosition(0, 0);
+
     //Register named autonomous commands
     NamedCommands.registerCommand("SpinUpShooter", new spinUpFlywheels(shooterFlywheels));
     NamedCommands.registerCommand("SpinUpTimeout", new spinUpFlywheels(shooterFlywheels).withTimeout(0.4));
@@ -204,6 +226,10 @@ public class RobotContainer {
     NamedCommands.registerCommand("Pitch40", new PitchCenter(shooterPitch));
     NamedCommands.registerCommand("Pitch44", new PitchSource(shooterPitch));
     NamedCommands.registerCommand("PitchAmp", new PitchAmp(shooterPitch));
+
+    NamedCommands.registerCommand("PitchCenter", new PitchCenter(shooterPitch));
+    NamedCommands.registerCommand("PitchSource", new PitchSource(shooterPitch));
+
     NamedCommands.registerCommand("AutoShootPitchOnly", new AutoPivotOnly(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL));
     NamedCommands.registerCommand("AutoShootPitchOnlyTimeout", new AutoPivotOnly(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL).withTimeout(0.4));
 
@@ -214,9 +240,6 @@ public class RobotContainer {
     //Unused
     NamedCommands.registerCommand("CarriageBackwards", new carriageBeltBackward(carriage).withTimeout(0.35)); //originally 0.5
     NamedCommands.registerCommand("BloopShot", new Pass(shooterFlywheels, shooterPitch, feeder, carriage));
-
-
-
 
 
     // TELEOP Setup
@@ -253,17 +276,12 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-    // ***TESTING BUTTONS*** - KEEP COMMENTED UNLESS IN USE
-    // driverController.pov(0).whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
-    // driverController.y().whileTrue(new shoot(shooterFlywheels, feeder, carriage));
-
     // ***DRIVER CONTROLS***
     // Reset heading
     driverController.back().whileTrue(new RunCommand(() -> robotDrive.zeroHeading()));
-    // Set drivetrain into brakeing configuration
+    // Set drivetrain into braking configuration
     driverController.start().whileTrue(new RunCommand(() -> robotDrive.setX(), robotDrive));
     // Cardinal Direction Buttons
-    // driverController.y().whileTrue(new FaceForward(robotDrive));
     driverController.y().whileTrue(new RotatingNoteAlignment(intakeLL, robotDrive));
     driverController.x().whileTrue(new Smart90Lock(robotDrive));
     driverController.b().whileTrue(new SmartPassAngle(robotDrive));
@@ -306,41 +324,7 @@ public class RobotContainer {
     // // Stay Ready
     gunnerController.pov(270).toggleOnTrue(new StayReady());
 
-
-    // CHAMPS
-    // // full intake & outtake
-    // new JoystickButton(gunnerController, Button.kRightBumper.value).whileTrue(new ODSIntake(intake, carriage, intakeODS, carriageODS, shooterLL, intakeLL, elevator));
-    // new JoystickButton(gunnerController, Button.kRightBumper.value).whileFalse(new fullIntakeOff(intake, carriage));
-    // new POVButton(gunnerController, 90).whileTrue(new intakeManual(intake, carriage));
-    // new JoystickButton(gunnerController, Button.kLeftBumper.value).whileTrue(new outtake(intake, carriage));
-    // // // shooter & carriage
-    // new JoystickButton(gunnerController, Button.kX.value).whileTrue(new AutoShoot(shooterPitch, shooterFlywheels, feeder, carriage, shooterLL, robotDrive));
-    // new POVButton(gunnerController, 270).whileTrue(new spinUpFlywheels(shooterFlywheels));
-    // new JoystickButton(gunnerController, Button.kB.value).whileTrue(new shoot(shooterFlywheels, feeder, carriage));
-    // new JoystickButton(gunnerController, Button.kStart.value).onTrue(new pitchSubwoofer(shooterPitch));
-    // new JoystickButton(gunnerController, Button.kBack.value).onTrue(new pitchLowest(shooterPitch));
-    // // // climber
-    // new POVButton(gunnerController, 180).whileTrue(new climbUpRight(climber, rightDownSwitch)); //Need to reverse names. Right = Left
-    // new POVButton(gunnerController, 0).whileTrue(new climbDownRight(climber)); //And Left = Right Currently
-    // new JoystickButton(gunnerController, Button.kA.value).whileTrue(new climbUpLeft(climber, leftDownSwitch));
-    // new JoystickButton(gunnerController, Button.kY.value).whileTrue(new climbDownLeft(climber));
-    // // // elevator
-    // new JoystickButton(gunnerController, Button.kLeftStick.value).whileTrue(new elevatorUpManual(elevator, intakeLL));
-    // new JoystickButton(gunnerController, Button.kLeftStick.value).whileFalse(new elevatorHoldPosition(elevator, intakeLL));
-    // new JoystickButton(gunnerController, Button.kRightStick.value).whileTrue(new elevatorDownManual(elevator, intakeLL));
-    // new JoystickButton(gunnerController, Button.kRightStick.value).whileFalse(new elevatorHoldPosition(elevator, intakeLL));
-
-    // NOT USED AT CHAMPS
-    // new JoystickButton(gunnerController, Button.kStart.value).whileTrue(new FeedAndShoot(shooter, feeder));
-    // new JoystickButton(gunnerController, Button.kStart.value).onFalse(new ShooterOff(shooter));
-
-    // new JoystickButton(gunnerController, Button.kA.value).whileTrue(new FeedForward(feeder));
-    // new JoystickButton(gunnerController, Button.kB.value).whileTrue(new AutoIntakeNote(robotDrive, intakeLL, intake));
-
-    // new JoystickButton(gunnerController, Button.kX.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(0), intakeLL));
-    // new JoystickButton(gunnerController, Button.kY.value).onTrue(new RunCommand(() -> intakeLL.setPipeline(1), intakeLL));
-    
-    // *** TESTING CONTROLS ***
+    // ***TESTING BUTTONS*** - KEEP COMMENTED UNLESS IN USE
     // shooter pitch 
     // new JoystickButton(testingController, Button.kBack.value).whileTrue(new shooterPitchUp(shooterPitch));
     // new JoystickButton(testingController, Button.kBack.value).whileFalse(new shooterPitchOff(shooterPitch));
@@ -363,6 +347,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // return Commands.print("No autonomous command configured");
+    
     return autoChooserPathPlan.getSelected();
   }
   void smartDashboardOut(){
