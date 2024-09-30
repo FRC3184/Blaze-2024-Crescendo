@@ -274,7 +274,7 @@ public class RobotContainer {
     driverController.rightBumper().onTrue(new SetFastMode(robotDrive));
     driverController.leftBumper().onFalse(new SetNormalMode(robotDrive));
     // Field Centric vs. Robot Centric
-    driverController.pov(90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
+    // driverController.pov(90).toggleOnTrue(new RunCommand(() -> robotDrive.setFieldcentric(false)));
     // Scoring and Passing
     driverController.leftTrigger().whileTrue(new SmartScore(shooterPitch, shooterFlywheels, feeder, carriage, intake, shooterLL, robotDrive, elevator).withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming));
     driverController.rightTrigger().whileTrue(new Pass(shooterFlywheels, shooterPitch, feeder, carriage));
