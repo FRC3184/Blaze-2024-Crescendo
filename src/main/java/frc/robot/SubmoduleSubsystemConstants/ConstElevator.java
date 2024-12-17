@@ -28,6 +28,6 @@ public class ConstElevator {
   public static final double elevatorRiseSpeed = 1;
   public static final double elevatorFinishSpeed = 0.2;
   public static final double elevatorFallSpeed = 1;
-  public static final double elevatorSlowZoneUp = 67.5;
-  public static final double elevatorSlowZoneDown = 7.5;
+  public static final double elevatorSlowZoneUp = 65;
+  public static final double elevatorSlowZoneDown = 10;
 }
